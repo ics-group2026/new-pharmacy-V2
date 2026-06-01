@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
+import '../routes/app_routes.dart';
 import '../utils/app_translations.dart';
 import 'cached_network_image_widget.dart';
 import 'discount_badge.dart';
@@ -43,13 +45,16 @@ class ProductCard extends StatelessWidget {
         children: [
           Stack(
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
-                child: CachedNetworkImageWidget(
-                  imageUrl: product.imageUrl,
-                  width: double.infinity,
-                  height: imgHeight,
-                  fit: BoxFit.cover,
+              Hero(
+                tag: 'product-image-${product.imageUrl}',
+                child: ClipRRect(
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+                  child: CachedNetworkImageWidget(
+                    imageUrl: product.imageUrl,
+                    width: double.infinity,
+                    height: imgHeight,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               Positioned(
@@ -135,7 +140,10 @@ class ProductCard extends StatelessWidget {
       ),
     );
 
-    return card;
+    return GestureDetector(
+      onTap: () => context.push(AppRoutes.productDetail, extra: product),
+      child: card,
+    );
   }
 }
 

@@ -51,6 +51,15 @@
     "on_sale": "On Sale",
     "new_arrivals": "New"
   },
+  "product_detail": {
+    "description": "Description",
+    "how_to_use": "How to Use",
+    "in_stock": "In Stock",
+    "quantity": "Quantity",
+    "add_to_cart": "Add to Cart",
+    "reviews": "Reviews",
+    "total": "Total"
+  },
   "categories": {
     "title": "Categories",
     "personal_care": "Personal Care",

@@ -51,6 +51,15 @@
     "on_sale": "تخفيضات",
     "new_arrivals": "جديد"
   },
+  "product_detail": {
+    "description": "الوصف",
+    "how_to_use": "طريقة الاستخدام",
+    "in_stock": "متوفر",
+    "quantity": "الكمية",
+    "add_to_cart": "أضف إلى السلة",
+    "reviews": "تقييمات",
+    "total": "الإجمالي"
+  },
   "categories": {
     "title": "الأقسام",
     "personal_care": "العناية الشخصية",
