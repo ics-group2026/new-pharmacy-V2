@@ -1,0 +1,155 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../../core/utils/app_translations.dart';
+import '../../../../../core/widgets/t_text.dart';
+import '../../../flash_deals/data/models/flash_deal_model.dart';
+import 'trending_product_item.dart';
+
+class TrendingSection extends StatefulWidget {
+  const TrendingSection({super.key, this.onSeeAll});
+
+  final VoidCallback? onSeeAll;
+
+  @override
+  State<TrendingSection> createState() => _TrendingSectionState();
+}
+
+class _TrendingSectionState extends State<TrendingSection> {
+  int _selectedFilter = 0;
+
+  static const _filterKeys = [
+    'trending.best_seller',
+    'trending.top_rated',
+    'trending.on_sale',
+    'trending.new_arrivals',
+  ];
+
+  static const _products = [
+    FlashDealModel(
+      name: 'Organic High-Curcumin Turmeric Powder',
+      price: 22.49,
+      imageUrl: 'https://picsum.photos/seed/tr_a1/300/300',
+      rating: 4.5,
+    ),
+    FlashDealModel(
+      name: 'Aura Radiance Hydration Serum',
+      price: 54.0,
+      imageUrl: 'https://picsum.photos/seed/tr_a2/300/300',
+      rating: 4.0,
+    ),
+    FlashDealModel(
+      name: 'Vitamin C 1000mg Effervescent',
+      price: 89.0,
+      imageUrl: 'https://picsum.photos/seed/tr_a3/300/300',
+      rating: 5.0,
+    ),
+    FlashDealModel(
+      name: 'MEDIDERM Dermatological Moisturizer',
+      price: 106.0,
+      imageUrl: 'https://picsum.photos/seed/tr_a4/300/300',
+      rating: 3.5,
+    ),
+    FlashDealModel(
+      name: 'Omega 3 Fish Oil 1200mg Softgels',
+      price: 145.0,
+      imageUrl: 'https://picsum.photos/seed/tr_a5/300/300',
+      rating: 4.5,
+    ),
+    FlashDealModel(
+      name: 'Biotin Hair Growth Formula',
+      price: 120.0,
+      imageUrl: 'https://picsum.photos/seed/tr_a6/300/300',
+      rating: 4.0,
+    ),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            TText(
+              'trending.title',
+              style: theme.textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+                color: colorScheme.onSurface,
+              ),
+            ),
+            GestureDetector(
+              onTap: widget.onSeeAll ?? () {},
+              child: Text(
+                AppTranslations.t('common.see_all'),
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: colorScheme.primary,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ],
+        ),
+        12.verticalSpace,
+        SizedBox(
+          height: 36.h,
+          child: ListView.separated(
+            padding: EdgeInsets.zero,
+            scrollDirection: Axis.horizontal,
+            itemCount: _filterKeys.length,
+            separatorBuilder: (_, _) => 8.horizontalSpace,
+            itemBuilder: (_, index) {
+              final isSelected = _selectedFilter == index;
+              return GestureDetector(
+                onTap: () => setState(() => _selectedFilter = index),
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 200),
+                  curve: Curves.easeInOut,
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  decoration: BoxDecoration(
+                    color: isSelected ? colorScheme.primary : Colors.transparent,
+                    borderRadius: BorderRadius.circular(20.r),
+                    border: Border.all(
+                      color: isSelected
+                          ? colorScheme.primary
+                          : colorScheme.outlineVariant,
+                    ),
+                  ),
+                  child: Center(
+                    child: TText(
+                      _filterKeys[index],
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: isSelected
+                            ? colorScheme.onPrimary
+                            : colorScheme.onSurface.withValues(alpha: 0.7),
+                        fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+        16.verticalSpace,
+        GridView.builder(
+          padding: EdgeInsets.zero,
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 12.w,
+            mainAxisSpacing: 12.h,
+            childAspectRatio: 0.72,
+          ),
+          itemCount: _products.length,
+          itemBuilder: (_, index) => TrendingProductItem(product: _products[index]),
+        ),
+      ],
+    );
+  }
+}

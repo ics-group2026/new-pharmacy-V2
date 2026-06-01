@@ -1,0 +1,65 @@
+{
+  "auth": {
+    "login_title": "Welcome Back",
+    "login_subtitle": "Sign in to your account",
+    "email": "Email Address",
+    "email_hint": "Enter your email",
+    "password": "Password",
+    "password_hint": "Enter your password",
+    "login_btn": "Sign In",
+    "forget_password": "Forgot Password?",
+    "no_account": "Don't have an account?",
+    "register_link": "Sign Up",
+    "or_continue_with": "Or continue with"
+  },
+  "nav_bar": {
+    "home": "Home",
+    "wishlist": "Wishlist",
+    "cart": "Cart",
+    "account": "Account"
+  },
+  "language": {
+    "select_language": "Select Language",
+    "english": "English",
+    "arabic": "Arabic"
+  },
+  "common": {
+    "see_all": "See All",
+    "search_hint": "Search for products..."
+  },
+  "flash_deals": {
+    "title": "Flash Deals",
+    "buy_now": "Buy Now",
+    "currency": "EGP"
+  },
+  "new_arrivals": {
+    "title": "New Arrivals"
+  },
+  "products": {
+    "best_seller": "Best Seller",
+    "top_rated": "Top Rated",
+    "on_sale": "On Sale"
+  },
+  "home": {
+    "greeting": "Hello,",
+    "user_name": "Ahmed Omran"
+  },
+  "trending": {
+    "title": "Trending This Week",
+    "best_seller": "Best Seller",
+    "top_rated": "Top Rated",
+    "on_sale": "On Sale",
+    "new_arrivals": "New"
+  },
+  "categories": {
+    "title": "Categories",
+    "personal_care": "Personal Care",
+    "perfume": "Perfume",
+    "hair_care": "Hair Care",
+    "skin_care": "Skin Care",
+    "face_makeup": "Face Makeup",
+    "vitamins": "Vitamins",
+    "baby_care": "Baby Care",
+    "dental": "Dental Care"
+  }
+}

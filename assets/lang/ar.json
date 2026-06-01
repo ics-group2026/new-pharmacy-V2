@@ -1,0 +1,65 @@
+{
+  "auth": {
+    "login_title": "مرحبا بعودتك",
+    "login_subtitle": "سجل الدخول إلى حسابك",
+    "email": "البريد الإلكتروني",
+    "email_hint": "أدخل بريدك الإلكتروني",
+    "password": "كلمة المرور",
+    "password_hint": "أدخل كلمة المرور",
+    "login_btn": "تسجيل الدخول",
+    "forget_password": "هل نسيت كلمة المرور؟",
+    "no_account": "ليس لديك حساب؟",
+    "register_link": "إنشاء حساب",
+    "or_continue_with": "أو تابع بـ"
+  },
+  "nav_bar": {
+    "home": "الرئيسية",
+    "wishlist": "المفضلة",
+    "cart": "السلة",
+    "account": "حسابي"
+  },
+  "language": {
+    "select_language": "اختر اللغة",
+    "english": "الإنجليزية",
+    "arabic": "العربية"
+  },
+  "common": {
+    "see_all": "عرض الكل",
+    "search_hint": "ابحث عن منتج..."
+  },
+  "flash_deals": {
+    "title": "عروض سريعة",
+    "buy_now": "اشتري الآن",
+    "currency": "ج.م"
+  },
+  "new_arrivals": {
+    "title": "وصل حديثاً"
+  },
+  "products": {
+    "best_seller": "الأكثر مبيعاً",
+    "top_rated": "الأعلى تقييماً",
+    "on_sale": "تخفيضات"
+  },
+  "home": {
+    "greeting": "مرحباً،",
+    "user_name": "Ahmed Omran"
+  },
+  "trending": {
+    "title": "الأكثر رواجاً هذا الأسبوع",
+    "best_seller": "الأكثر مبيعاً",
+    "top_rated": "الأعلى تقييماً",
+    "on_sale": "تخفيضات",
+    "new_arrivals": "جديد"
+  },
+  "categories": {
+    "title": "الأقسام",
+    "personal_care": "العناية الشخصية",
+    "perfume": "العطور",
+    "hair_care": "العناية بالشعر",
+    "skin_care": "العناية بالبشرة",
+    "face_makeup": "مكياج",
+    "vitamins": "فيتامينات",
+    "baby_care": "العناية بالطفل",
+    "dental": "العناية بالأسنان"
+  }
+}
