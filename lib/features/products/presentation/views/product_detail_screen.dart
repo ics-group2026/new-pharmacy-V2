@@ -2,21 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:new_pharamacy_theme_v1/features/products/presentation/widgets/add_to_cart_bar.dart';
 import 'package:new_pharamacy_theme_v1/features/products/presentation/widgets/price_row.dart';
-import 'package:new_pharamacy_theme_v1/features/products/presentation/widgets/quantity_stepper.dart';
+import 'package:new_pharamacy_theme_v1/features/products/presentation/widgets/products_sliver_app_bar.dart';
+import 'package:new_pharamacy_theme_v1/features/products/presentation/widgets/quantity_widget.dart';
 
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_translations.dart';
 import '../../../../../core/widgets/animated_fade_slide.dart';
-import '../../../../../core/widgets/cached_network_image_widget.dart';
 import '../../../../../core/widgets/discount_badge.dart';
 import '../../../../../core/widgets/section_header.dart';
 import '../../../../../core/widgets/star_rating_row.dart';
 import '../../../cart/cubit/cart_cubit.dart';
 import '../../../flash_deals/data/models/flash_deal_model.dart';
-import '../../../wishlist/cubit/wishlist_cubit.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   const ProductDetailScreen({super.key, required this.product});
@@ -62,7 +60,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         ),
         body: CustomScrollView(
           slivers: [
-            _ProductSliverAppBar(product: product),
+            ProductSliverAppBar(product: product),
             SliverToBoxAdapter(
               child: Container(
                 decoration: BoxDecoration(
@@ -189,27 +187,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
                       20.verticalSpace,
 
-                      // ── Quantity ─────────────────────────────────────────
-                      AnimatedFadeSlide(
-                        delay: const Duration(milliseconds: 260),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              AppTranslations.t('product_detail.quantity'),
-                              style: theme.textTheme.titleSmall?.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: colorScheme.onSurface,
-                              ),
-                            ),
-                            12.verticalSpace,
-                            QuantityStepper(
-                              quantity: _quantity,
-                              onIncrement: _increment,
-                              onDecrement: _decrement,
-                            ),
-                          ],
-                        ),
+                      QuantityWidget(
+                        quantity: _quantity,
+                        increment: _increment,
+                        decrement: _decrement,
+                        theme: theme,
+                        colorScheme: colorScheme,
                       ),
 
                       SizedBox(height: 100.h),
@@ -227,71 +210,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
 // ── Sliver AppBar ────────────────────────────────────────────────────────────
 
-class _ProductSliverAppBar extends StatelessWidget {
-  const _ProductSliverAppBar({required this.product});
 
-  final FlashDealModel product;
-
-  @override
-  Widget build(BuildContext context) {
-    return SliverAppBar(
-      expandedHeight: 320.h,
-      pinned: true,
-      backgroundColor: AppColors.primaryDark,
-      leading: Padding(
-        padding: EdgeInsets.only(left: 8.w),
-        child: CircleAvatar(
-          backgroundColor: Colors.black26,
-          child: IconButton(
-            icon: Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white, size: 18.r),
-            onPressed: () => context.pop(),
-          ),
-        ),
-      ),
-      actions: [
-        BlocSelector<WishlistCubit, List<FlashDealModel>, bool>(
-          selector: (state) => state.any((p) => p.imageUrl == product.imageUrl),
-          builder: (context, isWishlisted) => Padding(
-            padding: EdgeInsets.only(right: 8.w),
-            child: CircleAvatar(
-              backgroundColor: Colors.black26,
-              child: IconButton(
-                icon: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 250),
-                  transitionBuilder: (child, anim) => ScaleTransition(scale: anim, child: child),
-                  child: Icon(
-                    isWishlisted ? Icons.favorite_rounded : Icons.favorite_border_rounded,
-                    key: ValueKey(isWishlisted),
-                    color: isWishlisted ? Colors.redAccent : Colors.white,
-                    size: 20.r,
-                  ),
-                ),
-                onPressed: () => context.read<WishlistCubit>().toggle(product),
-              ),
-            ),
-          ),
-        ),
-      ],
-      title: Text(
-        product.name,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-        style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-      ),
-      flexibleSpace: FlexibleSpaceBar(
-        background: Hero(
-          tag: 'product-image-${product.imageUrl}',
-          child: CachedNetworkImageWidget(
-            imageUrl: product.imageUrl,
-            width: double.infinity,
-            height: double.infinity,
-            fit: BoxFit.cover,
-          ),
-        ),
-      ),
-    );
-  }
-}
 
 // ── Price Row ────────────────────────────────────────────────────────────────
 
