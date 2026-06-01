@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_translations.dart';
 
 class HomeAppBar extends StatelessWidget {
@@ -9,7 +10,6 @@ class HomeAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
     const white = Colors.white;
 
     return SliverAppBar(
@@ -18,7 +18,16 @@ class HomeAppBar extends StatelessWidget {
       floating: false,
       toolbarHeight: 76.h,
       titleSpacing: 16.w,
-      backgroundColor: colorScheme.primary.withValues(alpha: 0.82),
+      backgroundColor: Colors.transparent,
+      flexibleSpace: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [AppColors.primaryDark, AppColors.primary],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+      ),
       title: Row(
         children: [
           Container(

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 abstract class AppColors {
-  // Primary red (logo, nav bar, buttons — matches website)
-  static const Color primary = Color(0xFFE53935);
-  static const Color primaryDark = Color(0xFFC62828);
-  static const Color primaryLight = Color(0xFFEF9A9A);
-  static const Color primaryContainer = Color(0xFFFFEBEE);
+  // Primary green (logo, nav bar, buttons — matches website)
+  static const Color primary = Color(0xFF43A047);
+  static const Color primaryDark = Color(0xFF2E7D32);
+  static const Color primaryLight = Color(0xFFA5D6A7);
+  static const Color primaryContainer = Color(0xFFE8F5E9);
 
-  // Secondary orange (Hot Deal badge, accent highlights)
-  static const Color secondary = Color(0xFFFF6D00);
-  static const Color secondaryDark = Color(0xFFE65100);
-  static const Color secondaryContainer = Color(0xFFFFF3E0);
+  // Secondary amber (discount badges, accent highlights)
+  static const Color secondary = Color(0xFFFFC107);
+  static const Color secondaryDark = Color(0xFFFF8F00);
+  static const Color secondaryContainer = Color(0xFFFFF8E1);
 
   // Light theme surfaces
   static const Color scaffoldLight = Color(0xFFF5F5F5);
@@ -38,7 +38,7 @@ abstract class AppColors {
 
   // Semantic
   static const Color error = Color(0xFFD32F2F);
-  static const Color success = Color(0xFF2E7D32);
+  static const Color success = Color(0xFF00796B);
   static const Color warning = Color(0xFFF57C00);
   static const Color info = Color(0xFF1565C0);
 

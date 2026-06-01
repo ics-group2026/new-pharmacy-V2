@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../utils/app_translations.dart';
 import 't_text.dart';
@@ -26,12 +27,19 @@ class TitleWithSeeAll extends StatelessWidget {
         ),
         GestureDetector(
           onTap: onSeeAll,
-          child: Text(
-            AppTranslations.t('common.see_all'),
-            style: theme.textTheme.bodyMedium?.copyWith(
-              color: colorScheme.primary,
-              fontWeight: FontWeight.w500,
-            ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                AppTranslations.t('common.see_all'),
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: colorScheme.primary,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              3.horizontalSpace,
+              Icon(Icons.arrow_forward_ios_rounded, size: 12.r, color: colorScheme.primary),
+            ],
           ),
         ),
       ],

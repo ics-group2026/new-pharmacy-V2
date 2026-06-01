@@ -331,7 +331,7 @@ abstract class SharedTheme {
   );
 
   static const ChipThemeData darkChipTheme = ChipThemeData(
-    backgroundColor: Color(0xFF3A1A1A),
+    backgroundColor: Color(0xFF1A3A1A),
     selectedColor: AppColors.primary,
     labelStyle: TextStyle(fontSize: 13, color: AppColors.primaryLight),
     side: BorderSide(color: AppColors.primaryDark),

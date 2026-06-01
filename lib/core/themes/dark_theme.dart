@@ -13,11 +13,11 @@ ThemeData darkTheme = ThemeData(
   colorScheme: const ColorScheme.dark(
     primary: AppColors.primary,
     onPrimary: AppColors.whiteColor,
-    primaryContainer: Color(0xFF4A1515),
+    primaryContainer: Color(0xFF1B5E20),
     onPrimaryContainer: AppColors.primaryLight,
     secondary: AppColors.secondary,
     onSecondary: AppColors.whiteColor,
-    secondaryContainer: Color(0xFF3E2000),
+    secondaryContainer: Color(0xFF3E2C00),
     onSecondaryContainer: Color(0xFFFFCC80),
     surface: AppColors.surfaceDark,
     onSurface: AppColors.textPrimaryDark,
@@ -106,7 +106,7 @@ ThemeData darkTheme = ThemeData(
   // ── NavigationBar (M3) ───────────────────────────────────────────────────
   navigationBarTheme: NavigationBarThemeData(
     backgroundColor: AppColors.surfaceDark,
-    indicatorColor: const Color(0xFF4A1515),
+    indicatorColor: const Color(0xFF1B5E20),
     iconTheme: const WidgetStatePropertyAll(
       IconThemeData(color: AppColors.textSecondaryDark),
     ),
@@ -137,7 +137,7 @@ ThemeData darkTheme = ThemeData(
     ),
     trackColor: WidgetStateProperty.resolveWith(
       (states) => states.contains(WidgetState.selected)
-          ? const Color(0xFF4A1515)
+          ? const Color(0xFF1B5E20)
           : AppColors.borderDark,
     ),
   ),
@@ -187,8 +187,8 @@ ThemeData darkTheme = ThemeData(
   // ── ProgressIndicator ─────────────────────────────────────────────────────
   progressIndicatorTheme: const ProgressIndicatorThemeData(
     color: AppColors.primary,
-    linearTrackColor: Color(0xFF4A1515),
-    circularTrackColor: Color(0xFF4A1515),
+    linearTrackColor: Color(0xFF1B5E20),
+    circularTrackColor: Color(0xFF1B5E20),
   ),
 
   // ── ListTile ──────────────────────────────────────────────────────────────

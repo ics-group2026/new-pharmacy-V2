@@ -19,7 +19,13 @@ class HomeProductItem extends StatelessWidget {
       decoration: BoxDecoration(
         color: colorScheme.surface,
         borderRadius: BorderRadius.circular(16.r),
-        border: Border.all(color: colorScheme.outlineVariant.withValues(alpha: 0.6)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.07),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,6 +49,13 @@ class HomeProductItem extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: colorScheme.surface,
                     shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.08),
+                        blurRadius: 6,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
                   ),
                   child: Icon(
                     Icons.favorite_border_rounded,
@@ -51,10 +64,30 @@ class HomeProductItem extends StatelessWidget {
                   ),
                 ),
               ),
+              if (product.discountPercent != null)
+                Positioned(
+                  top: 8.h,
+                  left: 8.w,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFFFC107),
+                      borderRadius: BorderRadius.circular(20.r),
+                    ),
+                    child: Text(
+                      '${product.discountPercent}% Off',
+                      style: TextStyle(
+                        fontSize: 10.sp,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black87,
+                      ),
+                    ),
+                  ),
+                ),
             ],
           ),
           Padding(
-            padding: EdgeInsets.all(10.w),
+            padding: EdgeInsets.fromLTRB(10.w, 10.h, 10.w, 0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -73,14 +106,50 @@ class HomeProductItem extends StatelessWidget {
                   _StarRating(rating: product.rating!),
                 ],
                 8.verticalSpace,
-                Text(
-                  '${product.price.toStringAsFixed(0)} ${AppTranslations.t('flash_deals.currency')}',
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    color: colorScheme.primary,
-                    fontWeight: FontWeight.bold,
-                  ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      '${product.price.toStringAsFixed(0)} ${AppTranslations.t('flash_deals.currency')}',
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: colorScheme.primary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    if (product.originalPrice != null) ...[
+                      6.horizontalSpace,
+                      Text(
+                        product.originalPrice!.toStringAsFixed(0),
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: colorScheme.onSurface.withValues(alpha: 0.4),
+                          decoration: TextDecoration.lineThrough,
+                          decorationColor: colorScheme.onSurface.withValues(alpha: 0.4),
+                        ),
+                      ),
+                    ],
+                  ],
                 ),
               ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.fromLTRB(10.w, 8.h, 10.w, 10.h),
+            child: SizedBox(
+              width: double.infinity,
+              height: 32.h,
+              child: ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.r),
+                  ),
+                ),
+                child: Text(
+                  AppTranslations.t('flash_deals.buy_now'),
+                  style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w600),
+                ),
+              ),
             ),
           ),
         ],

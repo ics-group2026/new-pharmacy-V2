@@ -15,18 +15,24 @@ class BestSellerSection extends StatelessWidget {
     FlashDealModel(
       name: 'Organic High-Curcumin Turmeric Powder',
       price: 22.49,
+      originalPrice: 32.0,
+      discountPercent: 30,
       imageUrl: 'https://picsum.photos/seed/bs1/200/200',
       rating: 4.5,
     ),
     FlashDealModel(
       name: 'Pure Medical Grade Hyaluronic Serum',
       price: 45.00,
+      originalPrice: 60.0,
+      discountPercent: 25,
       imageUrl: 'https://picsum.photos/seed/bs2/200/200',
       rating: 3.5,
     ),
     FlashDealModel(
       name: 'Advanced Daytime Face Moisturizer',
       price: 32.99,
+      originalPrice: 45.0,
+      discountPercent: 27,
       imageUrl: 'https://picsum.photos/seed/bs3/200/200',
       rating: 5.0,
     ),
@@ -54,7 +60,7 @@ class BestSellerSection extends StatelessWidget {
         ),
         12.verticalSpace,
         SizedBox(
-          height: 230.h,
+          height: 270.h,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             itemCount: _products.length,

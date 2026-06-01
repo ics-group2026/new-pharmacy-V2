@@ -20,18 +20,49 @@ class NewArrivalItem extends StatelessWidget {
       decoration: BoxDecoration(
         color: colorScheme.surface,
         borderRadius: BorderRadius.circular(16.r),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.07),
+            blurRadius: 10,
+            offset: const Offset(0, 3),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
-            child: CachedNetworkImageWidget(
-              imageUrl: item.imageUrl,
-              width: double.infinity,
-              height: 145.h,
-              fit: BoxFit.cover,
-            ),
+          Stack(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
+                child: CachedNetworkImageWidget(
+                  imageUrl: item.imageUrl,
+                  width: double.infinity,
+                  height: 145.h,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              if (item.discountPercent != null)
+                Positioned(
+                  top: 8.h,
+                  left: 8.w,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFFFC107),
+                      borderRadius: BorderRadius.circular(20.r),
+                    ),
+                    child: Text(
+                      '${item.discountPercent}% Off',
+                      style: TextStyle(
+                        fontSize: 10.sp,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black87,
+                      ),
+                    ),
+                  ),
+                ),
+            ],
           ),
           Padding(
             padding: EdgeInsets.all(10.w),
@@ -48,14 +79,30 @@ class NewArrivalItem extends StatelessWidget {
                     height: 1.3,
                   ),
                 ),
-                8.verticalSpace,
-                Text(
-                  '${item.price.toStringAsFixed(0)} ${AppTranslations.t('flash_deals.currency')}',
-                  overflow: TextOverflow.ellipsis,
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    color: colorScheme.primary,
-                    fontWeight: FontWeight.bold,
-                  ),
+                6.verticalSpace,
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      '${item.price.toStringAsFixed(0)} ${AppTranslations.t('flash_deals.currency')}',
+                      overflow: TextOverflow.ellipsis,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: colorScheme.primary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    if (item.originalPrice != null) ...[
+                      5.horizontalSpace,
+                      Text(
+                        item.originalPrice!.toStringAsFixed(0),
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: colorScheme.onSurface.withValues(alpha: 0.4),
+                          decoration: TextDecoration.lineThrough,
+                          decorationColor: colorScheme.onSurface.withValues(alpha: 0.4),
+                        ),
+                      ),
+                    ],
+                  ],
                 ),
               ],
             ),

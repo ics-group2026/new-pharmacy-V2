@@ -15,18 +15,24 @@ class OnSaleSection extends StatelessWidget {
     FlashDealModel(
       name: 'MEDIDERM Dermatological Moisturizer Lotion',
       price: 106.00,
+      originalPrice: 140.0,
+      discountPercent: 24,
       imageUrl: 'https://picsum.photos/seed/os1/200/200',
       rating: 4.0,
     ),
     FlashDealModel(
       name: 'Pectol Orange Throat Lozenges',
       price: 25.00,
+      originalPrice: 38.0,
+      discountPercent: 34,
       imageUrl: 'https://picsum.photos/seed/os2/200/200',
       rating: 3.5,
     ),
     FlashDealModel(
       name: 'Aurora Organic Cleansing Oil',
       price: 54.00,
+      originalPrice: 75.0,
+      discountPercent: 28,
       imageUrl: 'https://picsum.photos/seed/os3/200/200',
       rating: 4.5,
     ),
@@ -54,7 +60,7 @@ class OnSaleSection extends StatelessWidget {
         ),
         12.verticalSpace,
         SizedBox(
-          height: 230.h,
+          height: 270.h,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             itemCount: _products.length,

@@ -15,18 +15,24 @@ class TopRatedSection extends StatelessWidget {
     FlashDealModel(
       name: 'Vitamin C 1000mg Effervescent Tablets',
       price: 89.00,
+      originalPrice: 115.0,
+      discountPercent: 23,
       imageUrl: 'https://picsum.photos/seed/tr1/200/200',
       rating: 5.0,
     ),
     FlashDealModel(
       name: 'Omega 3 Fish Oil 1200mg Softgels',
       price: 145.00,
+      originalPrice: 190.0,
+      discountPercent: 24,
       imageUrl: 'https://picsum.photos/seed/tr2/200/200',
       rating: 4.5,
     ),
     FlashDealModel(
       name: 'Collagen Peptides Anti-Aging Complex',
       price: 210.00,
+      originalPrice: 280.0,
+      discountPercent: 25,
       imageUrl: 'https://picsum.photos/seed/tr3/200/200',
       rating: 4.0,
     ),
@@ -51,7 +57,7 @@ class TopRatedSection extends StatelessWidget {
         ),
         12.verticalSpace,
         SizedBox(
-          height: 230.h,
+          height: 270.h,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             itemCount: _products.length,
