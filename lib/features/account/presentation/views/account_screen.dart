@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/utils/app_colors.dart';
-import '../../../../../core/utils/app_translations.dart';
 import '../../../../../core/widgets/language_switcher.dart';
+import '../../../../../core/widgets/t_text.dart';
 import '../../../../../core/widgets/theme_switcher.dart';
 
 class AccountScreen extends StatelessWidget {
@@ -40,21 +40,24 @@ class AccountScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: Colors.white.withValues(alpha: 0.2),
-                          border: Border.all(color: Colors.white.withValues(alpha: 0.6), width: 2),
+                          border: Border.all(
+                            color: Colors.white.withValues(alpha: 0.6),
+                            width: 2,
+                          ),
                         ),
                         child: Icon(Icons.person_rounded, size: 38.r, color: Colors.white),
                       ),
                       12.verticalSpace,
-                      Text(
-                        AppTranslations.t('home.user_name'),
+                      TText(
+                        'home.user_name',
                         style: theme.textTheme.titleMedium?.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       4.verticalSpace,
-                      Text(
-                        'user@pharmacy.com',
+                      TText(
+                        'account.email_placeholder',
                         style: theme.textTheme.bodySmall?.copyWith(
                           color: Colors.white.withValues(alpha: 0.75),
                         ),
@@ -64,8 +67,8 @@ class AccountScreen extends StatelessWidget {
                 ),
               ),
             ),
-            title: Text(
-              AppTranslations.t('nav_bar.account'),
+            title: TText(
+              'nav_bar.account',
               style: const TextStyle(color: Colors.white),
             ),
             backgroundColor: AppColors.primaryDark,
@@ -78,8 +81,8 @@ class AccountScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   16.verticalSpace,
-                  Text(
-                    'Preferences',
+                  TText(
+                    'account.preferences',
                     style: theme.textTheme.labelLarge?.copyWith(
                       color: colorScheme.onSurface.withValues(alpha: 0.5),
                       letterSpacing: 0.8,
@@ -90,12 +93,12 @@ class AccountScreen extends StatelessWidget {
                     children: [
                       const LanguageSwitcher(),
                       Divider(height: 1, color: colorScheme.outlineVariant),
-                      ThemeSwitcher(),
+                      const ThemeSwitcher(),
                     ],
                   ),
                   24.verticalSpace,
-                  Text(
-                    'Account',
+                  TText(
+                    'nav_bar.account',
                     style: theme.textTheme.labelLarge?.copyWith(
                       color: colorScheme.onSurface.withValues(alpha: 0.5),
                       letterSpacing: 0.8,
@@ -106,19 +109,19 @@ class AccountScreen extends StatelessWidget {
                     children: [
                       _SettingsTile(
                         icon: Icons.receipt_long_rounded,
-                        title: 'My Orders',
+                        titleKey: 'account.my_orders',
                         onTap: () {},
                       ),
                       Divider(height: 1, color: colorScheme.outlineVariant),
                       _SettingsTile(
                         icon: Icons.notifications_outlined,
-                        title: 'Notifications',
+                        titleKey: 'account.notifications',
                         onTap: () {},
                       ),
                       Divider(height: 1, color: colorScheme.outlineVariant),
                       _SettingsTile(
                         icon: Icons.help_outline_rounded,
-                        title: 'Help & Support',
+                        titleKey: 'account.help_support',
                         onTap: () {},
                       ),
                     ],
@@ -161,10 +164,14 @@ class _SettingsCard extends StatelessWidget {
 }
 
 class _SettingsTile extends StatelessWidget {
-  const _SettingsTile({required this.icon, required this.title, required this.onTap});
+  const _SettingsTile({
+    required this.icon,
+    required this.titleKey,
+    required this.onTap,
+  });
 
   final IconData icon;
-  final String title;
+  final String titleKey;
   final VoidCallback onTap;
 
   @override
@@ -181,8 +188,17 @@ class _SettingsTile extends StatelessWidget {
         ),
         child: Icon(icon, size: 20.r, color: colorScheme.primary),
       ),
-      title: Text(title, style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500)),
-      trailing: Icon(Icons.arrow_forward_ios_rounded, size: 14.r, color: colorScheme.onSurface.withValues(alpha: 0.4)),
+      title: TText(
+        titleKey,
+        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+      trailing: Icon(
+        Icons.arrow_forward_ios_rounded,
+        size: 14.r,
+        color: colorScheme.onSurface.withValues(alpha: 0.4),
+      ),
     );
   }
 }

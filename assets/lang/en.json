@@ -60,6 +60,29 @@
     "reviews": "Reviews",
     "total": "Total"
   },
+  "wishlist": {
+    "empty_title": "Your Wishlist is Empty",
+    "empty_subtitle": "Save items you love for later"
+  },
+  "cart": {
+    "empty_title": "Your Cart is Empty",
+    "empty_subtitle": "Add items to start your order",
+    "order_summary": "Order Summary",
+    "subtotal": "Subtotal",
+    "delivery_fee": "Delivery Fee",
+    "total": "Total",
+    "checkout": "Proceed to Checkout",
+    "free": "Free",
+    "remove": "Remove"
+  },
+  "account": {
+    "preferences": "Preferences",
+    "my_orders": "My Orders",
+    "notifications": "Notifications",
+    "help_support": "Help & Support",
+    "dark_mode": "Dark Mode",
+    "email_placeholder": "user@pharmacy.com"
+  },
   "categories": {
     "title": "Categories",
     "personal_care": "Personal Care",

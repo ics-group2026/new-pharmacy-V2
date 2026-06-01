@@ -60,6 +60,29 @@
     "reviews": "تقييمات",
     "total": "الإجمالي"
   },
+  "wishlist": {
+    "empty_title": "قائمة المفضلة فارغة",
+    "empty_subtitle": "احفظ العناصر التي تحبها لوقت لاحق"
+  },
+  "cart": {
+    "empty_title": "سلة التسوق فارغة",
+    "empty_subtitle": "أضف منتجات لبدء طلبك",
+    "order_summary": "ملخص الطلب",
+    "subtotal": "المجموع الفرعي",
+    "delivery_fee": "رسوم التوصيل",
+    "total": "الإجمالي",
+    "checkout": "متابعة الدفع",
+    "free": "مجاناً",
+    "remove": "إزالة"
+  },
+  "account": {
+    "preferences": "التفضيلات",
+    "my_orders": "طلباتي",
+    "notifications": "الإشعارات",
+    "help_support": "المساعدة والدعم",
+    "dark_mode": "الوضع الداكن",
+    "email_placeholder": "user@pharmacy.com"
+  },
   "categories": {
     "title": "الأقسام",
     "personal_care": "العناية الشخصية",
