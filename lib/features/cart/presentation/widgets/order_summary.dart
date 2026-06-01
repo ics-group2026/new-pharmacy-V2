@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:new_pharamacy_theme_v1/core/utils/app_colors.dart';
-import 'package:new_pharamacy_theme_v1/core/utils/app_translations.dart';
-import 'package:new_pharamacy_theme_v1/core/widgets/t_text.dart';
-import 'package:new_pharamacy_theme_v1/features/cart/cubit/cart_cubit.dart';
-import 'package:new_pharamacy_theme_v1/features/cart/presentation/widgets/row_of_cart.dart';
+import 'package:new_pharmacy_v2/core/utils/app_colors.dart';
+import 'package:new_pharmacy_v2/core/utils/app_translations.dart';
+import 'package:new_pharmacy_v2/core/widgets/t_text.dart';
+import 'package:new_pharmacy_v2/features/cart/cubit/cart_cubit.dart';
+import 'package:new_pharmacy_v2/features/cart/presentation/widgets/row_of_cart.dart';
 
 class OrderSummary extends StatelessWidget {
   const OrderSummary({super.key});

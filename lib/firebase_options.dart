@@ -63,6 +63,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: '875364234816',
     projectId: 'new-pharmacy-592df',
     storageBucket: 'new-pharmacy-592df.firebasestorage.app',
-    iosBundleId: 'com.example.newPharamacyThemeV1',
+    iosBundleId: 'com.example.new_pharmacy_v2',
   );
 }

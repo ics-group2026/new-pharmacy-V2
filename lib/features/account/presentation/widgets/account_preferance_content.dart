@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:new_pharamacy_theme_v1/core/widgets/language_switcher.dart';
-import 'package:new_pharamacy_theme_v1/core/widgets/t_text.dart';
-import 'package:new_pharamacy_theme_v1/core/widgets/theme_switcher.dart';
-import 'package:new_pharamacy_theme_v1/features/account/presentation/widgets/settings_card.dart';
-import 'package:new_pharamacy_theme_v1/features/account/presentation/widgets/settings_tile.dart';
+import 'package:new_pharmacy_v2/core/widgets/language_switcher.dart';
+import 'package:new_pharmacy_v2/core/widgets/t_text.dart';
+import 'package:new_pharmacy_v2/core/widgets/theme_switcher.dart';
+import 'package:new_pharmacy_v2/features/account/presentation/widgets/settings_card.dart';
+import 'package:new_pharmacy_v2/features/account/presentation/widgets/settings_tile.dart';
 
 class AccountPreferanceContent extends StatelessWidget {
   const AccountPreferanceContent({super.key});

@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="new_pharamacy_theme_v1"
+        android:label="Pharmacy V2"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

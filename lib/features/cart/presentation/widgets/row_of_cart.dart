@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:new_pharamacy_theme_v1/core/widgets/t_text.dart';
+import 'package:new_pharmacy_v2/core/widgets/t_text.dart';
 
 class RowOfCart extends StatelessWidget {
   const RowOfCart({super.key, required this.labelKey, this.value, this.valueKey, this.bold = false, this.valueColor});

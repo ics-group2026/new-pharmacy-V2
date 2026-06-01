@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:new_pharamacy_theme_v1/core/utils/app_colors.dart';
-import 'package:new_pharamacy_theme_v1/core/utils/app_translations.dart';
-import 'package:new_pharamacy_theme_v1/features/flash_deals/data/models/flash_deal_model.dart';
+import 'package:new_pharmacy_v2/core/utils/app_colors.dart';
+import 'package:new_pharmacy_v2/core/utils/app_translations.dart';
+import 'package:new_pharmacy_v2/features/flash_deals/data/models/flash_deal_model.dart';
 
 class PriceRow extends StatelessWidget {
   const PriceRow({super.key, required this.product});

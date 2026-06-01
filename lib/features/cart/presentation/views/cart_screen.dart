@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:new_pharamacy_theme_v1/features/cart/presentation/widgets/cart_bloc_builder_widget.dart';
-import 'package:new_pharamacy_theme_v1/features/cart/presentation/widgets/cart_bloc_selector_widget.dart';
+import 'package:new_pharmacy_v2/features/cart/presentation/widgets/cart_bloc_builder_widget.dart';
+import 'package:new_pharmacy_v2/features/cart/presentation/widgets/cart_bloc_selector_widget.dart';
 import '../../../../../core/widgets/t_text.dart';
 
 class CartScreen extends StatelessWidget {

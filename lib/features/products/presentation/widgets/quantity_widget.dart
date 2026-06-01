@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:new_pharamacy_theme_v1/core/utils/app_translations.dart';
-import 'package:new_pharamacy_theme_v1/core/widgets/animated_fade_slide.dart';
-import 'package:new_pharamacy_theme_v1/features/products/presentation/widgets/quantity_stepper.dart';
+import 'package:new_pharmacy_v2/core/utils/app_translations.dart';
+import 'package:new_pharmacy_v2/core/widgets/animated_fade_slide.dart';
+import 'package:new_pharmacy_v2/features/products/presentation/widgets/quantity_stepper.dart';
     
 
 class QuantityWidget extends StatelessWidget {

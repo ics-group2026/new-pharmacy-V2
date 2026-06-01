@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:new_pharamacy_theme_v1/core/utils/app_colors.dart';
-import 'package:new_pharamacy_theme_v1/core/widgets/cached_network_image_widget.dart';
-import 'package:new_pharamacy_theme_v1/features/flash_deals/data/models/flash_deal_model.dart';
-import 'package:new_pharamacy_theme_v1/features/wishlist/cubit/wishlist_cubit.dart';
+import 'package:new_pharmacy_v2/core/utils/app_colors.dart';
+import 'package:new_pharmacy_v2/core/widgets/cached_network_image_widget.dart';
+import 'package:new_pharmacy_v2/features/flash_deals/data/models/flash_deal_model.dart';
+import 'package:new_pharmacy_v2/features/wishlist/cubit/wishlist_cubit.dart';
 
 class ProductSliverAppBar extends StatelessWidget {
   const ProductSliverAppBar({super.key, required this.product});

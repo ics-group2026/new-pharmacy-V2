@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:new_pharamacy_theme_v1/features/products/presentation/widgets/add_to_cart_bar.dart';
-import 'package:new_pharamacy_theme_v1/features/products/presentation/widgets/describtion_widget.dart';
-import 'package:new_pharamacy_theme_v1/features/products/presentation/widgets/how_to_use_widget.dart';
-import 'package:new_pharamacy_theme_v1/features/products/presentation/widgets/product_header.dart';
-import 'package:new_pharamacy_theme_v1/features/products/presentation/widgets/products_sliver_app_bar.dart';
-import 'package:new_pharamacy_theme_v1/features/products/presentation/widgets/quantity_widget.dart';
+import 'package:new_pharmacy_v2/features/products/presentation/widgets/add_to_cart_bar.dart';
+import 'package:new_pharmacy_v2/features/products/presentation/widgets/describtion_widget.dart';
+import 'package:new_pharmacy_v2/features/products/presentation/widgets/how_to_use_widget.dart';
+import 'package:new_pharmacy_v2/features/products/presentation/widgets/product_header.dart';
+import 'package:new_pharmacy_v2/features/products/presentation/widgets/products_sliver_app_bar.dart';
+import 'package:new_pharmacy_v2/features/products/presentation/widgets/quantity_widget.dart';
 
 import '../../../../../core/utils/app_translations.dart';
 import '../../../cart/cubit/cart_cubit.dart';

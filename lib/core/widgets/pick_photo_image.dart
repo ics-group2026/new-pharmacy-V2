@@ -3,7 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:new_pharamacy_theme_v1/core/utils/app_colors.dart';
+import 'package:new_pharmacy_v2/core/utils/app_colors.dart';
 
 class PickPhotoWidget extends StatefulWidget {
   const PickPhotoWidget({super.key, required this.onChanged});

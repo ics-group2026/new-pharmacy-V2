@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:new_pharamacy_theme_v1/features/account/presentation/widgets/account_preferance_content.dart';
+import 'package:new_pharmacy_v2/features/account/presentation/widgets/account_preferance_content.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/widgets/t_text.dart';
 

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:new_pharamacy_theme_v1/features/cart/cubit/cart_cubit.dart';
-import 'package:new_pharamacy_theme_v1/features/cart/presentation/widgets/cart_item_row.dart';
-import 'package:new_pharamacy_theme_v1/features/cart/presentation/widgets/empty_state.dart';
-import 'package:new_pharamacy_theme_v1/features/cart/presentation/widgets/order_summary.dart';
+import 'package:new_pharmacy_v2/features/cart/cubit/cart_cubit.dart';
+import 'package:new_pharmacy_v2/features/cart/presentation/widgets/cart_item_row.dart';
+import 'package:new_pharmacy_v2/features/cart/presentation/widgets/empty_state.dart';
+import 'package:new_pharmacy_v2/features/cart/presentation/widgets/order_summary.dart';
 
 class CartBlocBuilderWidget extends StatelessWidget {
   const CartBlocBuilderWidget({super.key});

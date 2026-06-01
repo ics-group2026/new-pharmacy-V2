@@ -1,6 +1,6 @@
 {
-    "name": "new_pharmacy_v2",
-    "short_name": "new_pharmacy_v2",
+    "name": "Pharmacy V2",
+    "short_name": "Pharmacy V2",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
