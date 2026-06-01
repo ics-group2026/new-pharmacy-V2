@@ -3,6 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:new_pharamacy_theme_v1/features/products/presentation/widgets/add_to_cart_bar.dart';
+import 'package:new_pharamacy_theme_v1/features/products/presentation/widgets/price_row.dart';
+import 'package:new_pharamacy_theme_v1/features/products/presentation/widgets/quantity_stepper.dart';
 
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_translations.dart';
@@ -47,7 +50,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       ),
       child: Scaffold(
         extendBodyBehindAppBar: true,
-        bottomNavigationBar: _AddToCartBar(
+        bottomNavigationBar: AddToCartBar(
           totalPrice: _totalPrice,
           currency: AppTranslations.t('flash_deals.currency'),
           onAddToCart: () {
@@ -131,7 +134,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               ),
                             ],
                             16.verticalSpace,
-                            _PriceRow(product: product),
+                            PriceRow(product: product),
                           ],
                         ),
                       ),
@@ -200,7 +203,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               ),
                             ),
                             12.verticalSpace,
-                            _QuantityStepper(
+                            QuantityStepper(
                               quantity: _quantity,
                               onIncrement: _increment,
                               onDecrement: _decrement,
@@ -292,219 +295,14 @@ class _ProductSliverAppBar extends StatelessWidget {
 
 // ── Price Row ────────────────────────────────────────────────────────────────
 
-class _PriceRow extends StatelessWidget {
-  const _PriceRow({required this.product});
 
-  final FlashDealModel product;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-    final currency = AppTranslations.t('flash_deals.currency');
-
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
-      decoration: BoxDecoration(
-        color: AppColors.primaryContainer,
-        borderRadius: BorderRadius.circular(16.r),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Text(
-            '${product.price.toStringAsFixed(0)} $currency',
-            style: theme.textTheme.headlineSmall?.copyWith(
-              color: colorScheme.primary,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          if (product.originalPrice != null) ...[
-            12.horizontalSpace,
-            Padding(
-              padding: EdgeInsets.only(bottom: 2.h),
-              child: Text(
-                '${product.originalPrice!.toStringAsFixed(0)} $currency',
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color: colorScheme.onSurface.withValues(alpha: 0.4),
-                  decoration: TextDecoration.lineThrough,
-                  decorationColor: colorScheme.onSurface.withValues(alpha: 0.4),
-                ),
-              ),
-            ),
-          ],
-          const Spacer(),
-          if (product.discountPercent != null)
-            Text(
-              'Save ${((1 - product.price / product.originalPrice!) * 100).toStringAsFixed(0)}%',
-              style: TextStyle(
-                fontSize: 12.sp,
-                fontWeight: FontWeight.w600,
-                color: colorScheme.primary,
-              ),
-            ),
-        ],
-      ),
-    );
-  }
-}
 
 // ── Quantity Stepper ─────────────────────────────────────────────────────────
 
-class _QuantityStepper extends StatelessWidget {
-  const _QuantityStepper({
-    required this.quantity,
-    required this.onIncrement,
-    required this.onDecrement,
-  });
 
-  final int quantity;
-  final VoidCallback onIncrement;
-  final VoidCallback onDecrement;
 
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
 
-    return Row(
-      children: [
-        _StepButton(
-          icon: Icons.remove_rounded,
-          onTap: quantity > 1 ? onDecrement : null,
-          colorScheme: colorScheme,
-        ),
-        SizedBox(
-          width: 52.w,
-          child: Center(
-            child: AnimatedSwitcher(
-              duration: const Duration(milliseconds: 200),
-              transitionBuilder: (child, animation) => FadeTransition(opacity: animation, child: child),
-              child: Text(
-                '$quantity',
-                key: ValueKey(quantity),
-                style: TextStyle(
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.bold,
-                  color: colorScheme.onSurface,
-                ),
-              ),
-            ),
-          ),
-        ),
-        _StepButton(
-          icon: Icons.add_rounded,
-          onTap: onIncrement,
-          colorScheme: colorScheme,
-        ),
-      ],
-    );
-  }
-}
-
-class _StepButton extends StatelessWidget {
-  const _StepButton({required this.icon, required this.onTap, required this.colorScheme});
-
-  final IconData icon;
-  final VoidCallback? onTap;
-  final ColorScheme colorScheme;
-
-  @override
-  Widget build(BuildContext context) {
-    final enabled = onTap != null;
-
-    return GestureDetector(
-      onTap: onTap,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 150),
-        width: 40.r,
-        height: 40.r,
-        decoration: BoxDecoration(
-          color: enabled ? colorScheme.primary : colorScheme.onSurface.withValues(alpha: 0.08),
-          borderRadius: BorderRadius.circular(12.r),
-        ),
-        child: Icon(
-          icon,
-          size: 20.r,
-          color: enabled ? Colors.white : colorScheme.onSurface.withValues(alpha: 0.3),
-        ),
-      ),
-    );
-  }
-}
 
 // ── Add to Cart Bottom Bar ───────────────────────────────────────────────────
 
-class _AddToCartBar extends StatelessWidget {
-  const _AddToCartBar({
-    required this.totalPrice,
-    required this.currency,
-    required this.onAddToCart,
-  });
 
-  final double totalPrice;
-  final String currency;
-  final VoidCallback onAddToCart;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
-    return Container(
-      padding: EdgeInsets.fromLTRB(20.w, 12.h, 20.w, 12.h),
-      decoration: BoxDecoration(
-        color: colorScheme.surface,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.08),
-            blurRadius: 16,
-            offset: const Offset(0, -4),
-          ),
-        ],
-      ),
-      child: SafeArea(
-        top: false,
-        child: Row(
-          children: [
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  AppTranslations.t('product_detail.total'),
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    color: colorScheme.onSurface.withValues(alpha: 0.5),
-                  ),
-                ),
-                4.verticalSpace,
-                Text(
-                  '${totalPrice.toStringAsFixed(0)} $currency',
-                  style: theme.textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: colorScheme.primary,
-                  ),
-                ),
-              ],
-            ),
-            16.horizontalSpace,
-            Expanded(
-              child: SizedBox(
-                height: 48.h,
-                child: ElevatedButton(
-                  onPressed: onAddToCart,
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14.r)),
-                  ),
-                  child: Text(
-                    AppTranslations.t('product_detail.add_to_cart'),
-                    style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w600),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
