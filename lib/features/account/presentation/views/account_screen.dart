@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:new_pharamacy_theme_v1/features/account/presentation/widgets/settings_tile.dart';
-
+import 'package:new_pharamacy_theme_v1/features/account/presentation/widgets/account_preferance_content.dart';
 import '../../../../../core/utils/app_colors.dart';
-import '../../../../../core/widgets/language_switcher.dart';
 import '../../../../../core/widgets/t_text.dart';
-import '../../../../../core/widgets/theme_switcher.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
@@ -13,7 +10,6 @@ class AccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
 
     return Scaffold(
       body: CustomScrollView(
@@ -76,61 +72,7 @@ class AccountScreen extends StatelessWidget {
             iconTheme: const IconThemeData(color: Colors.white),
           ),
           SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.all(16.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  16.verticalSpace,
-                  TText(
-                    'account.preferences',
-                    style: theme.textTheme.labelLarge?.copyWith(
-                      color: colorScheme.onSurface.withValues(alpha: 0.5),
-                      letterSpacing: 0.8,
-                    ),
-                  ),
-                  12.verticalSpace,
-                  _SettingsCard(
-                    children: [
-                      const LanguageSwitcher(),
-                      Divider(height: 1, color: colorScheme.outlineVariant),
-                      const ThemeSwitcher(),
-                    ],
-                  ),
-                  24.verticalSpace,
-                  TText(
-                    'nav_bar.account',
-                    style: theme.textTheme.labelLarge?.copyWith(
-                      color: colorScheme.onSurface.withValues(alpha: 0.5),
-                      letterSpacing: 0.8,
-                    ),
-                  ),
-                  12.verticalSpace,
-                  _SettingsCard(
-                    children: [
-                      SettingsTile(
-                        icon: Icons.receipt_long_rounded,
-                        titleKey: 'account.my_orders',
-                        onTap: () {},
-                      ),
-                      Divider(height: 1, color: colorScheme.outlineVariant),
-                      SettingsTile(
-                        icon: Icons.notifications_outlined,
-                        titleKey: 'account.notifications',
-                        onTap: () {},
-                      ),
-                      Divider(height: 1, color: colorScheme.outlineVariant),
-                      SettingsTile(
-                        icon: Icons.help_outline_rounded,
-                        titleKey: 'account.help_support',
-                        onTap: () {},
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 100.h),
-                ],
-              ),
-            ),
+            child: AccountPreferanceContent(),
           ),
         ],
       ),
@@ -138,30 +80,6 @@ class AccountScreen extends StatelessWidget {
   }
 }
 
-class _SettingsCard extends StatelessWidget {
-  const _SettingsCard({required this.children});
 
-  final List<Widget> children;
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
-    return Container(
-      decoration: BoxDecoration(
-        color: colorScheme.surface,
-        borderRadius: BorderRadius.circular(16.r),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.06),
-            blurRadius: 12,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(children: children),
-    );
-  }
-}
 
 
