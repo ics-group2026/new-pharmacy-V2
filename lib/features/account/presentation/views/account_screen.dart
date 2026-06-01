@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:new_pharamacy_theme_v1/features/account/presentation/widgets/settings_tile.dart';
 
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/widgets/language_switcher.dart';
@@ -107,19 +108,19 @@ class AccountScreen extends StatelessWidget {
                   12.verticalSpace,
                   _SettingsCard(
                     children: [
-                      _SettingsTile(
+                      SettingsTile(
                         icon: Icons.receipt_long_rounded,
                         titleKey: 'account.my_orders',
                         onTap: () {},
                       ),
                       Divider(height: 1, color: colorScheme.outlineVariant),
-                      _SettingsTile(
+                      SettingsTile(
                         icon: Icons.notifications_outlined,
                         titleKey: 'account.notifications',
                         onTap: () {},
                       ),
                       Divider(height: 1, color: colorScheme.outlineVariant),
-                      _SettingsTile(
+                      SettingsTile(
                         icon: Icons.help_outline_rounded,
                         titleKey: 'account.help_support',
                         onTap: () {},
@@ -163,42 +164,4 @@ class _SettingsCard extends StatelessWidget {
   }
 }
 
-class _SettingsTile extends StatelessWidget {
-  const _SettingsTile({
-    required this.icon,
-    required this.titleKey,
-    required this.onTap,
-  });
 
-  final IconData icon;
-  final String titleKey;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
-    return ListTile(
-      onTap: onTap,
-      leading: Container(
-        padding: EdgeInsets.all(8.r),
-        decoration: BoxDecoration(
-          color: AppColors.primaryContainer,
-          borderRadius: BorderRadius.circular(10.r),
-        ),
-        child: Icon(icon, size: 20.r, color: colorScheme.primary),
-      ),
-      title: TText(
-        titleKey,
-        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-      trailing: Icon(
-        Icons.arrow_forward_ios_rounded,
-        size: 14.r,
-        color: colorScheme.onSurface.withValues(alpha: 0.4),
-      ),
-    );
-  }
-}
