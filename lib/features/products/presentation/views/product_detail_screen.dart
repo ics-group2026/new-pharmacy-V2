@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_pharamacy_theme_v1/features/products/presentation/widgets/add_to_cart_bar.dart';
+import 'package:new_pharamacy_theme_v1/features/products/presentation/widgets/describtion_widget.dart';
+import 'package:new_pharamacy_theme_v1/features/products/presentation/widgets/how_to_use_widget.dart';
 import 'package:new_pharamacy_theme_v1/features/products/presentation/widgets/price_row.dart';
 import 'package:new_pharamacy_theme_v1/features/products/presentation/widgets/products_sliver_app_bar.dart';
 import 'package:new_pharamacy_theme_v1/features/products/presentation/widgets/quantity_widget.dart';
@@ -11,7 +13,6 @@ import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_translations.dart';
 import '../../../../../core/widgets/animated_fade_slide.dart';
 import '../../../../../core/widgets/discount_badge.dart';
-import '../../../../../core/widgets/section_header.dart';
 import '../../../../../core/widgets/star_rating_row.dart';
 import '../../../cart/cubit/cart_cubit.dart';
 import '../../../flash_deals/data/models/flash_deal_model.dart';
@@ -72,7 +73,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // ── Header info ─────────────────────────────────────
                       AnimatedFadeSlide(
                         delay: Duration.zero,
                         child: Column(
@@ -136,57 +136,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           ],
                         ),
                       ),
-
                       20.verticalSpace,
                       Divider(color: colorScheme.outlineVariant, thickness: 1),
                       20.verticalSpace,
-
-                      // ── Description ─────────────────────────────────────
-                      AnimatedFadeSlide(
-                        delay: const Duration(milliseconds: 100),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SectionHeader(titleKey: 'product_detail.description'),
-                            12.verticalSpace,
-                            Text(
-                              'A premium quality product formulated to support your health and wellness. '
-                              'Made with carefully selected ingredients that meet the highest safety standards. '
-                              'Suitable for daily use and recommended by healthcare professionals.',
-                              style: theme.textTheme.bodyMedium?.copyWith(
-                                color: colorScheme.onSurface.withValues(alpha: 0.65),
-                                height: 1.6,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-
+                      DescriptionWidget(colorScheme: colorScheme, theme: theme),
                       20.verticalSpace,
-
-                      // ── How to Use ──────────────────────────────────────
-                      AnimatedFadeSlide(
-                        delay: const Duration(milliseconds: 180),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SectionHeader(titleKey: 'product_detail.how_to_use'),
-                            12.verticalSpace,
-                            Text(
-                              'Take one unit daily with a full glass of water, preferably with a meal. '
-                              'Do not exceed the recommended dosage. '
-                              'Consult your physician before use if you have any medical conditions.',
-                              style: theme.textTheme.bodyMedium?.copyWith(
-                                color: colorScheme.onSurface.withValues(alpha: 0.65),
-                                height: 1.6,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-
+                      HowToUseWidget(colorScheme: colorScheme, theme: theme),
                       20.verticalSpace,
-
                       QuantityWidget(
                         quantity: _quantity,
                         increment: _increment,
@@ -194,8 +150,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         theme: theme,
                         colorScheme: colorScheme,
                       ),
-
-                      SizedBox(height: 100.h),
                     ],
                   ),
                 ),
@@ -207,21 +161,3 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     );
   }
 }
-
-// ── Sliver AppBar ────────────────────────────────────────────────────────────
-
-
-
-// ── Price Row ────────────────────────────────────────────────────────────────
-
-
-
-// ── Quantity Stepper ─────────────────────────────────────────────────────────
-
-
-
-
-
-// ── Add to Cart Bottom Bar ───────────────────────────────────────────────────
-
-
