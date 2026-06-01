@@ -5,7 +5,7 @@ import 'package:new_pharamacy_theme_v1/core/widgets/animated_fade_slide.dart';
 import 'package:new_pharamacy_theme_v1/features/products/presentation/widgets/quantity_stepper.dart';
     
 
-class x extends StatelessWidget {
+class QuantityWidget extends StatelessWidget {
   const QuantityWidget({
     super.key,
     required this.quantity,

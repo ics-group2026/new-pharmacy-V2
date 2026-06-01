@@ -45,7 +45,7 @@ class BestSellerSection extends StatelessWidget {
         SectionHeader(titleKey: 'products.best_seller', onSeeAll: onSeeAll),
         12.verticalSpace,
         SizedBox(
-          height: 270.h,
+          height: 290.h,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             padding: EdgeInsets.zero,
