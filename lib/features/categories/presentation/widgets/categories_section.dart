@@ -1,90 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/widgets/title_with_see_all.dart';
-import 'category_item.dart';
+import '../../../../../core/utils/app_translations.dart';
+import '../../../../../core/widgets/pill_chip.dart';
 
-class CategoriesSection extends StatelessWidget {
-  const CategoriesSection({super.key, this.onSeeAll});
+class CategoriesSection extends StatefulWidget {
+  const CategoriesSection({super.key});
 
-  final VoidCallback? onSeeAll;
+  @override
+  State<CategoriesSection> createState() => _CategoriesSectionState();
+}
+
+class _CategoriesSectionState extends State<CategoriesSection> {
+  int _selectedIndex = 0;
 
   static const _categories = [
-    (
-      labelKey: 'categories.personal_care',
-      icon: Icons.face_retouching_natural_rounded,
-      background: Color(0xFFFFCDD2),
-      iconColor: Color(0xFFE53935),
-    ),
-    (
-      labelKey: 'categories.perfume',
-      icon: Icons.spa_rounded,
-      background: Color(0xFFE1BEE7),
-      iconColor: Color(0xFF8E24AA),
-    ),
-    (
-      labelKey: 'categories.hair_care',
-      icon: Icons.content_cut_rounded,
-      background: Color(0xFFB3E5FC),
-      iconColor: Color(0xFF0288D1),
-    ),
-    (
-      labelKey: 'categories.skin_care',
-      icon: Icons.water_drop_rounded,
-      background: Color(0xFFC8E6C9),
-      iconColor: Color(0xFF388E3C),
-    ),
-    (
-      labelKey: 'categories.face_makeup',
-      icon: Icons.brush_rounded,
-      background: Color(0xFFFFCCBC),
-      iconColor: Color(0xFFE64A19),
-    ),
-    (
-      labelKey: 'categories.vitamins',
-      icon: Icons.medication_rounded,
-      background: Color(0xFFFFF9C4),
-      iconColor: Color(0xFFF9A825),
-    ),
-    (
-      labelKey: 'categories.baby_care',
-      icon: Icons.child_care_rounded,
-      background: Color(0xFFF8BBD0),
-      iconColor: Color(0xFFD81B60),
-    ),
-    (
-      labelKey: 'categories.dental',
-      icon: Icons.medical_services_rounded,
-      background: Color(0xFFB2EBF2),
-      iconColor: Color(0xFF00838F),
-    ),
+    _Category('categories.personal_care', Icons.face_retouching_natural_rounded),
+    _Category('categories.perfume', Icons.spa_rounded),
+    _Category('categories.hair_care', Icons.content_cut_rounded),
+    _Category('categories.skin_care', Icons.water_drop_rounded),
+    _Category('categories.face_makeup', Icons.brush_rounded),
+    _Category('categories.vitamins', Icons.medication_rounded),
+    _Category('categories.baby_care', Icons.child_care_rounded),
+    _Category('categories.dental', Icons.medical_services_rounded),
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        TitleWithSeeAll(titleKey: 'categories.title', onSeeAll: () {}),
-        12.verticalSpace,
-        SizedBox(
-          height: 100.h,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemCount: _categories.length,
-            separatorBuilder: (_, _) => 8.horizontalSpace,
-            itemBuilder: (_, index) {
-              final cat = _categories[index];
-              return CategoryItem(
-                labelKey: cat.labelKey,
-                icon: cat.icon,
-                backgroundColor: cat.background,
-                iconColor: cat.iconColor,
-              );
-            },
-          ),
-        ),
-      ],
+    return SizedBox(
+      height: 44.h,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        padding: EdgeInsets.zero,
+        itemCount: _categories.length,
+        separatorBuilder: (_, _) => 8.horizontalSpace,
+        itemBuilder: (_, index) {
+          final category = _categories[index];
+          return PillChip(
+            label: AppTranslations.t(category.labelKey),
+            icon: category.icon,
+            isSelected: _selectedIndex == index,
+            onTap: () => setState(() => _selectedIndex = index),
+          );
+        },
+      ),
     );
   }
+}
+
+class _Category {
+  const _Category(this.labelKey, this.icon);
+
+  final String labelKey;
+  final IconData icon;
 }

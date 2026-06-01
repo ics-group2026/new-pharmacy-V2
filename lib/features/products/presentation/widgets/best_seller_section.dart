@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/utils/app_translations.dart';
-import '../../../../../core/widgets/title_with_see_all.dart';
+import '../../../../../core/widgets/section_header.dart';
 import '../../../flash_deals/data/models/flash_deal_model.dart';
 import 'home_product_item.dart';
 
@@ -40,32 +39,19 @@ class BestSellerSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        TitleWithSeeAll(
-          titleKey: 'products.best_seller',
-          onSeeAll: onSeeAll ?? () {},
-        ),
-        4.verticalSpace,
-        Container(
-          width: AppTranslations.t('products.best_seller').length * 7.w,
-          height: 2.h,
-          decoration: BoxDecoration(
-            color: colorScheme.primary,
-            borderRadius: BorderRadius.circular(2.r),
-          ),
-        ),
+        SectionHeader(titleKey: 'products.best_seller', onSeeAll: onSeeAll),
         12.verticalSpace,
         SizedBox(
           height: 270.h,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
+            padding: EdgeInsets.zero,
             itemCount: _products.length,
             separatorBuilder: (_, _) => 12.horizontalSpace,
-            itemBuilder: (_, index) => SizedBox(width: 150.w, child: HomeProductItem(product: _products[index])),
+            itemBuilder: (_, index) => HomeProductItem(product: _products[index]),
           ),
         ),
       ],

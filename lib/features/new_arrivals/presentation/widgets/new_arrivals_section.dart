@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/widgets/title_with_see_all.dart';
+import '../../../../../core/widgets/section_header.dart';
 import '../../../flash_deals/data/models/flash_deal_model.dart';
 import 'new_arrival_item.dart';
 
@@ -50,26 +50,22 @@ class NewArrivalsSection extends StatelessWidget {
     return Container(
       width: double.infinity,
       color: colorScheme.primaryContainer,
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          8.verticalSpace,
-          TitleWithSeeAll(
-            titleKey: 'new_arrivals.title',
-            onSeeAll: onSeeAll ?? () {},
-          ),
-          16.verticalSpace,
+          SectionHeader(titleKey: 'new_arrivals.title', onSeeAll: onSeeAll),
+          12.verticalSpace,
           SizedBox(
-            height: 220.h,
+            height: 270.h,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
+              padding: EdgeInsets.zero,
               itemCount: _items.length,
               separatorBuilder: (_, _) => 12.horizontalSpace,
               itemBuilder: (_, index) => NewArrivalItem(item: _items[index]),
             ),
           ),
-          16.verticalSpace,
         ],
       ),
     );

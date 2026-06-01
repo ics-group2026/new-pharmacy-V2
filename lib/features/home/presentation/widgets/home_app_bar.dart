@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_translations.dart';
 
@@ -14,10 +16,10 @@ class HomeAppBar extends StatelessWidget {
 
     return SliverAppBar(
       automaticallyImplyLeading: false,
-      pinned: false,
+      pinned: true,
       floating: false,
-      toolbarHeight: 76.h,
-      titleSpacing: 16.w,
+      snap: false,
+      toolbarHeight: 64.h,
       backgroundColor: Colors.transparent,
       flexibleSpace: Container(
         decoration: const BoxDecoration(
@@ -31,12 +33,12 @@ class HomeAppBar extends StatelessWidget {
       title: Row(
         children: [
           Container(
-            width: 44.r,
-            height: 44.r,
+            width: 42.r,
+            height: 42.r,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: white.withValues(alpha: 0.2),
-              border: Border.all(color: white.withValues(alpha: 0.5), width: 1.5),
+              color: white.withValues(alpha: 0.18),
+              border: Border.all(color: white.withValues(alpha: 0.45), width: 1.5),
             ),
             child: Icon(Icons.person_rounded, color: white, size: 20.r),
           ),
@@ -55,7 +57,7 @@ class HomeAppBar extends StatelessWidget {
                 2.verticalSpace,
                 Text(
                   AppTranslations.t('home.user_name'),
-                  style: theme.textTheme.titleLarge?.copyWith(
+                  style: theme.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: white,
                     height: 1.1,
@@ -65,8 +67,56 @@ class HomeAppBar extends StatelessWidget {
             ),
           ),
           _NotificationButton(),
-          12.horizontalSpace,
+          8.horizontalSpace,
         ],
+      ),
+      bottom: PreferredSize(
+        preferredSize: Size.fromHeight(56.h),
+        child: _SearchBarSlot(),
+      ),
+    );
+  }
+}
+
+class _SearchBarSlot extends StatelessWidget {
+  const _SearchBarSlot();
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return Padding(
+      padding: EdgeInsets.fromLTRB(16.w, 0, 16.w, 12.h),
+      child: GestureDetector(
+        onTap: () => context.push(AppRoutes.search),
+        child: Container(
+          height: 44.h,
+          decoration: BoxDecoration(
+            color: colorScheme.surface,
+            borderRadius: BorderRadius.circular(28.r),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.12),
+                blurRadius: 8,
+                offset: const Offset(0, 3),
+              ),
+            ],
+          ),
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          child: Row(
+            children: [
+              Icon(Icons.search_rounded, size: 20.r, color: colorScheme.onSurface.withValues(alpha: 0.45)),
+              10.horizontalSpace,
+              Text(
+                AppTranslations.t('common.search_hint'),
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  color: colorScheme.onSurface.withValues(alpha: 0.45),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -81,16 +131,16 @@ class _NotificationButton extends StatelessWidget {
       clipBehavior: Clip.none,
       children: [
         Container(
-          padding: EdgeInsets.all(9.r),
+          padding: EdgeInsets.all(8.r),
           decoration: BoxDecoration(
-            color: Colors.white.withValues(alpha: 0.2),
+            color: Colors.white.withValues(alpha: 0.18),
             shape: BoxShape.circle,
           ),
           child: Icon(Icons.notifications_outlined, size: 20.r, color: Colors.white),
         ),
         Positioned(
-          top: 7.r,
-          right: 7.r,
+          top: 6.r,
+          right: 6.r,
           child: Container(
             width: 8.r,
             height: 8.r,

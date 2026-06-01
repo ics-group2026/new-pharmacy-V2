@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/utils/app_translations.dart';
-import '../../../../../core/widgets/t_text.dart';
+import '../../../../../core/widgets/pill_chip.dart';
+import '../../../../../core/widgets/section_header.dart';
 import '../../../flash_deals/data/models/flash_deal_model.dart';
 import 'trending_product_item.dart';
 
@@ -78,88 +79,46 @@ class _TrendingSectionState extends State<TrendingSection> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            TText(
-              'trending.title',
-              style: theme.textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: colorScheme.onSurface,
-              ),
-            ),
-            GestureDetector(
-              onTap: widget.onSeeAll ?? () {},
-              child: Text(
-                AppTranslations.t('common.see_all'),
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color: colorScheme.primary,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-          ],
-        ),
+        SectionHeader(titleKey: 'trending.title', onSeeAll: widget.onSeeAll),
         12.verticalSpace,
         SizedBox(
-          height: 36.h,
+          height: 44.h,
           child: ListView.separated(
             padding: EdgeInsets.zero,
             scrollDirection: Axis.horizontal,
             itemCount: _filterKeys.length,
             separatorBuilder: (_, _) => 8.horizontalSpace,
-            itemBuilder: (_, index) {
-              final isSelected = _selectedFilter == index;
-              return GestureDetector(
-                onTap: () => setState(() => _selectedFilter = index),
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  curve: Curves.easeInOut,
-                  padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  decoration: BoxDecoration(
-                    color: isSelected ? colorScheme.primary : Colors.transparent,
-                    borderRadius: BorderRadius.circular(20.r),
-                    border: Border.all(
-                      color: isSelected
-                          ? colorScheme.primary
-                          : colorScheme.outlineVariant,
-                    ),
-                  ),
-                  child: Center(
-                    child: TText(
-                      _filterKeys[index],
-                      style: theme.textTheme.bodySmall?.copyWith(
-                        color: isSelected
-                            ? colorScheme.onPrimary
-                            : colorScheme.onSurface.withValues(alpha: 0.7),
-                        fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
-                      ),
-                    ),
-                  ),
-                ),
-              );
-            },
+            itemBuilder: (_, index) => PillChip(
+              label: AppTranslations.t(_filterKeys[index]),
+              isSelected: _selectedFilter == index,
+              onTap: () => setState(() => _selectedFilter = index),
+            ),
           ),
         ),
         16.verticalSpace,
-        GridView.builder(
-          padding: EdgeInsets.zero,
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 12.w,
-            mainAxisSpacing: 12.h,
-            childAspectRatio: 0.65,
+        AnimatedSwitcher(
+          duration: const Duration(milliseconds: 300),
+          transitionBuilder: (child, animation) => FadeTransition(
+            opacity: animation,
+            child: child,
           ),
-          itemCount: _products.length,
-          itemBuilder: (_, index) => TrendingProductItem(product: _products[index]),
+          child: GridView.builder(
+            key: ValueKey(_selectedFilter),
+            padding: EdgeInsets.zero,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 12.w,
+              mainAxisSpacing: 12.h,
+              childAspectRatio: 0.65,
+            ),
+            itemCount: _products.length,
+            itemBuilder: (_, index) => TrendingProductItem(product: _products[index]),
+          ),
         ),
       ],
     );

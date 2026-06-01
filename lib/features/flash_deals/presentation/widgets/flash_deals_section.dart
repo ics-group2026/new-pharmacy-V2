@@ -71,7 +71,7 @@ class FlashDealsSection extends StatelessWidget {
           _FlashDealsHeader(onSeeAll: onSeeAll),
           16.verticalSpace,
           SizedBox(
-            height: 230.h,
+            height: 270.h,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemCount: _deals.length,
