@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
@@ -10,7 +11,9 @@ import '../../../../../core/widgets/cached_network_image_widget.dart';
 import '../../../../../core/widgets/discount_badge.dart';
 import '../../../../../core/widgets/section_header.dart';
 import '../../../../../core/widgets/star_rating_row.dart';
+import '../../../cart/cubit/cart_cubit.dart';
 import '../../../flash_deals/data/models/flash_deal_model.dart';
+import '../../../wishlist/cubit/wishlist_cubit.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   const ProductDetailScreen({super.key, required this.product});
@@ -23,7 +26,6 @@ class ProductDetailScreen extends StatefulWidget {
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
   int _quantity = 1;
-  bool _isWishlisted = false;
 
   double get _totalPrice => widget.product.price * _quantity;
 
@@ -48,15 +50,16 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         bottomNavigationBar: _AddToCartBar(
           totalPrice: _totalPrice,
           currency: AppTranslations.t('flash_deals.currency'),
-          onAddToCart: () {},
+          onAddToCart: () {
+            final cart = context.read<CartCubit>();
+            for (var i = 0; i < _quantity; i++) {
+              cart.add(widget.product);
+            }
+          },
         ),
         body: CustomScrollView(
           slivers: [
-            _ProductSliverAppBar(
-              product: product,
-              isWishlisted: _isWishlisted,
-              onWishlistToggle: () => setState(() => _isWishlisted = !_isWishlisted),
-            ),
+            _ProductSliverAppBar(product: product),
             SliverToBoxAdapter(
               child: Container(
                 decoration: BoxDecoration(
@@ -222,15 +225,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 // ── Sliver AppBar ────────────────────────────────────────────────────────────
 
 class _ProductSliverAppBar extends StatelessWidget {
-  const _ProductSliverAppBar({
-    required this.product,
-    required this.isWishlisted,
-    required this.onWishlistToggle,
-  });
+  const _ProductSliverAppBar({required this.product});
 
   final FlashDealModel product;
-  final bool isWishlisted;
-  final VoidCallback onWishlistToggle;
 
   @override
   Widget build(BuildContext context) {
@@ -249,22 +246,25 @@ class _ProductSliverAppBar extends StatelessWidget {
         ),
       ),
       actions: [
-        Padding(
-          padding: EdgeInsets.only(right: 8.w),
-          child: CircleAvatar(
-            backgroundColor: Colors.black26,
-            child: IconButton(
-              icon: AnimatedSwitcher(
-                duration: const Duration(milliseconds: 250),
-                transitionBuilder: (child, animation) => ScaleTransition(scale: animation, child: child),
-                child: Icon(
-                  isWishlisted ? Icons.favorite_rounded : Icons.favorite_border_rounded,
-                  key: ValueKey(isWishlisted),
-                  color: isWishlisted ? Colors.redAccent : Colors.white,
-                  size: 20.r,
+        BlocSelector<WishlistCubit, List<FlashDealModel>, bool>(
+          selector: (state) => state.any((p) => p.imageUrl == product.imageUrl),
+          builder: (context, isWishlisted) => Padding(
+            padding: EdgeInsets.only(right: 8.w),
+            child: CircleAvatar(
+              backgroundColor: Colors.black26,
+              child: IconButton(
+                icon: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 250),
+                  transitionBuilder: (child, anim) => ScaleTransition(scale: anim, child: child),
+                  child: Icon(
+                    isWishlisted ? Icons.favorite_rounded : Icons.favorite_border_rounded,
+                    key: ValueKey(isWishlisted),
+                    color: isWishlisted ? Colors.redAccent : Colors.white,
+                    size: 20.r,
+                  ),
                 ),
+                onPressed: () => context.read<WishlistCubit>().toggle(product),
               ),
-              onPressed: onWishlistToggle,
             ),
           ),
         ),

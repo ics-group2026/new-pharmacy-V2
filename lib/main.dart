@@ -8,6 +8,8 @@ import 'core/services/prefs.dart';
 import 'core/services/push_notification_service.dart';
 import 'core/services/setup_service_locator.dart';
 import 'core/themes/theme_cubit/theme_cubit.dart';
+import 'features/cart/cubit/cart_cubit.dart';
+import 'features/wishlist/cubit/wishlist_cubit.dart';
 import 'firebase_options.dart';
 import 'pharmacy_app.dart';
 
@@ -27,8 +29,12 @@ void main() async {
       startLocale: Locale("en"),
       fallbackLocale: Locale("en"),
       saveLocale: true,
-      child: BlocProvider(
-        create: (context) => ThemeCubit()..getCurrentTheme(),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (_) => ThemeCubit()..getCurrentTheme()),
+          BlocProvider(create: (_) => WishlistCubit()),
+          BlocProvider(create: (_) => CartCubit()),
+        ],
         child: const PharmacyApp(),
       ),
     ),
