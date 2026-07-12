@@ -12,7 +12,6 @@ import '../../../../../core/widgets/t_text.dart';
 import '../../../auth/data/repos/auth_repo.dart';
 import '../../../auth/presentation/cubits/auth_cubit.dart';
 import '../../../auth/presentation/cubits/auth_state.dart';
-import '../../../profile/data/repos/profile_repo.dart';
 import '../../../profile/presentation/cubits/profile_cubit.dart';
 import '../../../profile/presentation/cubits/profile_state.dart';
 
@@ -23,9 +22,7 @@ class AccountScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (_) => ProfileCubit(getIt<ProfileRepo>())..getProfile(),
-        ),
+        BlocProvider.value(value: getIt<ProfileCubit>()..getProfile()),
         BlocProvider(create: (_) => AuthCubit(getIt<AuthRepo>())),
       ],
       child: const _AccountView(),

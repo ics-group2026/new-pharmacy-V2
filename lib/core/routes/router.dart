@@ -6,7 +6,6 @@ import '../../features/auth/data/repos/auth_repo.dart';
 import '../../features/auth/presentation/cubits/auth_cubit.dart';
 import '../../features/auth/presentation/views/login_screen.dart';
 import '../../features/auth/presentation/views/register_screen.dart';
-import '../../features/profile/data/repos/profile_repo.dart';
 import '../../features/profile/presentation/cubits/profile_cubit.dart';
 import '../../features/profile/presentation/views/profile_screen.dart';
 import '../../features/nav_bar/presentation/views/bottom_nav_bar_screen.dart';
@@ -57,8 +56,8 @@ final GoRouter appRouter = GoRouter(
     ),
     GoRoute(
       path: AppRoutes.profile,
-      builder: (context, state) => BlocProvider(
-        create: (_) => ProfileCubit(getIt<ProfileRepo>()),
+      builder: (context, state) => BlocProvider.value(
+        value: getIt<ProfileCubit>(),
         child: const ProfileScreen(),
       ),
     ),

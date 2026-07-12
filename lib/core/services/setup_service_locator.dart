@@ -4,6 +4,7 @@ import '../../features/auth/data/repos/auth_repo.dart';
 import '../../features/auth/data/repos/auth_repo_impl.dart';
 import '../../features/profile/data/repos/profile_repo.dart';
 import '../../features/profile/data/repos/profile_repo_impl.dart';
+import '../../features/profile/presentation/cubits/profile_cubit.dart';
 import 'api_service.dart';
 import 'dio_consumer.dart';
 
@@ -19,4 +20,8 @@ void setupServiceLocator() {
   );
 
   /// Cubits
+  // Shared so the account header and the edit-profile screen stay in sync.
+  getIt.registerLazySingleton<ProfileCubit>(
+    () => ProfileCubit(getIt<ProfileRepo>()),
+  );
 }
