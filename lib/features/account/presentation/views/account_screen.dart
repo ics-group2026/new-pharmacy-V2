@@ -1,16 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_pharmacy_v2/features/account/presentation/widgets/account_preferance_content.dart';
+import '../../../../../core/services/setup_service_locator.dart';
 import '../../../../../core/utils/app_colors.dart';
+import '../../../../../core/utils/app_translations.dart';
 import '../../../../../core/widgets/t_text.dart';
+import '../../../profile/data/repos/profile_repo.dart';
+import '../../../profile/presentation/cubits/profile_cubit.dart';
+import '../../../profile/presentation/cubits/profile_state.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    return BlocProvider(
+      create: (_) => ProfileCubit(getIt<ProfileRepo>())..getProfile(),
+      child: const _AccountView(),
+    );
+  }
+}
 
+class _AccountView extends StatelessWidget {
+  const _AccountView();
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -42,23 +58,14 @@ class AccountScreen extends StatelessWidget {
                             width: 2,
                           ),
                         ),
-                        child: Icon(Icons.person_rounded, size: 38.r, color: Colors.white),
+                        child: Icon(
+                          Icons.person_rounded,
+                          size: 38.r,
+                          color: Colors.white,
+                        ),
                       ),
                       12.verticalSpace,
-                      TText(
-                        'home.user_name',
-                        style: theme.textTheme.titleMedium?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      4.verticalSpace,
-                      TText(
-                        'account.email_placeholder',
-                        style: theme.textTheme.bodySmall?.copyWith(
-                          color: Colors.white.withValues(alpha: 0.75),
-                        ),
-                      ),
+                      const _ProfileInfo(),
                     ],
                   ),
                 ),
@@ -71,15 +78,50 @@ class AccountScreen extends StatelessWidget {
             backgroundColor: AppColors.primaryDark,
             iconTheme: const IconThemeData(color: Colors.white),
           ),
-          SliverToBoxAdapter(
-            child: AccountPreferanceContent(),
-          ),
+          SliverToBoxAdapter(child: AccountPreferanceContent()),
         ],
       ),
     );
   }
 }
 
+class _ProfileInfo extends StatelessWidget {
+  const _ProfileInfo();
 
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
 
+    return BlocBuilder<ProfileCubit, ProfileState>(
+      builder: (context, state) {
+        final user = state.user;
+        final hasName =
+            user != null &&
+            (user.firstName.isNotEmpty || user.lastName.isNotEmpty);
+        final name = hasName
+            ? '${user.firstName} ${user.lastName}'.trim()
+            : AppTranslations.t('home.user_name');
+        final email = user?.email ?? AppTranslations.t('account.email_placeholder');
 
+        return Column(
+          children: [
+            Text(
+              name,
+              style: theme.textTheme.titleMedium?.copyWith(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            4.verticalSpace,
+            Text(
+              email,
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: Colors.white.withValues(alpha: 0.75),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
