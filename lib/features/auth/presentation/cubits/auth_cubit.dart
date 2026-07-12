@@ -68,4 +68,26 @@ class AuthCubit extends Cubit<AuthState> {
       ),
     );
   }
+
+  Future<void> logout() async {
+    emit(
+      state.copyWith(
+        status: AuthStatus.loading,
+        errorMessage: null,
+        successMessage: null,
+      ),
+    );
+    final result = await authRepo.logout();
+    result.fold(
+      (failure) => emit(
+        state.copyWith(status: AuthStatus.error, errorMessage: failure.errMessage),
+      ),
+      (_) => emit(
+        state.copyWith(
+          status: AuthStatus.logoutSuccess,
+          successMessage: AppTranslations.t('auth.logout_success'),
+        ),
+      ),
+    );
+  }
 }

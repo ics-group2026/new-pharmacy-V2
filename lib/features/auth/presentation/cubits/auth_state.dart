@@ -1,5 +1,12 @@
 
-enum AuthStatus { initial, loading, loginSuccess, registerSuccess, error }
+enum AuthStatus {
+  initial,
+  loading,
+  loginSuccess,
+  registerSuccess,
+  logoutSuccess,
+  error,
+}
 
 class AuthState {
   final AuthStatus status;
