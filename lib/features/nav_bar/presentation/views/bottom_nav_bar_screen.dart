@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/services/setup_service_locator.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_translations.dart';
 import '../../../account/presentation/views/account_screen.dart';
 import '../../../cart/presentation/views/cart_screen.dart';
 import '../../../home/presentation/views/home_screen.dart';
+import '../../../profile/presentation/cubits/profile_cubit.dart';
 import '../../../wishlist/presentation/views/wishlist_screen.dart';
 
 class BottomNavBarScreen extends StatefulWidget {
@@ -17,6 +20,13 @@ class BottomNavBarScreen extends StatefulWidget {
 
 class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
   int _currentIndex = 0;
+  final _profileCubit = getIt<ProfileCubit>();
+
+  @override
+  void initState() {
+    super.initState();
+    _profileCubit.getProfile();
+  }
 
   static const List<Widget> _screens = [
     HomeScreen(),
@@ -27,33 +37,48 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
 
   static const _navItems = [
     _NavItem(Icons.home_outlined, Icons.home_rounded, 'nav_bar.home'),
-    _NavItem(Icons.favorite_border_rounded, Icons.favorite_rounded, 'nav_bar.wishlist'),
-    _NavItem(Icons.shopping_cart_outlined, Icons.shopping_cart_rounded, 'nav_bar.cart'),
-    _NavItem(Icons.person_outline_rounded, Icons.person_rounded, 'nav_bar.account'),
+    _NavItem(
+      Icons.favorite_border_rounded,
+      Icons.favorite_rounded,
+      'nav_bar.wishlist',
+    ),
+    _NavItem(
+      Icons.shopping_cart_outlined,
+      Icons.shopping_cart_rounded,
+      'nav_bar.cart',
+    ),
+    _NavItem(
+      Icons.person_outline_rounded,
+      Icons.person_rounded,
+      'nav_bar.account',
+    ),
   ];
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: _currentIndex == 0,
-      onPopInvokedWithResult: (didPop, _) {
-        if (!didPop) setState(() => _currentIndex = 0);
-      },
-      child: Scaffold(
-        body: Stack(
-          children: [
-            IndexedStack(index: _currentIndex, children: _screens),
-            Positioned(
-              bottom: 16.h,
-              left: 16.w,
-              right: 16.w,
-              child: _FloatingNavBar(
-                currentIndex: _currentIndex,
-                items: _navItems,
-                onTap: (index) => setState(() => _currentIndex = index),
+    return BlocProvider.value(
+      value: _profileCubit,
+      child: PopScope(
+        canPop: _currentIndex == 0,
+        onPopInvokedWithResult: (didPop, _) {
+          if (!didPop) setState(() => _currentIndex = 0);
+        },
+        child: Scaffold(
+          body: Stack(
+            children: [
+              IndexedStack(index: _currentIndex, children: _screens),
+              Positioned(
+                bottom: 16.h,
+                left: 16.w,
+                right: 16.w,
+                child: _FloatingNavBar(
+                  currentIndex: _currentIndex,
+                  items: _navItems,
+                  onTap: (index) => setState(() => _currentIndex = index),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

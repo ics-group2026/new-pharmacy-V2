@@ -20,11 +20,10 @@ class AccountScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider.value(value: getIt<ProfileCubit>()..getProfile()),
-        BlocProvider(create: (_) => AuthCubit(getIt<AuthRepo>())),
-      ],
+    // ProfileCubit is provided by the nav shell; only AuthCubit (for logout)
+    // is scoped to this screen.
+    return BlocProvider(
+      create: (_) => AuthCubit(getIt<AuthRepo>()),
       child: const _AccountView(),
     );
   }
@@ -42,63 +41,66 @@ class _AccountView extends StatelessWidget {
           context.go(AppRoutes.login);
         } else if (state.status == AuthStatus.error &&
             state.errorMessage != null) {
-          context.showErrorSnackBar(state.errorMessage!, background: Colors.red);
+          context.showErrorSnackBar(
+            state.errorMessage!,
+            background: Colors.red,
+          );
         }
       },
       child: Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            expandedHeight: 200.h,
-            pinned: true,
-            flexibleSpace: FlexibleSpaceBar(
-              background: Container(
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [AppColors.primaryDark, AppColors.primary],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
+        body: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              expandedHeight: 200.h,
+              pinned: true,
+              flexibleSpace: FlexibleSpaceBar(
+                background: Container(
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [AppColors.primaryDark, AppColors.primary],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
                   ),
-                ),
-                child: SafeArea(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      40.verticalSpace,
-                      Container(
-                        width: 72.r,
-                        height: 72.r,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white.withValues(alpha: 0.2),
-                          border: Border.all(
-                            color: Colors.white.withValues(alpha: 0.6),
-                            width: 2,
+                  child: SafeArea(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        40.verticalSpace,
+                        Container(
+                          width: 72.r,
+                          height: 72.r,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white.withValues(alpha: 0.2),
+                            border: Border.all(
+                              color: Colors.white.withValues(alpha: 0.6),
+                              width: 2,
+                            ),
+                          ),
+                          child: Icon(
+                            Icons.person_rounded,
+                            size: 38.r,
+                            color: Colors.white,
                           ),
                         ),
-                        child: Icon(
-                          Icons.person_rounded,
-                          size: 38.r,
-                          color: Colors.white,
-                        ),
-                      ),
-                      12.verticalSpace,
-                      const _ProfileInfo(),
-                    ],
+                        12.verticalSpace,
+                        const _ProfileInfo(),
+                      ],
+                    ),
                   ),
                 ),
               ),
+              title: TText(
+                'nav_bar.account',
+                style: const TextStyle(color: Colors.white),
+              ),
+              backgroundColor: AppColors.primaryDark,
+              iconTheme: const IconThemeData(color: Colors.white),
             ),
-            title: TText(
-              'nav_bar.account',
-              style: const TextStyle(color: Colors.white),
-            ),
-            backgroundColor: AppColors.primaryDark,
-            iconTheme: const IconThemeData(color: Colors.white),
-          ),
-          SliverToBoxAdapter(child: AccountPreferanceContent()),
-        ],
-      ),
+            SliverToBoxAdapter(child: AccountPreferanceContent()),
+          ],
+        ),
       ),
     );
   }
@@ -120,7 +122,8 @@ class _ProfileInfo extends StatelessWidget {
         final name = hasName
             ? '${user.firstName} ${user.lastName}'.trim()
             : AppTranslations.t('home.user_name');
-        final email = user?.email ?? AppTranslations.t('account.email_placeholder');
+        final email =
+            user?.email ?? AppTranslations.t('account.email_placeholder');
 
         return Column(
           children: [

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_translations.dart';
+import '../../../profile/presentation/cubits/profile_cubit.dart';
+import '../../../profile/presentation/cubits/profile_state.dart';
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({super.key});
@@ -38,7 +41,10 @@ class HomeAppBar extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: white.withValues(alpha: 0.18),
-              border: Border.all(color: white.withValues(alpha: 0.45), width: 1.5),
+              border: Border.all(
+                color: white.withValues(alpha: 0.45),
+                width: 1.5,
+              ),
             ),
             child: Icon(Icons.person_rounded, color: white, size: 20.r),
           ),
@@ -55,13 +61,26 @@ class HomeAppBar extends StatelessWidget {
                   ),
                 ),
                 2.verticalSpace,
-                Text(
-                  AppTranslations.t('home.user_name'),
-                  style: theme.textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: white,
-                    height: 1.1,
-                  ),
+                BlocBuilder<ProfileCubit, ProfileState>(
+                  builder: (context, state) {
+                    final user = state.user;
+                    final name =
+                        user != null &&
+                            (user.firstName.isNotEmpty ||
+                                user.lastName.isNotEmpty)
+                        ? '${user.firstName} ${user.lastName}'.trim()
+                        : AppTranslations.t('home.user_name');
+                    return Text(
+                      name,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: white,
+                        height: 1.1,
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
@@ -105,7 +124,11 @@ class _SearchBarSlot extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: Row(
             children: [
-              Icon(Icons.search_rounded, size: 20.r, color: colorScheme.onSurface.withValues(alpha: 0.45)),
+              Icon(
+                Icons.search_rounded,
+                size: 20.r,
+                color: colorScheme.onSurface.withValues(alpha: 0.45),
+              ),
               10.horizontalSpace,
               Text(
                 AppTranslations.t('common.search_hint'),
@@ -136,7 +159,11 @@ class _NotificationButton extends StatelessWidget {
             color: Colors.white.withValues(alpha: 0.18),
             shape: BoxShape.circle,
           ),
-          child: Icon(Icons.notifications_outlined, size: 20.r, color: Colors.white),
+          child: Icon(
+            Icons.notifications_outlined,
+            size: 20.r,
+            color: Colors.white,
+          ),
         ),
         Positioned(
           top: 6.r,
