@@ -10,5 +10,5 @@ abstract class AuthRepo {
     RegisterRequestModel createAccountModel,
   );
   void saveToken(String token);
-  Future<Either<Failure, void>> deleteAccount(String password);
+  void saveRefreshToken(String refreshToken);
 }
