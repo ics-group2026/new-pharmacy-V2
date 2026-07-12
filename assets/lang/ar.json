@@ -20,6 +20,7 @@
     "confirm_password_hint": "أعد إدخال كلمة المرور",
     "register_btn": "إنشاء حساب",
     "register_success": "تم إنشاء الحساب بنجاح. يرجى تسجيل الدخول.",
+    "logout_success": "تم تسجيل الخروج بنجاح",
     "have_account": "لديك حساب بالفعل؟",
     "login_link": "تسجيل الدخول",
     "validation": {
@@ -48,7 +49,8 @@
   },
   "common": {
     "see_all": "عرض الكل",
-    "search_hint": "ابحث عن منتج..."
+    "search_hint": "ابحث عن منتج...",
+    "cancel": "إلغاء"
   },
   "flash_deals": {
     "title": "عروض سريعة",
@@ -105,7 +107,10 @@
     "notifications": "الإشعارات",
     "help_support": "المساعدة والدعم",
     "dark_mode": "الوضع الداكن",
-    "email_placeholder": "user@pharmacy.com"
+    "email_placeholder": "user@pharmacy.com",
+    "logout": "تسجيل الخروج",
+    "logout_confirm_title": "تسجيل الخروج",
+    "logout_confirm_message": "هل أنت متأكد أنك تريد تسجيل الخروج؟"
   },
   "profile": {
     "title": "تعديل الملف الشخصي",

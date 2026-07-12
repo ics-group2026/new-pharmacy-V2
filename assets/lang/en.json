@@ -20,6 +20,7 @@
     "confirm_password_hint": "Re-enter your password",
     "register_btn": "Sign Up",
     "register_success": "Account created successfully. Please sign in.",
+    "logout_success": "Logged out successfully",
     "have_account": "Already have an account?",
     "login_link": "Sign In",
     "validation": {
@@ -48,7 +49,8 @@
   },
   "common": {
     "see_all": "See All",
-    "search_hint": "Search for products..."
+    "search_hint": "Search for products...",
+    "cancel": "Cancel"
   },
   "flash_deals": {
     "title": "Flash Deals",
@@ -105,7 +107,10 @@
     "notifications": "Notifications",
     "help_support": "Help & Support",
     "dark_mode": "Dark Mode",
-    "email_placeholder": "user@pharmacy.com"
+    "email_placeholder": "user@pharmacy.com",
+    "logout": "Logout",
+    "logout_confirm_title": "Logout",
+    "logout_confirm_message": "Are you sure you want to log out?"
   },
   "profile": {
     "title": "Edit Profile",
