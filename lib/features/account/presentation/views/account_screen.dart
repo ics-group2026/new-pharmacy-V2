@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:new_pharmacy_v2/features/account/presentation/widgets/account_preferance_content.dart';
+import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/services/setup_service_locator.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_translations.dart';
+import '../../../../../core/utils/snack_bar_helper.dart';
 import '../../../../../core/widgets/t_text.dart';
+import '../../../auth/data/repos/auth_repo.dart';
+import '../../../auth/presentation/cubits/auth_cubit.dart';
+import '../../../auth/presentation/cubits/auth_state.dart';
 import '../../../profile/data/repos/profile_repo.dart';
 import '../../../profile/presentation/cubits/profile_cubit.dart';
 import '../../../profile/presentation/cubits/profile_state.dart';
@@ -15,8 +21,13 @@ class AccountScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => ProfileCubit(getIt<ProfileRepo>())..getProfile(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => ProfileCubit(getIt<ProfileRepo>())..getProfile(),
+        ),
+        BlocProvider(create: (_) => AuthCubit(getIt<AuthRepo>())),
+      ],
       child: const _AccountView(),
     );
   }
@@ -27,7 +38,17 @@ class _AccountView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return BlocListener<AuthCubit, AuthState>(
+      listenWhen: (previous, current) => previous.status != current.status,
+      listener: (context, state) {
+        if (state.status == AuthStatus.logoutSuccess) {
+          context.go(AppRoutes.login);
+        } else if (state.status == AuthStatus.error &&
+            state.errorMessage != null) {
+          context.showErrorSnackBar(state.errorMessage!);
+        }
+      },
+      child: Scaffold(
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -80,6 +101,7 @@ class _AccountView extends StatelessWidget {
           ),
           SliverToBoxAdapter(child: AccountPreferanceContent()),
         ],
+      ),
       ),
     );
   }
