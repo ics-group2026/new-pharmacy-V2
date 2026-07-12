@@ -62,6 +62,8 @@ class HomeAppBar extends StatelessWidget {
                 ),
                 2.verticalSpace,
                 BlocBuilder<ProfileCubit, ProfileState>(
+                  buildWhen: (previous, current) =>
+                      previous.user != current.user,
                   builder: (context, state) {
                     final user = state.user;
                     final name =

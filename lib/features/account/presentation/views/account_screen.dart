@@ -114,6 +114,7 @@ class _ProfileInfo extends StatelessWidget {
     final theme = Theme.of(context);
 
     return BlocBuilder<ProfileCubit, ProfileState>(
+      buildWhen: (previous, current) => previous.user != current.user,
       builder: (context, state) {
         final user = state.user;
         final hasName =

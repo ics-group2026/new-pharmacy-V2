@@ -25,7 +25,7 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
   @override
   void initState() {
     super.initState();
-    _profileCubit.getProfile();
+    if (_profileCubit.state.user == null) _profileCubit.getProfile();
   }
 
   static const List<Widget> _screens = [
