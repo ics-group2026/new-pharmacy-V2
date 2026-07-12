@@ -1,18 +1,16 @@
-// import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import '../constants/end_points.dart';
 import '../errors/exception.dart';
 import '../errors/failure.dart';
 import 'api_service.dart';
-// import 'refresh_token_interceptor.dart';
+import 'refresh_token_interceptor.dart';
 
 class DioConsumer implements ApiService {
   final Dio dio;
 
   DioConsumer({required this.dio}) {
     dio.options.baseUrl = EndPoints.baseUrl;
-    // dio.interceptors.add(RefreshTokenInterceptor(dio: dio));
+    dio.interceptors.add(RefreshTokenInterceptor(dio: dio));
   }
 
   @override

@@ -15,9 +15,14 @@ class AuthRepoImpl implements AuthRepo {
   AuthRepoImpl({required this.apiService});
 
   @override
-  Future<Either<Failure, UserModel>> login(LoginRequestModel model) async {
+  Future<Either<Failure, UserModel>> login(
+    LoginRequestModel loginRuequestModel,
+  ) async {
     try {
-      final result = await apiService.post(EndPoints.login, data: model.toJson());
+      final result = await apiService.post(
+        EndPoints.login,
+        data: loginRuequestModel.toJson(),
+      );
       final data = result['data'] as Map<String, dynamic>;
       saveToken(data['accessToken'] as String);
       saveRefreshToken(data['refreshToken'] as String);
@@ -29,11 +34,13 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<Either<Failure, UserModel>> register(RegisterRequestModel model) async {
+  Future<Either<Failure, UserModel>> register(
+    RegisterRequestModel registerRequestModel,
+  ) async {
     try {
       final result = await apiService.post(
         EndPoints.customerRegister,
-        data: model.toJson(),
+        data: registerRequestModel.toJson(),
       );
       final data = result['data'] as Map<String, dynamic>;
       saveToken(data['accessToken'] as String);
