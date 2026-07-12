@@ -23,6 +23,10 @@ class Prefs {
     return _instance.getString(key);
   }
 
+  static bool containsKey(String key) {
+    return _instance.containsKey(key);
+  }
+
   static Future<bool> removeData({required String key}) async {
     return await _instance.remove(key);
   }

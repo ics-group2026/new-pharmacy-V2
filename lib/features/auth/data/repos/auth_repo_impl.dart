@@ -15,8 +15,9 @@ class AuthRepoImpl implements AuthRepo {
 
   @override
   Future<Either<Failure, void>> login(
-    LoginRequestModel loginRuequestModel,
-  ) async {
+    LoginRequestModel loginRuequestModel, {
+    required bool rememberMe,
+  }) async {
     try {
       final result = await apiService.post(
         EndPoints.login,
@@ -25,6 +26,7 @@ class AuthRepoImpl implements AuthRepo {
       final data = result['data'] as Map<String, dynamic>;
       saveToken(data['accessToken'] as String);
       saveRefreshToken(data['refreshToken'] as String);
+      Prefs.setBool(kRememberMe, rememberMe);
       return const Right(null);
     } on CustomException catch (e) {
       return left(ServerFailure(errMessage: e.message));

@@ -3,6 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'core/constants/constants.dart';
+import 'features/auth/data/repos/auth_repo.dart';
 import 'core/services/local_notification_service.dart';
 import 'core/services/prefs.dart';
 import 'core/services/push_notification_service.dart';
@@ -22,6 +24,13 @@ void main() async {
   await LocalNotificationService.init();
   await Prefs.init();
   setupServiceLocator();
+  // Honor "Remember me": if the user opted out, don't carry the session across
+  // cold starts — clear tokens so the go_router redirect lands on login.
+  final optedOut =
+      Prefs.containsKey(kRememberMe) && !Prefs.getBool(kRememberMe);
+  if (optedOut && Prefs.getString(kToken) != null) {
+    getIt<AuthRepo>().clearTokens();
+  }
   runApp(
     EasyLocalization(
       supportedLocales: [Locale('ar'), Locale('en')],

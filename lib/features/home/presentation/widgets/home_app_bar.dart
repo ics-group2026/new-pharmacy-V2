@@ -66,14 +66,24 @@ class HomeAppBar extends StatelessWidget {
                       previous.user != current.user,
                   builder: (context, state) {
                     final user = state.user;
-                    final name =
+                    final hasName =
                         user != null &&
-                            (user.firstName.isNotEmpty ||
-                                user.lastName.isNotEmpty)
-                        ? '${user.firstName} ${user.lastName}'.trim()
-                        : AppTranslations.t('home.user_name');
+                        (user.firstName.isNotEmpty ||
+                            user.lastName.isNotEmpty);
+                    if (!hasName) {
+                      // Skeleton while the profile loads — avoids flashing a
+                      // placeholder name before the real one arrives.
+                      return Container(
+                        width: 120.w,
+                        height: 14.h,
+                        decoration: BoxDecoration(
+                          color: white.withValues(alpha: 0.25),
+                          borderRadius: BorderRadius.circular(6.r),
+                        ),
+                      );
+                    }
                     return Text(
-                      name,
+                      '${user.firstName} ${user.lastName}'.trim(),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: theme.textTheme.titleMedium?.copyWith(
