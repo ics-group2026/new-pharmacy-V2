@@ -50,6 +50,17 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
+  Future<Either<Failure, void>> logout() async {
+    try {
+      await apiService.post(EndPoints.logout, data: const {});
+      clearTokens();
+      return const Right(null);
+    } on CustomException catch (e) {
+      return left(ServerFailure(errMessage: e.message));
+    }
+  }
+
+  @override
   void saveToken(String token) {
     Prefs.setString(kToken, token);
   }
@@ -57,5 +68,11 @@ class AuthRepoImpl implements AuthRepo {
   @override
   void saveRefreshToken(String refreshToken) {
     Prefs.setString(kRefreshToken, refreshToken);
+  }
+
+  @override
+  void clearTokens() {
+    Prefs.removeData(key: kToken);
+    Prefs.removeData(key: kRefreshToken);
   }
 }

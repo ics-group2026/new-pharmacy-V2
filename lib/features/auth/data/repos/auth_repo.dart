@@ -8,6 +8,8 @@ abstract class AuthRepo {
   Future<Either<Failure, void>> register(
     RegisterRequestModel createAccountModel,
   );
+  Future<Either<Failure, void>> logout();
   void saveToken(String token);
   void saveRefreshToken(String refreshToken);
+  void clearTokens();
 }
