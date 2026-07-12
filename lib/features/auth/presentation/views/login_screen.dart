@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/routes/app_routes.dart';
 import '../../../../core/utils/app_translations.dart';
+import '../../../../core/utils/snack_bar_helper.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../core/widgets/password_field.dart';
@@ -50,14 +51,10 @@ class _LoginScreenState extends State<LoginScreen> {
         child: BlocConsumer<AuthCubit, AuthState>(
           listener: (context, state) {
             if (state.status == AuthStatus.error && state.errorMessage != null) {
-              ScaffoldMessenger.of(context)
-                ..hideCurrentSnackBar()
-                ..showSnackBar(
-                  SnackBar(
-                    backgroundColor: theme.colorScheme.error,
-                    content: Text(state.errorMessage!),
-                  ),
-                );
+              context.showErrorSnackBar(
+                state.errorMessage!,
+                background: Colors.red,
+              );
             } else if (state.status == AuthStatus.loginSuccess) {
               context.go(AppRoutes.navBar);
             }

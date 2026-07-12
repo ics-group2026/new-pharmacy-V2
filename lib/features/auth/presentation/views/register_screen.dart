@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/routes/app_routes.dart';
 import '../../../../core/utils/app_translations.dart';
+import '../../../../core/utils/snack_bar_helper.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../core/widgets/password_field.dart';
@@ -65,18 +66,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
         child: BlocConsumer<AuthCubit, AuthState>(
           listener: (context, state) {
             if (state.status == AuthStatus.error && state.errorMessage != null) {
-              ScaffoldMessenger.of(context)
-                ..hideCurrentSnackBar()
-                ..showSnackBar(
-                  SnackBar(
-                    backgroundColor: theme.colorScheme.error,
-                    content: Text(state.errorMessage!),
-                  ),
-                );
+              context.showErrorSnackBar(
+                state.errorMessage!,
+                background: Colors.red,
+              );
             } else if (state.status == AuthStatus.registerSuccess) {
-              ScaffoldMessenger.of(context)
-                ..hideCurrentSnackBar()
-                ..showSnackBar(SnackBar(content: Text(state.successMessage!)));
+              context.showSnackBar(
+                state.successMessage!,
+                background: Colors.green,
+              );
               context.go(AppRoutes.login);
             }
           },

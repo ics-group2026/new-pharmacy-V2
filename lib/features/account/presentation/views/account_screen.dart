@@ -45,7 +45,7 @@ class _AccountView extends StatelessWidget {
           context.go(AppRoutes.login);
         } else if (state.status == AuthStatus.error &&
             state.errorMessage != null) {
-          context.showErrorSnackBar(state.errorMessage!);
+          context.showErrorSnackBar(state.errorMessage!, background: Colors.red);
         }
       },
       child: Scaffold(
