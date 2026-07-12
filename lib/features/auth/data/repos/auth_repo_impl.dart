@@ -7,7 +7,6 @@ import '../../../../core/services/api_service.dart';
 import '../../../../core/services/prefs.dart';
 import '../models/login_request_model.dart';
 import '../models/register_request_model.dart';
-import '../models/user_model.dart';
 import 'auth_repo.dart';
 
 class AuthRepoImpl implements AuthRepo {
@@ -15,7 +14,7 @@ class AuthRepoImpl implements AuthRepo {
   AuthRepoImpl({required this.apiService});
 
   @override
-  Future<Either<Failure, UserModel>> login(
+  Future<Either<Failure, void>> login(
     LoginRequestModel loginRuequestModel,
   ) async {
     try {
@@ -26,15 +25,14 @@ class AuthRepoImpl implements AuthRepo {
       final data = result['data'] as Map<String, dynamic>;
       saveToken(data['accessToken'] as String);
       saveRefreshToken(data['refreshToken'] as String);
-      final user = UserModel.fromJson(data['user'] as Map<String, dynamic>);
-      return Right(user);
+      return const Right(null);
     } on CustomException catch (e) {
       return left(ServerFailure(errMessage: e.message));
     }
   }
 
   @override
-  Future<Either<Failure, UserModel>> register(
+  Future<Either<Failure, void>> register(
     RegisterRequestModel registerRequestModel,
   ) async {
     try {
@@ -45,8 +43,7 @@ class AuthRepoImpl implements AuthRepo {
       final data = result['data'] as Map<String, dynamic>;
       saveToken(data['accessToken'] as String);
       saveRefreshToken(data['refreshToken'] as String);
-      final user = UserModel.fromJson(data['user'] as Map<String, dynamic>);
-      return Right(user);
+      return const Right(null);
     } on CustomException catch (e) {
       return left(ServerFailure(errMessage: e.message));
     }

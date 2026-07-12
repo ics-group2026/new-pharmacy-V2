@@ -13,6 +13,14 @@ abstract class AuthValidators {
     return null;
   }
 
+  static String? validateRequired(String? value) {
+    final text = value?.trim() ?? '';
+    if (text.isEmpty) {
+      return AppTranslations.t('auth.validation.name_required');
+    }
+    return null;
+  }
+
   static String? validateEmail(String? value) {
     final email = value?.trim() ?? '';
     if (email.isEmpty) {

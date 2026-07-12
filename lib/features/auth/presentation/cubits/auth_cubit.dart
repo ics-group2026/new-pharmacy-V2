@@ -30,7 +30,6 @@ class AuthCubit extends Cubit<AuthState> {
         state.copyWith(
           status: AuthStatus.loginSuccess,
           successMessage: AppTranslations.t('auth.login_success'),
-          user: user,
         ),
       ),
     );
@@ -65,7 +64,6 @@ class AuthCubit extends Cubit<AuthState> {
         state.copyWith(
           status: AuthStatus.registerSuccess,
           successMessage: AppTranslations.t('auth.register_success'),
-          user: user,
         ),
       ),
     );
