@@ -9,6 +9,6 @@ extension SnackBarHelper on BuildContext {
       );
   }
 
-  void showErrorSnackBar(String message) =>
-      showSnackBar(message, background: Theme.of(this).colorScheme.error);
+  void showErrorSnackBar(String message, {Color? background}) =>
+      showSnackBar(message, background: background);
 }

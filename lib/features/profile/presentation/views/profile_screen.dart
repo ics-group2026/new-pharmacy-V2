@@ -58,14 +58,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
     switch (state.status) {
       case ProfileStatus.error:
         if (state.errorMessage != null) {
-          context.showErrorSnackBar(state.errorMessage!);
+          context.showErrorSnackBar(state.errorMessage!, background: Colors.red);
         }
       case ProfileStatus.loaded:
         if (state.user != null) _fillControllers(state.user!);
       case ProfileStatus.updateSuccess:
         if (state.user != null) _fillControllers(state.user!);
         if (state.successMessage != null) {
-          context.showSnackBar(state.successMessage!);
+          context.showSnackBar(state.successMessage!, background: Colors.green);
         }
       default:
         break;
