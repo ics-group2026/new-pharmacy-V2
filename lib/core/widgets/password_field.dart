@@ -24,6 +24,7 @@ class _PasswordFieldState extends State<PasswordField> {
   bool isPasswordVisible = true;
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return TextFormField(
       decoration: InputDecoration(
         suffixIcon: IconButton(
@@ -31,22 +32,15 @@ class _PasswordFieldState extends State<PasswordField> {
             isPasswordVisible = !isPasswordVisible;
             setState(() {});
           },
-          icon: isPasswordVisible
-              ? Icon(Icons.visibility, color: Colors.grey.withAlpha(128))
-              : Icon(Icons.visibility_off, color: Colors.grey.withAlpha(128)),
+          icon: Icon(
+            isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+            color: theme.colorScheme.onSurfaceVariant,
+          ),
         ),
         hintText: widget.hintText,
-        hintStyle: Theme.of(
-          context,
-        ).textTheme.titleMedium!.copyWith(color: Colors.grey, fontSize: 14),
-        border: Theme.of(context).inputDecorationTheme.border,
-        focusedBorder: Theme.of(context).inputDecorationTheme.focusedBorder,
-        enabledBorder: Theme.of(context).inputDecorationTheme.enabledBorder,
       ),
-      style: Theme.of(
-        context,
-      ).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.w500, fontSize: 14),
-      cursorColor: Colors.blueGrey,
+      style: theme.textTheme.titleMedium!.copyWith(fontWeight: FontWeight.w500, fontSize: 14),
+      cursorColor: theme.colorScheme.primary,
       obscureText: isPasswordVisible,
       keyboardType: widget.textInputType,
       controller: widget.controller,

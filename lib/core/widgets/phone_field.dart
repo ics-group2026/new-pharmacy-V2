@@ -1,33 +1,25 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField({
+import '../utils/validations.dart';
+
+class PhoneField extends StatelessWidget {
+  const PhoneField({
     super.key,
     this.onSaved,
     this.hintText,
     required this.controller,
-    this.textInputType = TextInputType.text,
     this.validator,
-    this.suffixIcon,
-    this.prefixIcon,
-    this.maxLines,
     this.enabled,
-    this.readOnly = false,
-    this.onTap,
     this.autofocus = false,
   });
+
   final String? hintText;
   final Function(String?)? onSaved;
   final TextEditingController? controller;
-  final TextInputType? textInputType;
   final String? Function(String?)? validator;
-  final Widget? suffixIcon;
-  final Widget? prefixIcon;
-  final int? maxLines;
   final bool? enabled;
-  final bool readOnly;
-  final VoidCallback? onTap;
   final bool autofocus;
 
   @override
@@ -35,20 +27,20 @@ class CustomTextFormField extends StatelessWidget {
     final theme = Theme.of(context);
     return TextFormField(
       enabled: enabled,
-      readOnly: readOnly,
-      maxLines: maxLines,
-      onTap: onTap,
       autofocus: autofocus,
+      keyboardType: TextInputType.phone,
+      inputFormatters: [
+        FilteringTextInputFormatter.digitsOnly,
+        LengthLimitingTextInputFormatter(11),
+      ],
       decoration: InputDecoration(
         hintText: hintText?.tr(),
-        suffixIcon: suffixIcon,
-        prefixIcon: prefixIcon,
+        prefixIcon: Icon(Icons.phone_outlined, color: theme.colorScheme.onSurfaceVariant),
       ),
       style: theme.textTheme.titleMedium!.copyWith(fontWeight: FontWeight.w500, fontSize: 14),
       cursorColor: theme.colorScheme.primary,
-      keyboardType: textInputType,
       controller: controller,
-      validator: validator,
+      validator: validator ?? Validations.validatePhone,
       onSaved: onSaved,
     );
   }
