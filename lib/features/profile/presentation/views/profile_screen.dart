@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_pharmacy_v2/features/profile/presentation/widgets/labled_feilds.dart';
 import 'package:new_pharmacy_v2/features/profile/presentation/widgets/profile_header.dart';
 
+import '../../../../core/utils/snack_bar_helper.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/t_text.dart';
 import '../../../auth/data/models/user_model.dart';
@@ -53,28 +54,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
     _emailController.text = user.email;
   }
 
-  void _showSnackBar(String message, {Color? background}) {
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(backgroundColor: background, content: Text(message)),
-      );
-  }
-
   void _onStateChanged(ProfileState state) {
     switch (state.status) {
       case ProfileStatus.error:
         if (state.errorMessage != null) {
-          _showSnackBar(
-            state.errorMessage!,
-            background: Theme.of(context).colorScheme.error,
-          );
+          context.showErrorSnackBar(state.errorMessage!);
         }
       case ProfileStatus.loaded:
         if (state.user != null) _fillControllers(state.user!);
       case ProfileStatus.updateSuccess:
         if (state.user != null) _fillControllers(state.user!);
-        if (state.successMessage != null) _showSnackBar(state.successMessage!);
+        if (state.successMessage != null) {
+          context.showSnackBar(state.successMessage!);
+        }
       default:
         break;
     }
