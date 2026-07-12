@@ -6,6 +6,9 @@ import '../../features/auth/data/repos/auth_repo.dart';
 import '../../features/auth/presentation/cubits/auth_cubit.dart';
 import '../../features/auth/presentation/views/login_screen.dart';
 import '../../features/auth/presentation/views/register_screen.dart';
+import '../../features/profile/data/repos/profile_repo.dart';
+import '../../features/profile/presentation/cubits/profile_cubit.dart';
+import '../../features/profile/presentation/views/profile_screen.dart';
 import '../../features/nav_bar/presentation/views/bottom_nav_bar_screen.dart';
 import '../../features/products/presentation/views/product_detail_screen.dart';
 import '../../features/search/presentation/views/search_screen.dart';
@@ -51,6 +54,13 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: AppRoutes.search,
       builder: (context, state) => const SearchScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.profile,
+      builder: (context, state) => BlocProvider(
+        create: (_) => ProfileCubit(getIt<ProfileRepo>()),
+        child: const ProfileScreen(),
+      ),
     ),
     GoRoute(
       path: AppRoutes.productDetail,

@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import '../../features/auth/data/repos/auth_repo.dart';
 import '../../features/auth/data/repos/auth_repo_impl.dart';
+import '../../features/profile/data/repos/profile_repo.dart';
+import '../../features/profile/data/repos/profile_repo_impl.dart';
 import 'api_service.dart';
 import 'dio_consumer.dart';
 
@@ -12,6 +14,9 @@ void setupServiceLocator() {
 
   /// Repositories
   getIt.registerSingleton<AuthRepo>(AuthRepoImpl(apiService: getIt<ApiService>()));
+  getIt.registerSingleton<ProfileRepo>(
+    ProfileRepoImpl(apiService: getIt<ApiService>()),
+  );
 
   /// Cubits
 }

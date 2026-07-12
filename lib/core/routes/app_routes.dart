@@ -5,4 +5,5 @@ abstract class AppRoutes {
   static const String navBar = "/navBar";
   static const String search = "/search";
   static const String productDetail = "/productDetail";
+  static const String profile = "/profile";
 }

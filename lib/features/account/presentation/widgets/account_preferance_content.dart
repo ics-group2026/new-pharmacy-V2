@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:new_pharmacy_v2/core/routes/app_routes.dart';
 import 'package:new_pharmacy_v2/core/widgets/language_switcher.dart';
 import 'package:new_pharmacy_v2/core/widgets/t_text.dart';
 import 'package:new_pharmacy_v2/core/widgets/theme_switcher.dart';
@@ -45,6 +47,12 @@ class AccountPreferanceContent extends StatelessWidget {
           12.verticalSpace,
           SettingsCard(
             children: [
+              SettingsTile(
+                icon: Icons.person_outline_rounded,
+                titleKey: 'account.edit_profile',
+                onTap: () => context.push(AppRoutes.profile),
+              ),
+              Divider(height: 1, color: colorScheme.outlineVariant),
               SettingsTile(
                 icon: Icons.receipt_long_rounded,
                 titleKey: 'account.my_orders',
