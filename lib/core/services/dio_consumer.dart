@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import '../constants/end_points.dart';
 import '../errors/exception.dart';
 import '../errors/failure.dart';
@@ -11,6 +12,11 @@ class DioConsumer implements ApiService {
   DioConsumer({required this.dio}) {
     dio.options.baseUrl = EndPoints.baseUrl;
     dio.interceptors.add(RefreshTokenInterceptor(dio: dio));
+    if (kDebugMode) {
+      dio.interceptors.add(
+        LogInterceptor(requestBody: true, responseBody: true, error: true),
+      );
+    }
   }
 
   @override
