@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:new_pharmacy_v2/features/profile/presentation/widgets/labled_feilds.dart';
+import 'package:new_pharmacy_v2/features/profile/presentation/widgets/profile_header.dart';
 
-import '../../../../core/utils/app_translations.dart';
 import '../../../../core/widgets/custom_button.dart';
-import '../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../core/widgets/t_text.dart';
+import '../../../auth/data/models/user_model.dart';
 import '../../../auth/presentation/utils/auth_validators.dart';
 import '../cubits/profile_cubit.dart';
 import '../cubits/profile_state.dart';
@@ -46,6 +47,39 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
+  void _fillControllers(UserModel user) {
+    _firstNameController.text = user.firstName;
+    _lastNameController.text = user.lastName;
+    _emailController.text = user.email;
+  }
+
+  void _showSnackBar(String message, {Color? background}) {
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(backgroundColor: background, content: Text(message)),
+      );
+  }
+
+  void _onStateChanged(ProfileState state) {
+    switch (state.status) {
+      case ProfileStatus.error:
+        if (state.errorMessage != null) {
+          _showSnackBar(
+            state.errorMessage!,
+            background: Theme.of(context).colorScheme.error,
+          );
+        }
+      case ProfileStatus.loaded:
+        if (state.user != null) _fillControllers(state.user!);
+      case ProfileStatus.updateSuccess:
+        if (state.user != null) _fillControllers(state.user!);
+        if (state.successMessage != null) _showSnackBar(state.successMessage!);
+      default:
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -60,33 +94,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       body: SafeArea(
         top: false,
         child: BlocConsumer<ProfileCubit, ProfileState>(
-          listener: (context, state) {
-            if (state.status == ProfileStatus.error &&
-                state.errorMessage != null) {
-              ScaffoldMessenger.of(context)
-                ..hideCurrentSnackBar()
-                ..showSnackBar(
-                  SnackBar(
-                    backgroundColor: theme.colorScheme.error,
-                    content: Text(state.errorMessage!),
-                  ),
-                );
-            } else if (state.status == ProfileStatus.loaded ||
-                state.status == ProfileStatus.updateSuccess) {
-              final user = state.user;
-              if (user != null) {
-                _firstNameController.text = user.firstName;
-                _lastNameController.text = user.lastName;
-                _emailController.text = user.email;
-              }
-              if (state.status == ProfileStatus.updateSuccess &&
-                  state.successMessage != null) {
-                ScaffoldMessenger.of(context)
-                  ..hideCurrentSnackBar()
-                  ..showSnackBar(SnackBar(content: Text(state.successMessage!)));
-              }
-            }
-          },
+          listener: (context, state) => _onStateChanged(state),
           builder: (context, state) {
             if (state.isLoading) {
               return const Center(child: CircularProgressIndicator());
@@ -98,44 +106,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    TText(
-                      'profile.subtitle',
-                      style: theme.textTheme.bodyMedium?.copyWith(
-                        color: theme.colorScheme.onSurfaceVariant,
-                      ),
-                    ),
+                    ProfileHeader(user: state.user),
                     SizedBox(height: 32.h),
-                    CustomTextFormField(
+                    LabeledField(
+                      labelKey: 'profile.first_name',
                       controller: _firstNameController,
-                      hintText: AppTranslations.t('profile.first_name_hint'),
-                      prefixIcon: Icon(
-                        Icons.person_outline,
-                        color: theme.colorScheme.onSurfaceVariant,
-                      ),
+                      hintKey: 'profile.first_name_hint',
+                      icon: Icons.person_outline,
                       validator: AuthValidators.validateRequired,
                     ),
-                    SizedBox(height: 16.h),
-                    CustomTextFormField(
+                    SizedBox(height: 20.h),
+                    LabeledField(
+                      labelKey: 'profile.last_name',
                       controller: _lastNameController,
-                      hintText: AppTranslations.t('profile.last_name_hint'),
-                      prefixIcon: Icon(
-                        Icons.person_outline,
-                        color: theme.colorScheme.onSurfaceVariant,
-                      ),
+                      hintKey: 'profile.last_name_hint',
+                      icon: Icons.person_outline,
                       validator: AuthValidators.validateRequired,
                     ),
-                    SizedBox(height: 16.h),
-                    CustomTextFormField(
+                    SizedBox(height: 20.h),
+                    LabeledField(
+                      labelKey: 'profile.email',
                       controller: _emailController,
-                      hintText: AppTranslations.t('profile.email_hint'),
-                      textInputType: TextInputType.emailAddress,
-                      prefixIcon: Icon(
-                        Icons.email_outlined,
-                        color: theme.colorScheme.onSurfaceVariant,
-                      ),
+                      hintKey: 'profile.email_hint',
+                      icon: Icons.email_outlined,
+                      keyboardType: TextInputType.emailAddress,
                       validator: AuthValidators.validateEmail,
                     ),
-                    SizedBox(height: 32.h),
+                    SizedBox(height: 40.h),
                     CustomButton(
                       text: 'profile.save_btn',
                       isLoading: state.isUpdating,
@@ -151,3 +148,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 }
+
+
+
+
