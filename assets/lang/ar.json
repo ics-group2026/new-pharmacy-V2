@@ -10,7 +10,30 @@
     "forget_password": "هل نسيت كلمة المرور؟",
     "no_account": "ليس لديك حساب؟",
     "register_link": "إنشاء حساب",
-    "or_continue_with": "أو تابع بـ"
+    "or_continue_with": "أو تابع بـ",
+    "login_success": "تم تسجيل الدخول بنجاح",
+    "register_title": "إنشاء حساب",
+    "register_subtitle": "سجل للبدء",
+    "full_name": "الاسم الكامل",
+    "full_name_hint": "أدخل اسمك الكامل",
+    "confirm_password": "تأكيد كلمة المرور",
+    "confirm_password_hint": "أعد إدخال كلمة المرور",
+    "register_btn": "إنشاء حساب",
+    "register_success": "تم إنشاء الحساب بنجاح. يرجى تسجيل الدخول.",
+    "have_account": "لديك حساب بالفعل؟",
+    "login_link": "تسجيل الدخول",
+    "validation": {
+      "name_required": "الاسم الكامل مطلوب",
+      "name_full": "يرجى إدخال الاسم الأول واسم العائلة",
+      "email_required": "البريد الإلكتروني مطلوب",
+      "email_invalid": "أدخل بريدًا إلكترونيًا صحيحًا",
+      "password_required": "كلمة المرور مطلوبة",
+      "password_min_length": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل",
+      "password_number": "يجب أن تحتوي كلمة المرور على رقم واحد على الأقل",
+      "password_special": "يجب أن تحتوي كلمة المرور على رمز خاص واحد على الأقل (@$!%*#?&)",
+      "confirm_password_required": "يرجى تأكيد كلمة المرور",
+      "confirm_password_mismatch": "كلمتا المرور غير متطابقتين"
+    }
   },
   "nav_bar": {
     "home": "الرئيسية",
