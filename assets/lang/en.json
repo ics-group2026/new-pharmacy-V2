@@ -51,7 +51,8 @@
   "common": {
     "see_all": "See All",
     "search_hint": "Search for products...",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "no_data": "No data available"
   },
   "combo_offers": {
     "title": "Combo Offers",

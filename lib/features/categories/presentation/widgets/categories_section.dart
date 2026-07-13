@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/services/setup_service_locator.dart';
+import '../../../../../core/widgets/empty_data_placeholder.dart';
 import '../../../../../core/widgets/pill_chip.dart';
 import '../../data/repos/categories_repo.dart';
 import '../cubits/categories_cubit.dart';
@@ -50,8 +51,12 @@ class _CategoriesSectionState extends State<_CategoriesBody> {
             );
           }
 
-          if (state.status == CategoriesStatus.error || state.categories.isEmpty) {
+          if (state.status == CategoriesStatus.error) {
             return const SizedBox.shrink();
+          }
+
+          if (state.categories.isEmpty) {
+            return const EmptyDataPlaceholder();
           }
 
           final categories = state.categories;

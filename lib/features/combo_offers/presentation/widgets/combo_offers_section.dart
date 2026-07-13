@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/services/setup_service_locator.dart';
+import '../../../../core/widgets/empty_data_placeholder.dart';
 import '../../data/repos/combo_offers_repo.dart';
 import '../cubits/combo_offers_cubit.dart';
 import '../cubits/combo_offers_state.dart';
@@ -32,14 +33,15 @@ class _ComboOffersBody extends StatelessWidget {
 
     return BlocBuilder<ComboOffersCubit, ComboOffersState>(
       builder: (context, state) {
+        if (state.status == ComboOffersStatus.error) {
+          return const SizedBox.shrink();
+        }
+
         final isLoading =
             state.status == ComboOffersStatus.initial ||
             state.status == ComboOffersStatus.loading;
-        final isEmptyOrError =
-            state.status == ComboOffersStatus.error ||
-            (state.status == ComboOffersStatus.loaded && state.comboOffers.isEmpty);
-
-        if (isEmptyOrError) return const SizedBox.shrink();
+        final isEmpty =
+            state.status == ComboOffersStatus.loaded && state.comboOffers.isEmpty;
 
         return Container(
           width: double.infinity,
@@ -55,6 +57,8 @@ class _ComboOffersBody extends StatelessWidget {
                 height: 270.h,
                 child: isLoading
                     ? const ComboOffersLoading()
+                    : isEmpty
+                    ? const EmptyDataPlaceholder()
                     : ComboOffersList(comboOffers: state.comboOffers),
               ),
               16.verticalSpace,

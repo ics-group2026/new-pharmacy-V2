@@ -51,7 +51,8 @@
   "common": {
     "see_all": "عرض الكل",
     "search_hint": "ابحث عن منتج...",
-    "cancel": "إلغاء"
+    "cancel": "إلغاء",
+    "no_data": "لا توجد بيانات"
   },
   "combo_offers": {
     "title": "عروض الكومبو",
