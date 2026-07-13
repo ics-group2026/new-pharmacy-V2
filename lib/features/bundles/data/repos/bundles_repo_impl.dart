@@ -24,16 +24,5 @@ class BundlesRepoImpl implements BundlesRepo {
     }
   }
 
-  @override
-  Future<Either<Failure, BundleModel>> getActiveBundleById(String id) async {
-    try {
-      final result = await apiService.get(EndPoints.activeBundleById(id));
-      final bundle = BundleModel.fromJson(
-        result['data'] as Map<String, dynamic>,
-      );
-      return Right(bundle);
-    } on CustomException catch (e) {
-      return left(ServerFailure(errMessage: e.message));
-    }
-  }
+  
 }

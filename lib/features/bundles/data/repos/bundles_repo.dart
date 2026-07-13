@@ -4,5 +4,4 @@ import '../models/bundle_model.dart';
 
 abstract class BundlesRepo {
   Future<Either<Failure, List<BundleModel>>> getActiveBundles();
-  Future<Either<Failure, BundleModel>> getActiveBundleById(String id);
 }
