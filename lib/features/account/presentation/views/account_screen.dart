@@ -37,7 +37,17 @@ class _AccountView extends StatelessWidget {
     return BlocListener<AuthCubit, AuthState>(
       listenWhen: (previous, current) => previous.status != current.status,
       listener: (context, state) {
-        if (state.status == AuthStatus.logoutSuccess) {
+        if (state.status == AuthStatus.logoutSuccess ||
+            state.status == AuthStatus.deleteAccountSuccess) {
+          if (state.successMessage != null) {
+            context.showSnackBar(
+              state.successMessage!,
+              background: Colors.green,
+            );
+          }
+          // The ProfileCubit is an app-lifetime singleton — clear it so the
+          // next user doesn't see the previous account's name/email.
+          getIt<ProfileCubit>().reset();
           context.go(AppRoutes.login);
         } else if (state.status == AuthStatus.error &&
             state.errorMessage != null) {

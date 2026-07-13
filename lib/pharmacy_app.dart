@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/routes/router.dart';
 import 'core/themes/theme_cubit/theme_cubit.dart';
+import 'core/utils/snack_bar_helper.dart';
 
 class PharmacyApp extends StatelessWidget {
   const PharmacyApp({super.key});
@@ -20,6 +21,7 @@ class PharmacyApp extends StatelessWidget {
             minTextAdapt: true,
             splitScreenMode: true,
             child: MaterialApp.router(
+              scaffoldMessengerKey: rootScaffoldMessengerKey,
               localizationsDelegates: context.localizationDelegates,
               supportedLocales: context.supportedLocales,
               locale: context.locale,
