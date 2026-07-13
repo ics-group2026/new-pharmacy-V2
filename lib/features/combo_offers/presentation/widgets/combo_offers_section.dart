@@ -11,24 +11,20 @@ import 'combo_offers_list.dart';
 import 'combo_offers_loading.dart';
 
 class ComboOffersSection extends StatelessWidget {
-  const ComboOffersSection({super.key, this.onSeeAll});
-
-  final VoidCallback? onSeeAll;
+  const ComboOffersSection({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) =>
           ComboOffersCubit(getIt<ComboOffersRepo>())..getActiveComboOffers(),
-      child: _ComboOffersBody(onSeeAll: onSeeAll),
+      child: const _ComboOffersBody(),
     );
   }
 }
 
 class _ComboOffersBody extends StatelessWidget {
-  const _ComboOffersBody({this.onSeeAll});
-
-  final VoidCallback? onSeeAll;
+  const _ComboOffersBody();
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +49,7 @@ class _ComboOffersBody extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               12.verticalSpace,
-              ComboOffersHeader(onSeeAll: onSeeAll),
+              const ComboOffersHeader(),
               16.verticalSpace,
               SizedBox(
                 height: 270.h,

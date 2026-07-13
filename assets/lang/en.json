@@ -54,7 +54,8 @@
     "cancel": "Cancel"
   },
   "combo_offers": {
-    "title": "Combo Offers"
+    "title": "Combo Offers",
+    "included_products": "Included Products"
   },
   "flash_deals": {
     "title": "Flash Deals",

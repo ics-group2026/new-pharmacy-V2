@@ -54,7 +54,8 @@
     "cancel": "إلغاء"
   },
   "combo_offers": {
-    "title": "عروض الكومبو"
+    "title": "عروض الكومبو",
+    "included_products": "المنتجات المشمولة"
   },
   "flash_deals": {
     "title": "عروض سريعة",

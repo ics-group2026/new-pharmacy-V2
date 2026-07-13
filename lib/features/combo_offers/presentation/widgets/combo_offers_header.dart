@@ -4,9 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/utils/app_translations.dart';
 
 class ComboOffersHeader extends StatelessWidget {
-  const ComboOffersHeader({super.key, this.onSeeAll});
-
-  final VoidCallback? onSeeAll;
+  const ComboOffersHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,26 +33,6 @@ class ComboOffersHeader extends StatelessWidget {
               fontWeight: FontWeight.bold,
               color: colorScheme.onSurface,
             ),
-          ),
-        ),
-        GestureDetector(
-          onTap: onSeeAll ?? () {},
-          child: Row(
-            children: [
-              Text(
-                AppTranslations.t('common.see_all'),
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: colorScheme.primary,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              2.horizontalSpace,
-              Icon(
-                Icons.arrow_forward_ios_rounded,
-                size: 11.r,
-                color: colorScheme.primary,
-              ),
-            ],
           ),
         ),
       ],
