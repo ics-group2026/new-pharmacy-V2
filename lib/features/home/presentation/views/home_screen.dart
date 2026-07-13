@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/widgets/animated_fade_slide.dart';
 import '../../../banners/presentation/widgets/banners_carousel.dart';
 import '../../../categories/presentation/widgets/categories_section.dart';
-import '../../../flash_deals/presentation/widgets/flash_deals_section.dart';
+import '../../../combo_offers/presentation/widgets/combo_offers_section.dart';
 import '../../../new_arrivals/presentation/widgets/new_arrivals_section.dart';
 import '../../../products/presentation/widgets/best_seller_section.dart';
 import '../../../products/presentation/widgets/on_sale_section.dart';
@@ -45,7 +45,7 @@ class HomeScreen extends StatelessWidget {
               delay: const Duration(milliseconds: 160),
               child: Padding(
                 padding: EdgeInsets.only(top: 20.h),
-                child: const FlashDealsSection(),
+                child: const ComboOffersSection(),
               ),
             ),
           ),

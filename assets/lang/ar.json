@@ -53,6 +53,9 @@
     "search_hint": "ابحث عن منتج...",
     "cancel": "إلغاء"
   },
+  "combo_offers": {
+    "title": "عروض الكومبو"
+  },
   "flash_deals": {
     "title": "عروض سريعة",
     "buy_now": "اشتري الآن",

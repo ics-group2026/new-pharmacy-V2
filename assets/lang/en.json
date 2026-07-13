@@ -53,6 +53,9 @@
     "search_hint": "Search for products...",
     "cancel": "Cancel"
   },
+  "combo_offers": {
+    "title": "Combo Offers"
+  },
   "flash_deals": {
     "title": "Flash Deals",
     "buy_now": "Buy Now",
