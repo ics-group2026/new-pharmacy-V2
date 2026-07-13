@@ -16,9 +16,8 @@ class AuthRepoImpl implements AuthRepo {
 
   @override
   Future<Either<Failure, void>> login(
-    LoginRequestModel loginRuequestModel, {
-    required bool rememberMe,
-  }) async {
+    LoginRequestModel loginRuequestModel,
+  ) async {
     try {
       final result = await apiService.post(
         EndPoints.login,
@@ -27,7 +26,6 @@ class AuthRepoImpl implements AuthRepo {
       final data = result['data'] as Map<String, dynamic>;
       saveToken(data['accessToken'] as String);
       saveRefreshToken(data['refreshToken'] as String);
-      Prefs.setBool(kRememberMe, rememberMe);
       return const Right(null);
     } on CustomException catch (e) {
       return left(ServerFailure(errMessage: e.message));
@@ -46,9 +44,6 @@ class AuthRepoImpl implements AuthRepo {
       final data = result['data'] as Map<String, dynamic>;
       saveToken(data['accessToken'] as String);
       saveRefreshToken(data['refreshToken'] as String);
-      // Registering signs the user straight in, so keep the session across
-      // restarts regardless of any earlier "Remember me" choice.
-      Prefs.setBool(kRememberMe, true);
       return const Right(null);
     } on CustomException catch (e) {
       return left(ServerFailure(errMessage: e.message));
