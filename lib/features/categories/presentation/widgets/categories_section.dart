@@ -3,18 +3,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../core/services/setup_service_locator.dart';
 import '../../../../../core/widgets/pill_chip.dart';
+import '../../data/repos/categories_repo.dart';
 import '../cubits/categories_cubit.dart';
 import '../cubits/categories_state.dart';
 
-class CategoriesSection extends StatefulWidget {
+class CategoriesSection extends StatelessWidget {
   const CategoriesSection({super.key});
 
   @override
-  State<CategoriesSection> createState() => _CategoriesSectionState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => CategoriesCubit(getIt<CategoriesRepo>())..getCategories(),
+      child: const _CategoriesBody(),
+    );
+  }
 }
 
-class _CategoriesSectionState extends State<CategoriesSection> {
+class _CategoriesBody extends StatefulWidget {
+  const _CategoriesBody();
+
+  @override
+  State<_CategoriesBody> createState() => _CategoriesSectionState();
+}
+
+class _CategoriesSectionState extends State<_CategoriesBody> {
   int _selectedIndex = 0;
 
   @override
