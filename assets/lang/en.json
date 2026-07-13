@@ -58,6 +58,11 @@
     "title": "Combo Offers",
     "included_products": "Included Products"
   },
+  "bundles": {
+    "title": "Product Bundles",
+    "included_products": "Included Products",
+    "save": "Save"
+  },
   "flash_deals": {
     "title": "Flash Deals",
     "buy_now": "Buy Now",

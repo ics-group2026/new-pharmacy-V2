@@ -6,6 +6,8 @@ import '../../features/auth/data/repos/auth_repo.dart';
 import '../../features/auth/presentation/cubits/auth_cubit.dart';
 import '../../features/auth/presentation/views/login_screen.dart';
 import '../../features/auth/presentation/views/register_screen.dart';
+import '../../features/bundles/data/models/bundle_model.dart';
+import '../../features/bundles/presentation/views/bundle_detail_screen.dart';
 import '../../features/combo_offers/data/models/combo_offer_model.dart';
 import '../../features/combo_offers/presentation/views/combo_offer_detail_screen.dart';
 import '../../features/profile/presentation/cubits/profile_cubit.dart';
@@ -75,6 +77,13 @@ final GoRouter appRouter = GoRouter(
       builder: (context, state) {
         final comboOffer = state.extra as ComboOfferModel;
         return ComboOfferDetailScreen(comboOffer: comboOffer);
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.bundleDetail,
+      builder: (context, state) {
+        final bundle = state.extra as BundleModel;
+        return BundleDetailScreen(bundle: bundle);
       },
     ),
   ],

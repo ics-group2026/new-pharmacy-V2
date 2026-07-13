@@ -6,5 +6,6 @@ abstract class AppRoutes {
   static const String search = "/search";
   static const String productDetail = "/productDetail";
   static const String comboOfferDetail = "/comboOfferDetail";
+  static const String bundleDetail = "/bundleDetail";
   static const String profile = "/profile";
 }

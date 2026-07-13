@@ -58,6 +58,11 @@
     "title": "عروض الكومبو",
     "included_products": "المنتجات المشمولة"
   },
+  "bundles": {
+    "title": "باقات المنتجات",
+    "included_products": "المنتجات المشمولة",
+    "save": "وفّر"
+  },
   "flash_deals": {
     "title": "عروض سريعة",
     "buy_now": "اشتري الآن",
