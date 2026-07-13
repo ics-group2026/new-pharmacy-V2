@@ -28,7 +28,6 @@ class BannerModel {
     this.startsAt,
     this.endsAt,
     this.computedStatus,
-
   });
 
   /// The API may return either an absolute URL or a server-relative path.
