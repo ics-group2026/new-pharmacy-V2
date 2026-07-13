@@ -20,8 +20,9 @@
     "confirm_password": "تأكيد كلمة المرور",
     "confirm_password_hint": "أعد إدخال كلمة المرور",
     "register_btn": "إنشاء حساب",
-    "register_success": "تم إنشاء الحساب بنجاح. يرجى تسجيل الدخول.",
+    "register_success": "تم إنشاء الحساب بنجاح. مرحباً بك!",
     "logout_success": "تم تسجيل الخروج بنجاح",
+    "delete_account_success": "تم حذف الحساب بنجاح",
     "have_account": "لديك حساب بالفعل؟",
     "login_link": "تسجيل الدخول",
     "validation": {
@@ -121,7 +122,10 @@
     "email_placeholder": "user@pharmacy.com",
     "logout": "تسجيل الخروج",
     "logout_confirm_title": "تسجيل الخروج",
-    "logout_confirm_message": "هل أنت متأكد أنك تريد تسجيل الخروج؟"
+    "logout_confirm_message": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+    "delete_account": "حذف الحساب",
+    "delete_account_confirm_title": "حذف الحساب",
+    "delete_account_confirm_message": "سيتم حذف حسابك نهائياً. أدخل كلمة المرور للتأكيد."
   },
   "profile": {
     "title": "تعديل الملف الشخصي",

@@ -20,8 +20,9 @@
     "confirm_password": "Confirm Password",
     "confirm_password_hint": "Re-enter your password",
     "register_btn": "Sign Up",
-    "register_success": "Account created successfully. Please sign in.",
+    "register_success": "Account created successfully. Welcome!",
     "logout_success": "Logged out successfully",
+    "delete_account_success": "Account deleted successfully",
     "have_account": "Already have an account?",
     "login_link": "Sign In",
     "validation": {
@@ -121,7 +122,10 @@
     "email_placeholder": "user@pharmacy.com",
     "logout": "Logout",
     "logout_confirm_title": "Logout",
-    "logout_confirm_message": "Are you sure you want to log out?"
+    "logout_confirm_message": "Are you sure you want to log out?",
+    "delete_account": "Delete Account",
+    "delete_account_confirm_title": "Delete Account",
+    "delete_account_confirm_message": "This will permanently delete your account. Enter your password to confirm."
   },
   "profile": {
     "title": "Edit Profile",

@@ -21,6 +21,7 @@ abstract class EndPoints {
   static const String customerRegister = '/auth/customer/register';
   static const String me = '/auth/me';
   static const String updateMe = '/auth/me';
+  static const String deleteMe = '/auth/me';
   static const String changePassword = '/auth/me/password';
   static const String register = '/auth/register';
   static const String refresh = '/auth/refresh';
