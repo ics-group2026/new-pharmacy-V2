@@ -8,6 +8,11 @@ abstract class EndPoints {
   // Combo Offers
   static const String activeComboOffers = '/combo-offers/active';
 
+  // Bundles
+  static const String activeBundles = '/bundles/active';
+
+  static String activeBundleById(String id) => '/bundles/active/$id';
+
   // Marketing / Banners
   static const String storefrontBanners = '/marketing/banners/storefront';
 
