@@ -13,7 +13,7 @@ class CachedNetworkImageWidget extends StatelessWidget {
     this.errorWidget,
   });
 
-  final String imageUrl;
+  final String? imageUrl;
   final double? width;
   final double? height;
   final BoxFit fit;
@@ -25,18 +25,22 @@ class CachedNetworkImageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    final image = CachedNetworkImage(
-      imageUrl: imageUrl,
-      width: width,
-      height: height,
-      fit: fit,
-      placeholder: (context, url) =>
-          placeholder ??
-          _Shimmer(width: width, height: height, colorScheme: colorScheme),
-      errorWidget: (context, url, error) =>
-          errorWidget ??
-          _ErrorPlaceholder(width: width, height: height, colorScheme: colorScheme),
-    );
+    final url = imageUrl;
+    final image = (url == null || url.isEmpty)
+        ? (errorWidget ??
+              _ErrorPlaceholder(width: width, height: height, colorScheme: colorScheme))
+        : CachedNetworkImage(
+            imageUrl: url,
+            width: width,
+            height: height,
+            fit: fit,
+            placeholder: (context, url) =>
+                placeholder ??
+                _Shimmer(width: width, height: height, colorScheme: colorScheme),
+            errorWidget: (context, url, error) =>
+                errorWidget ??
+                _ErrorPlaceholder(width: width, height: height, colorScheme: colorScheme),
+          );
 
     if (borderRadius != null) {
       return ClipRRect(borderRadius: borderRadius!, child: image);

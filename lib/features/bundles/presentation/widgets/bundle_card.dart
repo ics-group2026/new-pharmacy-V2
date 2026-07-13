@@ -26,8 +26,10 @@ class BundleCard extends StatelessWidget {
     final colorScheme = theme.colorScheme;
     final imgHeight = imageHeight ?? 140.h;
     final currency = AppTranslations.t('flash_deals.currency');
-    final discountPercent = bundle.savingsPercentage.round();
-    final hasDiscount = bundle.originalPrice > bundle.bundlePrice;
+    final bundlePrice = bundle.bundlePrice ?? 0;
+    final originalPrice = bundle.originalPrice ?? 0;
+    final discountPercent = (bundle.savingsPercentage ?? 0).round();
+    final hasDiscount = originalPrice > bundlePrice;
 
     return GestureDetector(
       onTap: () => context.push(AppRoutes.bundleDetail, extra: bundle),
@@ -77,7 +79,7 @@ class BundleCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    bundle.title,
+                    bundle.title ?? '',
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: theme.textTheme.bodySmall?.copyWith(
@@ -88,7 +90,7 @@ class BundleCard extends StatelessWidget {
                   ),
                   6.verticalSpace,
                   Text(
-                    bundle.description,
+                    bundle.description ?? '',
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: theme.textTheme.labelSmall?.copyWith(
@@ -99,7 +101,7 @@ class BundleCard extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        '${bundle.bundlePrice.toStringAsFixed(0)} $currency',
+                        '${bundlePrice.toStringAsFixed(0)} $currency',
                         style: theme.textTheme.bodyMedium?.copyWith(
                           color: colorScheme.primary,
                           fontWeight: FontWeight.bold,
@@ -109,7 +111,7 @@ class BundleCard extends StatelessWidget {
                         6.horizontalSpace,
                         Expanded(
                           child: Text(
-                            bundle.originalPrice.toStringAsFixed(0),
+                            originalPrice.toStringAsFixed(0),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: theme.textTheme.labelSmall?.copyWith(

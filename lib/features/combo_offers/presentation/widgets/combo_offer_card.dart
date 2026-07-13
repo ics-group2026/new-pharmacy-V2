@@ -20,11 +20,12 @@ class ComboOfferCard extends StatelessWidget {
   final double? imageHeight;
 
   int? get _discountPercent {
-    if (comboOffer.buyQuantity <= 0 || comboOffer.payQuantity >= comboOffer.buyQuantity) {
+    final buyQuantity = comboOffer.buyQuantity ?? 0;
+    final payQuantity = comboOffer.payQuantity ?? 0;
+    if (buyQuantity <= 0 || payQuantity >= buyQuantity) {
       return null;
     }
-    return (((comboOffer.buyQuantity - comboOffer.payQuantity) / comboOffer.buyQuantity) * 100)
-        .round();
+    return (((buyQuantity - payQuantity) / buyQuantity) * 100).round();
   }
 
   @override
@@ -80,7 +81,7 @@ class ComboOfferCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    comboOffer.title,
+                    comboOffer.title ?? '',
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: theme.textTheme.bodySmall?.copyWith(
@@ -91,7 +92,7 @@ class ComboOfferCard extends StatelessWidget {
                   ),
                   6.verticalSpace,
                   Text(
-                    comboOffer.description,
+                    comboOffer.description ?? '',
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: theme.textTheme.labelSmall?.copyWith(
@@ -100,7 +101,7 @@ class ComboOfferCard extends StatelessWidget {
                   ),
                   8.verticalSpace,
                   Text(
-                    comboOffer.offerDetails,
+                    comboOffer.offerDetails ?? '',
                     style: theme.textTheme.bodyMedium?.copyWith(
                       color: colorScheme.primary,
                       fontWeight: FontWeight.bold,

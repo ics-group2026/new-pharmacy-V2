@@ -1,48 +1,45 @@
 class ComboOfferProduct {
-  final String id;
-  final String comboOfferId;
-  final String productId;
-  final int quantity;
-  final int sortOrder;
-  final ComboOfferProductInfo product;
+  final String? id;
+  final String? comboOfferId;
+  final String? productId;
+  final int? quantity;
+  final int? sortOrder;
+  final ComboOfferProductInfo? product;
 
   ComboOfferProduct({
-    required this.id,
-    required this.comboOfferId,
-    required this.productId,
-    required this.quantity,
-    required this.sortOrder,
-    required this.product,
+    this.id,
+    this.comboOfferId,
+    this.productId,
+    this.quantity,
+    this.sortOrder,
+    this.product,
   });
 
   factory ComboOfferProduct.fromJson(Map<String, dynamic> json) => ComboOfferProduct(
-    id: json['id'] as String,
-    comboOfferId: json['comboOfferId'] as String,
-    productId: json['productId'] as String,
-    quantity: json['quantity'] as int,
-    sortOrder: json['sortOrder'] as int,
-    product: ComboOfferProductInfo.fromJson(json['product'] as Map<String, dynamic>),
+    id: json['id'] as String?,
+    comboOfferId: json['comboOfferId'] as String?,
+    productId: json['productId'] as String?,
+    quantity: json['quantity'] as int?,
+    sortOrder: json['sortOrder'] as int?,
+    product: json['product'] != null
+        ? ComboOfferProductInfo.fromJson(json['product'] as Map<String, dynamic>)
+        : null,
   );
 }
 
 class ComboOfferProductInfo {
-  final String id;
-  final String name;
+  final String? id;
+  final String? name;
   final String? image;
-  final String status;
+  final String? status;
 
-  ComboOfferProductInfo({
-    required this.id,
-    required this.name,
-    this.image,
-    required this.status,
-  });
+  ComboOfferProductInfo({this.id, this.name, this.image, this.status});
 
   factory ComboOfferProductInfo.fromJson(Map<String, dynamic> json) =>
       ComboOfferProductInfo(
-        id: json['id'] as String,
-        name: json['name'] as String,
+        id: json['id'] as String?,
+        name: json['name'] as String?,
         image: json['image'] as String?,
-        status: json['status'] as String,
+        status: json['status'] as String?,
       );
 }

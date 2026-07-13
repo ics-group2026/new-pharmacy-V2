@@ -17,8 +17,10 @@ class BundleInfo extends StatelessWidget {
     final colorScheme = theme.colorScheme;
     final dateFormat = DateFormat('MMM d, yyyy');
     final currency = AppTranslations.t('flash_deals.currency');
-    final hasDiscount = bundle.originalPrice > bundle.bundlePrice;
-    final discountPercent = bundle.savingsPercentage.round();
+    final bundlePrice = bundle.bundlePrice ?? 0;
+    final originalPrice = bundle.originalPrice ?? 0;
+    final hasDiscount = originalPrice > bundlePrice;
+    final discountPercent = (bundle.savingsPercentage ?? 0).round();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,7 +30,7 @@ class BundleInfo extends StatelessWidget {
           children: [
             Expanded(
               child: Text(
-                bundle.title,
+                bundle.title ?? '',
                 style: theme.textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: colorScheme.onSurface,
@@ -45,7 +47,7 @@ class BundleInfo extends StatelessWidget {
           textBaseline: TextBaseline.alphabetic,
           children: [
             Text(
-              '${bundle.bundlePrice.toStringAsFixed(0)} $currency',
+              '${bundlePrice.toStringAsFixed(0)} $currency',
               style: theme.textTheme.titleLarge?.copyWith(
                 color: colorScheme.primary,
                 fontWeight: FontWeight.bold,
@@ -54,7 +56,7 @@ class BundleInfo extends StatelessWidget {
             if (hasDiscount) ...[
               8.horizontalSpace,
               Text(
-                '${bundle.originalPrice.toStringAsFixed(0)} $currency',
+                '${originalPrice.toStringAsFixed(0)} $currency',
                 style: theme.textTheme.bodyMedium?.copyWith(
                   color: colorScheme.onSurface.withValues(alpha: 0.5),
                   decoration: TextDecoration.lineThrough,
@@ -67,7 +69,7 @@ class BundleInfo extends StatelessWidget {
           8.verticalSpace,
           Text(
             '${AppTranslations.t('bundles.save')} '
-            '${bundle.savings.toStringAsFixed(0)} $currency',
+            '${(bundle.savings ?? 0).toStringAsFixed(0)} $currency',
             style: theme.textTheme.bodyMedium?.copyWith(
               color: colorScheme.primary,
               fontWeight: FontWeight.w600,
@@ -76,30 +78,32 @@ class BundleInfo extends StatelessWidget {
         ],
         16.verticalSpace,
         Text(
-          bundle.description,
+          bundle.description ?? '',
           style: theme.textTheme.bodyMedium?.copyWith(
             color: colorScheme.onSurface.withValues(alpha: 0.75),
             height: 1.5,
           ),
         ),
-        20.verticalSpace,
-        Row(
-          children: [
-            Icon(
-              Icons.event_available_rounded,
-              size: 16.r,
-              color: colorScheme.onSurfaceVariant,
-            ),
-            6.horizontalSpace,
-            Text(
-              '${dateFormat.format(bundle.startDate)} - '
-              '${dateFormat.format(bundle.endDate)}',
-              style: theme.textTheme.bodySmall?.copyWith(
+        if (bundle.startDate != null && bundle.endDate != null) ...[
+          20.verticalSpace,
+          Row(
+            children: [
+              Icon(
+                Icons.event_available_rounded,
+                size: 16.r,
                 color: colorScheme.onSurfaceVariant,
               ),
-            ),
-          ],
-        ),
+              6.horizontalSpace,
+              Text(
+                '${dateFormat.format(bundle.startDate!)} - '
+                '${dateFormat.format(bundle.endDate!)}',
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: colorScheme.onSurfaceVariant,
+                ),
+              ),
+            ],
+          ),
+        ],
       ],
     );
   }

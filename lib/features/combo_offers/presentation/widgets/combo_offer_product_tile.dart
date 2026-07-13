@@ -13,35 +13,23 @@ class ComboOfferProductTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    final image = comboProduct.product.image;
+    final quantity = comboProduct.quantity ?? 0;
 
     return Padding(
       padding: EdgeInsets.only(bottom: 12.h),
       child: Row(
         children: [
-          ClipRRect(
+          CachedNetworkImageWidget(
+            imageUrl: comboProduct.product?.image,
+            width: 52.w,
+            height: 52.w,
+            fit: BoxFit.cover,
             borderRadius: BorderRadius.circular(12.r),
-            child: image != null
-                ? CachedNetworkImageWidget(
-                    imageUrl: image,
-                    width: 52.w,
-                    height: 52.w,
-                    fit: BoxFit.cover,
-                  )
-                : Container(
-                    width: 52.w,
-                    height: 52.w,
-                    color: colorScheme.surfaceContainerHighest,
-                    child: Icon(
-                      Icons.medication_outlined,
-                      color: colorScheme.onSurfaceVariant,
-                    ),
-                  ),
           ),
           12.horizontalSpace,
           Expanded(
             child: Text(
-              comboProduct.product.name,
+              comboProduct.product?.name ?? '',
               style: theme.textTheme.bodyMedium?.copyWith(
                 fontWeight: FontWeight.w600,
                 color: colorScheme.onSurface,
@@ -49,7 +37,7 @@ class ComboOfferProductTile extends StatelessWidget {
             ),
           ),
           Text(
-            'x${comboProduct.quantity}',
+            'x$quantity',
             style: theme.textTheme.bodyMedium?.copyWith(
               color: colorScheme.onSurfaceVariant,
               fontWeight: FontWeight.w600,

@@ -13,35 +13,23 @@ class BundleProductTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    final image = bundleProduct.product.image;
+    final quantity = bundleProduct.quantity ?? 0;
 
     return Padding(
       padding: EdgeInsets.only(bottom: 12.h),
       child: Row(
         children: [
-          ClipRRect(
+          CachedNetworkImageWidget(
+            imageUrl: bundleProduct.product?.image,
+            width: 52.w,
+            height: 52.w,
+            fit: BoxFit.cover,
             borderRadius: BorderRadius.circular(12.r),
-            child: image != null
-                ? CachedNetworkImageWidget(
-                    imageUrl: image,
-                    width: 52.w,
-                    height: 52.w,
-                    fit: BoxFit.cover,
-                  )
-                : Container(
-                    width: 52.w,
-                    height: 52.w,
-                    color: colorScheme.surfaceContainerHighest,
-                    child: Icon(
-                      Icons.medication_outlined,
-                      color: colorScheme.onSurfaceVariant,
-                    ),
-                  ),
           ),
           12.horizontalSpace,
           Expanded(
             child: Text(
-              bundleProduct.product.name,
+              bundleProduct.product?.name ?? '',
               style: theme.textTheme.bodyMedium?.copyWith(
                 fontWeight: FontWeight.w600,
                 color: colorScheme.onSurface,
@@ -49,7 +37,7 @@ class BundleProductTile extends StatelessWidget {
             ),
           ),
           Text(
-            'x${bundleProduct.quantity}',
+            'x$quantity',
             style: theme.textTheme.bodyMedium?.copyWith(
               color: colorScheme.onSurfaceVariant,
               fontWeight: FontWeight.w600,

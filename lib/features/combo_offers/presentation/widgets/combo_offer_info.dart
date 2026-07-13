@@ -11,11 +11,12 @@ class ComboOfferInfo extends StatelessWidget {
   final ComboOfferModel comboOffer;
 
   int? get _discountPercent {
-    if (comboOffer.buyQuantity <= 0 || comboOffer.payQuantity >= comboOffer.buyQuantity) {
+    final buyQuantity = comboOffer.buyQuantity ?? 0;
+    final payQuantity = comboOffer.payQuantity ?? 0;
+    if (buyQuantity <= 0 || payQuantity >= buyQuantity) {
       return null;
     }
-    return (((comboOffer.buyQuantity - comboOffer.payQuantity) / comboOffer.buyQuantity) * 100)
-        .round();
+    return (((buyQuantity - payQuantity) / buyQuantity) * 100).round();
   }
 
   @override
@@ -33,7 +34,7 @@ class ComboOfferInfo extends StatelessWidget {
           children: [
             Expanded(
               child: Text(
-                comboOffer.title,
+                comboOffer.title ?? '',
                 style: theme.textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: colorScheme.onSurface,
@@ -45,7 +46,7 @@ class ComboOfferInfo extends StatelessWidget {
         ),
         8.verticalSpace,
         Text(
-          comboOffer.offerDetails,
+          comboOffer.offerDetails ?? '',
           style: theme.textTheme.titleMedium?.copyWith(
             color: colorScheme.primary,
             fontWeight: FontWeight.bold,
@@ -53,30 +54,32 @@ class ComboOfferInfo extends StatelessWidget {
         ),
         16.verticalSpace,
         Text(
-          comboOffer.description,
+          comboOffer.description ?? '',
           style: theme.textTheme.bodyMedium?.copyWith(
             color: colorScheme.onSurface.withValues(alpha: 0.75),
             height: 1.5,
           ),
         ),
-        20.verticalSpace,
-        Row(
-          children: [
-            Icon(
-              Icons.event_available_rounded,
-              size: 16.r,
-              color: colorScheme.onSurfaceVariant,
-            ),
-            6.horizontalSpace,
-            Text(
-              '${dateFormat.format(comboOffer.startDate)} - '
-              '${dateFormat.format(comboOffer.endDate)}',
-              style: theme.textTheme.bodySmall?.copyWith(
+        if (comboOffer.startDate != null && comboOffer.endDate != null) ...[
+          20.verticalSpace,
+          Row(
+            children: [
+              Icon(
+                Icons.event_available_rounded,
+                size: 16.r,
                 color: colorScheme.onSurfaceVariant,
               ),
-            ),
-          ],
-        ),
+              6.horizontalSpace,
+              Text(
+                '${dateFormat.format(comboOffer.startDate!)} - '
+                '${dateFormat.format(comboOffer.endDate!)}',
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: colorScheme.onSurfaceVariant,
+                ),
+              ),
+            ],
+          ),
+        ],
       ],
     );
   }
