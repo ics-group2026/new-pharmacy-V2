@@ -1,5 +1,9 @@
 abstract class EndPoints {
   static const String baseUrl = 'https://pharmacy-api.bya3online.com/api/v1';
+  static const String mediaBaseUrl = 'https://pharmacy-api.bya3online.com';
+
+  // Categories
+  static const String categories = '/categories';
 
   // Authentication
   static const String login = '/auth/login';

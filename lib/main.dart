@@ -11,6 +11,8 @@ import 'core/services/push_notification_service.dart';
 import 'core/services/setup_service_locator.dart';
 import 'core/themes/theme_cubit/theme_cubit.dart';
 import 'features/cart/cubit/cart_cubit.dart';
+import 'features/categories/data/repos/categories_repo.dart';
+import 'features/categories/presentation/cubits/categories_cubit.dart';
 import 'features/wishlist/cubit/wishlist_cubit.dart';
 import 'firebase_options.dart';
 import 'pharmacy_app.dart';
@@ -43,6 +45,9 @@ void main() async {
           BlocProvider(create: (_) => ThemeCubit()..getCurrentTheme()),
           BlocProvider(create: (_) => WishlistCubit()),
           BlocProvider(create: (_) => CartCubit()),
+          BlocProvider(
+            create: (_) => CategoriesCubit(getIt<CategoriesRepo>())..getCategories(),
+          ),
         ],
         child: const PharmacyApp(),
       ),
