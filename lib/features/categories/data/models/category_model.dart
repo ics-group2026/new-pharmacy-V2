@@ -1,3 +1,5 @@
+import '../../../../core/utils/converter.dart';
+
 class CategoryModel {
   String? id;
   String? arName;
@@ -35,11 +37,11 @@ class CategoryModel {
     }
     image = json['image'];
     parentId = json['parentId'];
-    sortOrder = json['sortOrder'];
-    homeProductsLimit = json['homeProductsLimit'];
+    sortOrder = Converter.toIntOrNull(json['sortOrder']);
+    homeProductsLimit = Converter.toIntOrNull(json['homeProductsLimit']);
     homeProductsSortBy = json['homeProductsSortBy'];
     status = json['status'];
-    totalSubcategories = json['totalSubcategories'];
+    totalSubcategories = Converter.toIntOrNull(json['totalSubcategories']);
   }
 }
 

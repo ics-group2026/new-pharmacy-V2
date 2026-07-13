@@ -1,3 +1,5 @@
+import '../../../../core/utils/converter.dart';
+
 class BundleProduct {
   final String? id;
   final String? bundleId;
@@ -19,8 +21,8 @@ class BundleProduct {
     id: json['id'] as String?,
     bundleId: json['bundleId'] as String?,
     productId: json['productId'] as String?,
-    quantity: json['quantity'] as int?,
-    sortOrder: json['sortOrder'] as int?,
+    quantity: Converter.toIntOrNull(json['quantity']),
+    sortOrder: Converter.toIntOrNull(json['sortOrder']),
     product: json['product'] != null
         ? BundleProductInfo.fromJson(json['product'] as Map<String, dynamic>)
         : null,

@@ -1,3 +1,4 @@
+import '../../../../core/utils/converter.dart';
 import 'combo_offer_product.dart';
 
 class ComboOfferModel {
@@ -42,8 +43,8 @@ class ComboOfferModel {
     title: json['title'] as String?,
     description: json['description'] as String?,
     image: json['image'] as String?,
-    buyQuantity: json['buyQuantity'] as int?,
-    payQuantity: json['payQuantity'] as int?,
+    buyQuantity: Converter.toIntOrNull(json['buyQuantity']),
+    payQuantity: Converter.toIntOrNull(json['payQuantity']),
     offerDetails: json['offerDetails'] as String?,
     startDate: json['startDate'] != null
         ? DateTime.tryParse(json['startDate'] as String)
@@ -52,7 +53,7 @@ class ComboOfferModel {
         ? DateTime.tryParse(json['endDate'] as String)
         : null,
     isActive: json['isActive'] as bool?,
-    priority: json['priority'] as int?,
+    priority: Converter.toIntOrNull(json['priority']),
     createdBy: json['createdBy'] as String?,
     createdAt: json['createdAt'] != null
         ? DateTime.tryParse(json['createdAt'] as String)

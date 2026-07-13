@@ -1,3 +1,4 @@
+import '../../../../core/utils/converter.dart';
 import 'bundle_product.dart';
 
 class BundleModel {
@@ -50,9 +51,9 @@ class BundleModel {
     title: json['title'] as String?,
     description: json['description'] as String?,
     image: json['image'] as String?,
-    bundlePrice: (json['bundlePrice'] as num?)?.toDouble(),
+    bundlePrice: Converter.toDoubleOrNull(json['bundlePrice']),
     extraDiscountType: json['extraDiscountType'] as String?,
-    extraDiscountAmount: (json['extraDiscountAmount'] as num?)?.toDouble(),
+    extraDiscountAmount: Converter.toDoubleOrNull(json['extraDiscountAmount']),
     startDate: json['startDate'] != null
         ? DateTime.tryParse(json['startDate'] as String)
         : null,
@@ -60,7 +61,7 @@ class BundleModel {
         ? DateTime.tryParse(json['endDate'] as String)
         : null,
     isActive: json['isActive'] as bool?,
-    priority: json['priority'] as int?,
+    priority: Converter.toIntOrNull(json['priority']),
     createdBy: json['createdBy'] as String?,
     createdAt: json['createdAt'] != null
         ? DateTime.tryParse(json['createdAt'] as String)
@@ -69,10 +70,10 @@ class BundleModel {
         ? DateTime.tryParse(json['updatedAt'] as String)
         : null,
     computedStatus: json['computedStatus'] as String?,
-    originalPrice: (json['originalPrice'] as num?)?.toDouble(),
-    savings: (json['savings'] as num?)?.toDouble(),
-    savingsPercentage: (json['savingsPercentage'] as num?)?.toDouble(),
-    productsCount: json['productsCount'] as int?,
+    originalPrice: Converter.toDoubleOrNull(json['originalPrice']),
+    savings: Converter.toDoubleOrNull(json['savings']),
+    savingsPercentage: Converter.toDoubleOrNull(json['savingsPercentage']),
+    productsCount: Converter.toIntOrNull(json['productsCount']),
     products: (json['products'] as List?)
             ?.map((e) => BundleProduct.fromJson(e as Map<String, dynamic>))
             .toList() ??

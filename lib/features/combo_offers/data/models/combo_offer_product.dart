@@ -1,3 +1,5 @@
+import '../../../../core/utils/converter.dart';
+
 class ComboOfferProduct {
   final String? id;
   final String? comboOfferId;
@@ -19,8 +21,8 @@ class ComboOfferProduct {
     id: json['id'] as String?,
     comboOfferId: json['comboOfferId'] as String?,
     productId: json['productId'] as String?,
-    quantity: json['quantity'] as int?,
-    sortOrder: json['sortOrder'] as int?,
+    quantity: Converter.toIntOrNull(json['quantity']),
+    sortOrder: Converter.toIntOrNull(json['sortOrder']),
     product: json['product'] != null
         ? ComboOfferProductInfo.fromJson(json['product'] as Map<String, dynamic>)
         : null,
