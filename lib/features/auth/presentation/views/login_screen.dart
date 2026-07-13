@@ -26,7 +26,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  bool _rememberMe = false;
 
   @override
   void dispose() {
@@ -40,7 +39,6 @@ class _LoginScreenState extends State<LoginScreen> {
     context.read<AuthCubit>().login(
       email: _emailController.text.trim(),
       password: _passwordController.text,
-      rememberMe: _rememberMe,
     );
   }
 
@@ -99,25 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       hintText: AppTranslations.t('auth.password_hint'),
                       validator: AuthValidators.validatePassword,
                     ),
-                    SizedBox(height: 8.h),
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: _rememberMe,
-                          onChanged: (value) =>
-                              setState(() => _rememberMe = value ?? false),
-                        ),
-                        GestureDetector(
-                          onTap: () =>
-                              setState(() => _rememberMe = !_rememberMe),
-                          child: TText(
-                            'auth.remember_me',
-                            style: theme.textTheme.bodyMedium,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 24.h),
+                    SizedBox(height: 32.h),
                     CustomButton(
                       text: 'auth.login_btn',
                       isLoading: state.isLoading,

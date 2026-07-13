@@ -5,10 +5,7 @@ import '../models/login_request_model.dart';
 import '../models/register_request_model.dart';
 
 abstract class AuthRepo {
-  Future<Either<Failure, void>> login(
-    LoginRequestModel loginRequestModel, {
-    required bool rememberMe,
-  });
+  Future<Either<Failure, void>> login(LoginRequestModel loginRequestModel);
   Future<Either<Failure, void>> register(
     RegisterRequestModel createAccountModel,
   );

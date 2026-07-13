@@ -75,7 +75,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 state.successMessage!,
                 background: Colors.green,
               );
-              context.go(AppRoutes.login);
+              // Register already stores the tokens, so the user is signed in.
+              context.go(AppRoutes.navBar);
             }
           },
           builder: (context, state) {
