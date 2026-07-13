@@ -36,7 +36,7 @@ class RefreshTokenInterceptor extends QueuedInterceptorsWrapper {
         final freshDio = Dio(BaseOptions(baseUrl: EndPoints.baseUrl));
         final response = await freshDio.post(
           EndPoints.refresh,
-          options: Options(headers: {'Authorization': 'Bearer $refreshToken'}),
+          data: {'refreshToken': refreshToken},
         );
 
         final data = (response.data as Map<String, dynamic>)['data'] as Map<String, dynamic>;

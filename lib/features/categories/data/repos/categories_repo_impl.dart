@@ -21,6 +21,8 @@ class CategoriesRepoImpl implements CategoriesRepo {
       return Right(categories);
     } on CustomException catch (e) {
       return left(ServerFailure(errMessage: e.message));
+    } catch (e) {
+      return left(ServerFailure(errMessage: e.toString()));
     }
   }
 }

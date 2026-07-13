@@ -40,21 +40,14 @@ class _AccountView extends StatelessWidget {
         if (state.status == AuthStatus.logoutSuccess ||
             state.status == AuthStatus.deleteAccountSuccess) {
           if (state.successMessage != null) {
-            context.showSnackBar(
-              state.successMessage!,
-              background: Colors.green,
-            );
+            context.showSnackBar(state.successMessage!, background: Colors.green);
           }
           // The ProfileCubit is an app-lifetime singleton — clear it so the
           // next user doesn't see the previous account's name/email.
           getIt<ProfileCubit>().reset();
           context.go(AppRoutes.login);
-        } else if (state.status == AuthStatus.error &&
-            state.errorMessage != null) {
-          context.showErrorSnackBar(
-            state.errorMessage!,
-            background: Colors.red,
-          );
+        } else if (state.status == AuthStatus.error && state.errorMessage != null) {
+          context.showErrorSnackBar(state.errorMessage!, background: Colors.red);
         }
       },
       child: Scaffold(
@@ -128,13 +121,11 @@ class _ProfileInfo extends StatelessWidget {
       builder: (context, state) {
         final user = state.user;
         final hasName =
-            user != null &&
-            (user.firstName.isNotEmpty || user.lastName.isNotEmpty);
+            user != null && (user.firstName.isNotEmpty || user.lastName.isNotEmpty);
         final name = hasName
             ? '${user.firstName} ${user.lastName}'.trim()
             : AppTranslations.t('home.user_name');
-        final email =
-            user?.email ?? AppTranslations.t('account.email_placeholder');
+        final email = user?.email ?? AppTranslations.t('account.email_placeholder');
 
         return Column(
           children: [

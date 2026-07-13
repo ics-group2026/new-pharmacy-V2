@@ -25,8 +25,14 @@ class CategoryModel {
 
   CategoryModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    arName = json['name']['ar'];
-    enName = json['name']['en'];
+    final name = json['name'];
+    if (name is Map<String, dynamic>) {
+      arName = name['ar'];
+      enName = name['en'];
+    } else if (name is String) {
+      arName = name;
+      enName = name;
+    }
     image = json['image'];
     parentId = json['parentId'];
     sortOrder = json['sortOrder'];
