@@ -4,6 +4,8 @@ import '../../features/auth/data/repos/auth_repo.dart';
 import '../../features/auth/data/repos/auth_repo_impl.dart';
 import '../../features/categories/data/repos/categories_repo.dart';
 import '../../features/categories/data/repos/categories_repo_impl.dart';
+import '../../features/combo_offers/data/repos/combo_offers_repo.dart';
+import '../../features/combo_offers/data/repos/combo_offers_repo_impl.dart';
 import '../../features/profile/data/repos/profile_repo.dart';
 import '../../features/profile/data/repos/profile_repo_impl.dart';
 import '../../features/profile/presentation/cubits/profile_cubit.dart';
@@ -22,6 +24,9 @@ void setupServiceLocator() {
   );
   getIt.registerSingleton<CategoriesRepo>(
     CategoriesRepoImpl(apiService: getIt<ApiService>()),
+  );
+  getIt.registerSingleton<ComboOffersRepo>(
+    ComboOffersRepoImpl(apiService: getIt<ApiService>()),
   );
 
   /// Cubits
