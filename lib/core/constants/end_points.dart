@@ -8,6 +8,9 @@ abstract class EndPoints {
   // Combo Offers
   static const String activeComboOffers = '/combo-offers/active';
 
+  // Marketing / Banners
+  static const String storefrontBanners = '/marketing/banners/storefront';
+
   // Authentication
   static const String login = '/auth/login';
   static const String customerRegister = '/auth/customer/register';

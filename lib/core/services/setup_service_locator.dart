@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import '../../features/auth/data/repos/auth_repo.dart';
 import '../../features/auth/data/repos/auth_repo_impl.dart';
+import '../../features/banners/data/repos/banners_repo.dart';
+import '../../features/banners/data/repos/banners_repo_impl.dart';
 import '../../features/categories/data/repos/categories_repo.dart';
 import '../../features/categories/data/repos/categories_repo_impl.dart';
 import '../../features/combo_offers/data/repos/combo_offers_repo.dart';
@@ -27,6 +29,9 @@ void setupServiceLocator() {
   );
   getIt.registerSingleton<ComboOffersRepo>(
     ComboOffersRepoImpl(apiService: getIt<ApiService>()),
+  );
+  getIt.registerSingleton<BannersRepo>(
+    BannersRepoImpl(apiService: getIt<ApiService>()),
   );
 
   /// Cubits
