@@ -10,6 +10,11 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   ProfileCubit(this.profileRepo) : super(const ProfileState());
 
+  /// Drops the cached user. Must be called when the session ends (logout or
+  /// account deletion) — this cubit is an app-lifetime singleton, so otherwise
+  /// the previous user's data would leak into the next session.
+  void reset() => emit(const ProfileState());
+
   Future<void> getProfile() async {
     emit(
       state.copyWith(
