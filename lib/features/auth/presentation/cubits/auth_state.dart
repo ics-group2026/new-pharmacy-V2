@@ -5,6 +5,7 @@ enum AuthStatus {
   loginSuccess,
   registerSuccess,
   logoutSuccess,
+  deleteAccountSuccess,
   error,
 }
 
