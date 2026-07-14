@@ -4,9 +4,14 @@ class LocalizedText {
 
   LocalizedText({this.en, this.ar});
 
-  factory LocalizedText.fromJson(Map<String, dynamic>? json) {
-    if (json == null) return LocalizedText();
-    return LocalizedText(en: json['en'] as String?, ar: json['ar'] as String?);
+  /// Accepts either a `{en, ar}` map or a plain string, which the API returns
+  /// for notifications that have no translations.
+  factory LocalizedText.fromJson(dynamic json) {
+    if (json is Map) {
+      return LocalizedText(en: json['en'] as String?, ar: json['ar'] as String?);
+    }
+    if (json is String) return LocalizedText(en: json, ar: json);
+    return LocalizedText();
   }
 
   String localized(String languageCode) {
@@ -22,8 +27,8 @@ class NotificationInfo {
   NotificationInfo({required this.title, required this.body});
 
   factory NotificationInfo.fromJson(Map<String, dynamic> json) => NotificationInfo(
-    title: LocalizedText.fromJson(json['title'] as Map<String, dynamic>?),
-    body: LocalizedText.fromJson(json['body'] as Map<String, dynamic>?),
+    title: LocalizedText.fromJson(json['title']),
+    body: LocalizedText.fromJson(json['body']),
   );
 }
 
