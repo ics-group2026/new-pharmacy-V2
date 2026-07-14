@@ -16,6 +16,11 @@ abstract class EndPoints {
   // Marketing / Banners
   static const String storefrontBanners = '/marketing/banners/storefront';
 
+  // Notifications
+  static const String notificationsInbox = '/notifications/inbox/me';
+  static const String notificationsUnreadCount =
+      '/notifications/inbox/me/unread-count';
+
   // Authentication
   static const String login = '/auth/login';
   static const String customerRegister = '/auth/customer/register';

@@ -8,4 +8,5 @@ abstract class AppRoutes {
   static const String comboOfferDetail = "/comboOfferDetail";
   static const String bundleDetail = "/bundleDetail";
   static const String profile = "/profile";
+  static const String notifications = "/notifications";
 }

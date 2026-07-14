@@ -16,6 +16,7 @@ import '../../features/nav_bar/presentation/views/bottom_nav_bar_screen.dart';
 import '../../features/products/presentation/views/product_detail_screen.dart';
 import '../../features/search/presentation/views/search_screen.dart';
 import '../../features/flash_deals/data/models/flash_deal_model.dart';
+import '../../features/notifications/presentation/views/notifications_screen.dart';
 import '../constants/constants.dart';
 import '../services/prefs.dart';
 import '../services/setup_service_locator.dart';
@@ -85,6 +86,10 @@ final GoRouter appRouter = GoRouter(
         final bundle = state.extra as BundleModel;
         return BundleDetailScreen(bundle: bundle);
       },
+    ),
+    GoRoute(
+      path: AppRoutes.notifications,
+      builder: (context, state) => const NotificationsScreen(),
     ),
   ],
 );

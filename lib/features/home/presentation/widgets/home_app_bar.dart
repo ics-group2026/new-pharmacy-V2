@@ -4,8 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../core/routes/app_routes.dart';
+import '../../../../../core/services/setup_service_locator.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_translations.dart';
+import '../../../notifications/presentation/cubits/unread_notifications_cubit.dart';
 import '../../../profile/presentation/cubits/profile_cubit.dart';
 import '../../../profile/presentation/cubits/profile_state.dart';
 
@@ -157,43 +159,79 @@ class _SearchBarSlot extends StatelessWidget {
   }
 }
 
-class _NotificationButton extends StatelessWidget {
+class _NotificationButton extends StatefulWidget {
   const _NotificationButton();
 
   @override
+  State<_NotificationButton> createState() => _NotificationButtonState();
+}
+
+class _NotificationButtonState extends State<_NotificationButton> {
+  late final UnreadNotificationsCubit _cubit;
+
+  @override
+  void initState() {
+    super.initState();
+    _cubit = getIt<UnreadNotificationsCubit>()..getUnreadCount();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Stack(
-      clipBehavior: Clip.none,
-      children: [
-        Container(
-          padding: EdgeInsets.all(8.r),
-          decoration: BoxDecoration(
-            color: Colors.white.withValues(alpha: 0.18),
-            shape: BoxShape.circle,
-          ),
-          child: Icon(
-            Icons.notifications_outlined,
-            size: 20.r,
-            color: Colors.white,
-          ),
-        ),
-        Positioned(
-          top: 6.r,
-          right: 6.r,
-          child: Container(
-            width: 8.r,
-            height: 8.r,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: Theme.of(context).colorScheme.primary,
-                width: 1.5,
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return GestureDetector(
+      onTap: () async {
+        await context.push(AppRoutes.notifications);
+        if (context.mounted) _cubit.getUnreadCount();
+      },
+      child: BlocBuilder<UnreadNotificationsCubit, int>(
+        bloc: _cubit,
+        builder: (context, unreadCount) {
+          return Stack(
+            clipBehavior: Clip.none,
+            children: [
+              Container(
+                padding: EdgeInsets.all(8.r),
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: 0.18),
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  Icons.notifications_outlined,
+                  size: 20.r,
+                  color: Colors.white,
+                ),
               ),
-            ),
-          ),
-        ),
-      ],
+              if (unreadCount > 0)
+                Positioned(
+                  top: -2.r,
+                  right: -2.r,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 4.r),
+                    constraints: BoxConstraints(minWidth: 16.r, minHeight: 16.r),
+                    decoration: BoxDecoration(
+                      color: colorScheme.error,
+                      shape: BoxShape.circle,
+                      border: Border.all(color: colorScheme.primary, width: 1.5),
+                    ),
+                    child: Center(
+                      child: Text(
+                        unreadCount > 9 ? '9+' : '$unreadCount',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: colorScheme.onError,
+                          fontSize: 9.sp,
+                          fontWeight: FontWeight.bold,
+                          height: 1,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+            ],
+          );
+        },
+      ),
     );
   }
 }

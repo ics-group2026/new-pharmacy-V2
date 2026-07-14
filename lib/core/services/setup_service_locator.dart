@@ -10,6 +10,9 @@ import '../../features/categories/data/repos/categories_repo.dart';
 import '../../features/categories/data/repos/categories_repo_impl.dart';
 import '../../features/combo_offers/data/repos/combo_offers_repo.dart';
 import '../../features/combo_offers/data/repos/combo_offers_repo_impl.dart';
+import '../../features/notifications/data/repos/notifications_repo.dart';
+import '../../features/notifications/data/repos/notifications_repo_impl.dart';
+import '../../features/notifications/presentation/cubits/unread_notifications_cubit.dart';
 import '../../features/profile/data/repos/profile_repo.dart';
 import '../../features/profile/data/repos/profile_repo_impl.dart';
 import '../../features/profile/presentation/cubits/profile_cubit.dart';
@@ -38,10 +41,17 @@ void setupServiceLocator() {
   getIt.registerSingleton<BundlesRepo>(
     BundlesRepoImpl(apiService: getIt<ApiService>()),
   );
+  getIt.registerSingleton<NotificationsRepo>(
+    NotificationsRepoImpl(apiService: getIt<ApiService>()),
+  );
 
   /// Cubits
   // Shared so the account header and the edit-profile screen stay in sync.
   getIt.registerLazySingleton<ProfileCubit>(
     () => ProfileCubit(getIt<ProfileRepo>()),
+  );
+  // Shared so the home app bar badge reflects the count across navigation.
+  getIt.registerLazySingleton<UnreadNotificationsCubit>(
+    () => UnreadNotificationsCubit(getIt<NotificationsRepo>()),
   );
 }

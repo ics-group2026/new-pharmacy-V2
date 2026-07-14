@@ -27,7 +27,7 @@ class AccountSettingsCard extends StatelessWidget {
         SettingsTile(
           icon: Icons.notifications_outlined,
           titleKey: 'account.notifications',
-          onTap: () {},
+          onTap: () => context.push(AppRoutes.notifications),
         ),
         const SettingsDivider(),
         SettingsTile(

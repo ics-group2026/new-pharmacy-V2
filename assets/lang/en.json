@@ -52,7 +52,8 @@
     "see_all": "See All",
     "search_hint": "Search for products...",
     "cancel": "Cancel",
-    "no_data": "No data available"
+    "no_data": "No data available",
+    "retry": "Retry"
   },
   "combo_offers": {
     "title": "Combo Offers",
