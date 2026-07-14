@@ -70,7 +70,14 @@
   "flash_deals": {
     "title": "Flash Deals",
     "buy_now": "Buy Now",
-    "currency": "EGP"
+    "currency": "EGP",
+    "ends_in": "Ends in",
+    "ended": "Ended",
+    "from": "From",
+    "items": "{count} items",
+    "one_item": "1 item",
+    "included_products": "Deal Products",
+    "no_products": "No products in this deal yet"
   },
   "new_arrivals": {
     "title": "New Arrivals"

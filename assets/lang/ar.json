@@ -70,7 +70,14 @@
   "flash_deals": {
     "title": "عروض سريعة",
     "buy_now": "اشتري الآن",
-    "currency": "ج.م"
+    "currency": "ج.م",
+    "ends_in": "ينتهي خلال",
+    "ended": "انتهى",
+    "from": "يبدأ من",
+    "items": "{count} منتجات",
+    "one_item": "منتج واحد",
+    "included_products": "منتجات العرض",
+    "no_products": "لا توجد منتجات في هذا العرض بعد"
   },
   "new_arrivals": {
     "title": "وصل حديثاً"
