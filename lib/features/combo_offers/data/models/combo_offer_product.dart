@@ -41,7 +41,7 @@ class ComboOfferProductInfo {
       ComboOfferProductInfo(
         id: json['id'] as String?,
         name: json['name'] as String?,
-        image: json['image'] as String?,
+        image: (json['image'] as Map<String, dynamic>?)?['url'] as String?,
         status: json['status'] as String?,
       );
 }
