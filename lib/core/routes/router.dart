@@ -10,12 +10,14 @@ import '../../features/bundles/data/models/bundle_model.dart';
 import '../../features/bundles/presentation/views/bundle_detail_screen.dart';
 import '../../features/combo_offers/data/models/combo_offer_model.dart';
 import '../../features/combo_offers/presentation/views/combo_offer_detail_screen.dart';
+import '../../features/flash_deals/data/models/flash_deal_model.dart';
+import '../../features/flash_deals/presentation/views/flash_deal_detail_screen.dart';
 import '../../features/profile/presentation/cubits/profile_cubit.dart';
 import '../../features/profile/presentation/views/profile_screen.dart';
 import '../../features/nav_bar/presentation/views/bottom_nav_bar_screen.dart';
 import '../../features/products/presentation/views/product_detail_screen.dart';
 import '../../features/search/presentation/views/search_screen.dart';
-import '../../features/flash_deals/data/models/flash_deal_model.dart';
+import 'package:new_pharmacy_v2/core/models/static_product.dart';
 import '../../features/notifications/presentation/views/notifications_screen.dart';
 import '../constants/constants.dart';
 import '../services/prefs.dart';
@@ -69,7 +71,7 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: AppRoutes.productDetail,
       builder: (context, state) {
-        final product = state.extra as FlashDealModel;
+        final product = state.extra as StaticProduct;
         return ProductDetailScreen(product: product);
       },
     ),
@@ -78,6 +80,13 @@ final GoRouter appRouter = GoRouter(
       builder: (context, state) {
         final comboOffer = state.extra as ComboOfferModel;
         return ComboOfferDetailScreen(comboOffer: comboOffer);
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.flashDealDetail,
+      builder: (context, state) {
+        final flashDeal = state.extra as FlashDealModel;
+        return FlashDealDetailScreen(flashDeal: flashDeal);
       },
     ),
     GoRoute(

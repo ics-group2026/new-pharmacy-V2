@@ -10,6 +10,8 @@ import '../../features/categories/data/repos/categories_repo.dart';
 import '../../features/categories/data/repos/categories_repo_impl.dart';
 import '../../features/combo_offers/data/repos/combo_offers_repo.dart';
 import '../../features/combo_offers/data/repos/combo_offers_repo_impl.dart';
+import '../../features/flash_deals/data/repos/flash_deals_repo.dart';
+import '../../features/flash_deals/data/repos/flash_deals_repo_impl.dart';
 import '../../features/notifications/data/repos/notifications_repo.dart';
 import '../../features/notifications/data/repos/notifications_repo_impl.dart';
 import '../../features/notifications/presentation/cubits/unread_notifications_cubit.dart';
@@ -34,6 +36,9 @@ void setupServiceLocator() {
   );
   getIt.registerSingleton<ComboOffersRepo>(
     ComboOffersRepoImpl(apiService: getIt<ApiService>()),
+  );
+  getIt.registerSingleton<FlashDealsRepo>(
+    FlashDealsRepoImpl(apiService: getIt<ApiService>()),
   );
   getIt.registerSingleton<BannersRepo>(
     BannersRepoImpl(apiService: getIt<ApiService>()),
