@@ -8,6 +8,9 @@ abstract class EndPoints {
   // Combo Offers
   static const String activeComboOffers = '/combo-offers/active';
 
+  // Deals (flash deals are deals with type == 'FLASH')
+  static const String activeDeals = '/deals/active';
+
   // Bundles
   static const String activeBundles = '/bundles/active';
 

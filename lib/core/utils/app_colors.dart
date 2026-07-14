@@ -36,6 +36,11 @@ abstract class AppColors {
   static const Color textSecondaryDark = Color(0xFFB0B0B0);
   static const Color textHintDark = Color(0xFF757575);
 
+  // Flash deals (urgency accent — reads against the green section band,
+  // and stays distinct from the amber discount badges)
+  static const Color flash = Color(0xFFE53935);
+  static const Color flashDark = Color(0xFFB71C1C);
+
   // Semantic
   static const Color error = Color(0xFFD32F2F);
   static const Color success = Color(0xFF00796B);
