@@ -6,6 +6,7 @@ import '../../../banners/presentation/widgets/banners_carousel.dart';
 import '../../../bundles/presentation/widgets/bundles_section.dart';
 import '../../../categories/presentation/widgets/categories_section.dart';
 import '../../../combo_offers/presentation/widgets/combo_offers_section.dart';
+import '../../../flash_deals/presentation/widgets/flash_deals_section.dart';
 import '../../../new_arrivals/presentation/widgets/new_arrivals_section.dart';
 import '../../../products/presentation/widgets/best_seller_section.dart';
 import '../../../products/presentation/widgets/on_sale_section.dart';
@@ -46,7 +47,7 @@ class HomeScreen extends StatelessWidget {
               delay: const Duration(milliseconds: 160),
               child: Padding(
                 padding: EdgeInsets.only(top: 20.h),
-                child: const ComboOffersSection(),
+                child: const FlashDealsSection(),
               ),
             ),
           ),
@@ -54,8 +55,8 @@ class HomeScreen extends StatelessWidget {
             child: AnimatedFadeSlide(
               delay: const Duration(milliseconds: 200),
               child: Padding(
-                padding: EdgeInsets.fromLTRB(16.w, 24.h, 16.w, 0),
-                child: const BundlesSection(),
+                padding: EdgeInsets.only(top: 20.h),
+                child: const ComboOffersSection(),
               ),
             ),
           ),
@@ -64,7 +65,7 @@ class HomeScreen extends StatelessWidget {
               delay: const Duration(milliseconds: 240),
               child: Padding(
                 padding: EdgeInsets.fromLTRB(16.w, 24.h, 16.w, 0),
-                child: const BestSellerSection(),
+                child: const BundlesSection(),
               ),
             ),
           ),
@@ -73,7 +74,7 @@ class HomeScreen extends StatelessWidget {
               delay: const Duration(milliseconds: 280),
               child: Padding(
                 padding: EdgeInsets.fromLTRB(16.w, 24.h, 16.w, 0),
-                child: const TopRatedSection(),
+                child: const BestSellerSection(),
               ),
             ),
           ),
@@ -82,13 +83,22 @@ class HomeScreen extends StatelessWidget {
               delay: const Duration(milliseconds: 320),
               child: Padding(
                 padding: EdgeInsets.fromLTRB(16.w, 24.h, 16.w, 0),
-                child: const OnSaleSection(),
+                child: const TopRatedSection(),
               ),
             ),
           ),
           SliverToBoxAdapter(
             child: AnimatedFadeSlide(
               delay: const Duration(milliseconds: 360),
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(16.w, 24.h, 16.w, 0),
+                child: const OnSaleSection(),
+              ),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: AnimatedFadeSlide(
+              delay: const Duration(milliseconds: 400),
               child: Padding(
                 padding: EdgeInsets.only(top: 24.h),
                 child: const NewArrivalsSection(),
@@ -97,7 +107,7 @@ class HomeScreen extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: AnimatedFadeSlide(
-              delay: const Duration(milliseconds: 400),
+              delay: const Duration(milliseconds: 440),
               child: Padding(
                 padding: EdgeInsets.fromLTRB(16.w, 24.h, 16.w, 0),
                 child: const TrendingSection(),
