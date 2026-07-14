@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/widgets/product_card.dart';
-import '../../../flash_deals/data/models/flash_deal_model.dart';
+import 'package:new_pharmacy_v2/core/models/static_product.dart';
 
 class NewArrivalItem extends StatelessWidget {
   const NewArrivalItem({super.key, required this.item});
 
-  final FlashDealModel item;
+  final StaticProduct item;
 
   @override
   Widget build(BuildContext context) {

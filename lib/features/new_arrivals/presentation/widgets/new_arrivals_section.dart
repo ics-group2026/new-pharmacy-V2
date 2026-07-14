@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/widgets/section_header.dart';
-import '../../../flash_deals/data/models/flash_deal_model.dart';
+import 'package:new_pharmacy_v2/core/models/static_product.dart';
 import 'new_arrival_item.dart';
 
 class NewArrivalsSection extends StatelessWidget {
@@ -11,32 +11,32 @@ class NewArrivalsSection extends StatelessWidget {
   final VoidCallback? onSeeAll;
 
   static const _items = [
-    FlashDealModel(
+    StaticProduct(
       name: 'Aura Radiance Hydration Serum',
       price: 54.0,
       imageUrl: 'https://picsum.photos/seed/na1/300/300',
     ),
-    FlashDealModel(
+    StaticProduct(
       name: 'MEDIDERM Dermatological Moisturizer',
       price: 106.0,
       imageUrl: 'https://picsum.photos/seed/na2/300/300',
     ),
-    FlashDealModel(
+    StaticProduct(
       name: 'Aurora Organic Cleansing Oil',
       price: 25.0,
       imageUrl: 'https://picsum.photos/seed/na3/300/300',
     ),
-    FlashDealModel(
+    StaticProduct(
       name: 'RIVO 10TAB Supplement',
       price: 200.0,
       imageUrl: 'https://picsum.photos/seed/na4/300/300',
     ),
-    FlashDealModel(
+    StaticProduct(
       name: 'Zinc & Magnesium Complex',
       price: 75.0,
       imageUrl: 'https://picsum.photos/seed/na5/300/300',
     ),
-    FlashDealModel(
+    StaticProduct(
       name: 'Biotin Hair Growth Formula',
       price: 120.0,
       imageUrl: 'https://picsum.photos/seed/na6/300/300',
