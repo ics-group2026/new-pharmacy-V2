@@ -4,13 +4,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:new_pharmacy_v2/core/utils/app_colors.dart';
 import 'package:new_pharmacy_v2/core/widgets/cached_network_image_widget.dart';
-import 'package:new_pharmacy_v2/features/flash_deals/data/models/flash_deal_model.dart';
+import 'package:new_pharmacy_v2/core/models/static_product.dart';
 import 'package:new_pharmacy_v2/features/wishlist/cubit/wishlist_cubit.dart';
 
 class ProductSliverAppBar extends StatelessWidget {
   const ProductSliverAppBar({super.key, required this.product});
 
-  final FlashDealModel product;
+  final StaticProduct product;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class ProductSliverAppBar extends StatelessWidget {
         ),
       ),
       actions: [
-        BlocSelector<WishlistCubit, List<FlashDealModel>, bool>(
+        BlocSelector<WishlistCubit, List<StaticProduct>, bool>(
           selector: (state) => state.any((p) => p.imageUrl == product.imageUrl),
           builder: (context, isWishlisted) => Padding(
             padding: EdgeInsets.only(right: 8.w),

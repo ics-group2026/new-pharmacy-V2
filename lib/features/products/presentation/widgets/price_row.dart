@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_pharmacy_v2/core/utils/app_colors.dart';
 import 'package:new_pharmacy_v2/core/utils/app_translations.dart';
-import 'package:new_pharmacy_v2/features/flash_deals/data/models/flash_deal_model.dart';
+import 'package:new_pharmacy_v2/core/models/static_product.dart';
 
 class PriceRow extends StatelessWidget {
   const PriceRow({super.key, required this.product});
 
-  final FlashDealModel product;
+  final StaticProduct product;
 
   @override
   Widget build(BuildContext context) {

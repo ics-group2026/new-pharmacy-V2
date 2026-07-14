@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/utils/app_translations.dart';
 import '../../../../../core/widgets/pill_chip.dart';
 import '../../../../../core/widgets/section_header.dart';
-import '../../../flash_deals/data/models/flash_deal_model.dart';
+import 'package:new_pharmacy_v2/core/models/static_product.dart';
 import 'trending_product_item.dart';
 
 class TrendingSection extends StatefulWidget {
@@ -27,7 +27,7 @@ class _TrendingSectionState extends State<TrendingSection> {
   ];
 
   static const _products = [
-    FlashDealModel(
+    StaticProduct(
       name: 'Organic High-Curcumin Turmeric Powder',
       price: 22.49,
       originalPrice: 32.0,
@@ -35,7 +35,7 @@ class _TrendingSectionState extends State<TrendingSection> {
       imageUrl: 'https://picsum.photos/seed/tr_a1/300/300',
       rating: 4.5,
     ),
-    FlashDealModel(
+    StaticProduct(
       name: 'Aura Radiance Hydration Serum',
       price: 54.0,
       originalPrice: 72.0,
@@ -43,7 +43,7 @@ class _TrendingSectionState extends State<TrendingSection> {
       imageUrl: 'https://picsum.photos/seed/tr_a2/300/300',
       rating: 4.0,
     ),
-    FlashDealModel(
+    StaticProduct(
       name: 'Vitamin C 1000mg Effervescent',
       price: 89.0,
       originalPrice: 115.0,
@@ -51,7 +51,7 @@ class _TrendingSectionState extends State<TrendingSection> {
       imageUrl: 'https://picsum.photos/seed/tr_a3/300/300',
       rating: 5.0,
     ),
-    FlashDealModel(
+    StaticProduct(
       name: 'MEDIDERM Dermatological Moisturizer',
       price: 106.0,
       originalPrice: 140.0,
@@ -59,7 +59,7 @@ class _TrendingSectionState extends State<TrendingSection> {
       imageUrl: 'https://picsum.photos/seed/tr_a4/300/300',
       rating: 3.5,
     ),
-    FlashDealModel(
+    StaticProduct(
       name: 'Omega 3 Fish Oil 1200mg Softgels',
       price: 145.0,
       originalPrice: 190.0,
@@ -67,7 +67,7 @@ class _TrendingSectionState extends State<TrendingSection> {
       imageUrl: 'https://picsum.photos/seed/tr_a5/300/300',
       rating: 4.5,
     ),
-    FlashDealModel(
+    StaticProduct(
       name: 'Biotin Hair Growth Formula',
       price: 120.0,
       originalPrice: 160.0,

@@ -6,13 +6,13 @@ import '../../../../../core/utils/app_translations.dart';
 import '../../../../../core/widgets/animated_fade_slide.dart';
 import '../../../../../core/widgets/discount_badge.dart';
 import '../../../../../core/widgets/star_rating_row.dart';
-import '../../../flash_deals/data/models/flash_deal_model.dart';
+import 'package:new_pharmacy_v2/core/models/static_product.dart';
 import 'price_row.dart';
 
 class ProductHeader extends StatelessWidget {
   const ProductHeader({super.key, required this.product});
 
-  final FlashDealModel product;
+  final StaticProduct product;
 
   @override
   Widget build(BuildContext context) {
