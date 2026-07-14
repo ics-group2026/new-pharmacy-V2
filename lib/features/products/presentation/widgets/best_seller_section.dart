@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/widgets/section_header.dart';
-import '../../../flash_deals/data/models/flash_deal_model.dart';
+import 'package:new_pharmacy_v2/core/models/static_product.dart';
 import 'home_product_item.dart';
 
 class BestSellerSection extends StatelessWidget {
@@ -11,7 +11,7 @@ class BestSellerSection extends StatelessWidget {
   final VoidCallback? onSeeAll;
 
   static const _products = [
-    FlashDealModel(
+    StaticProduct(
       name: 'Organic High-Curcumin Turmeric Powder',
       price: 22.49,
       originalPrice: 32.0,
@@ -19,7 +19,7 @@ class BestSellerSection extends StatelessWidget {
       imageUrl: 'https://picsum.photos/seed/bs1/200/200',
       rating: 4.5,
     ),
-    FlashDealModel(
+    StaticProduct(
       name: 'Pure Medical Grade Hyaluronic Serum',
       price: 45.00,
       originalPrice: 60.0,
@@ -27,7 +27,7 @@ class BestSellerSection extends StatelessWidget {
       imageUrl: 'https://picsum.photos/seed/bs2/200/200',
       rating: 3.5,
     ),
-    FlashDealModel(
+    StaticProduct(
       name: 'Advanced Daytime Face Moisturizer',
       price: 32.99,
       originalPrice: 45.0,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/widgets/section_header.dart';
-import '../../../flash_deals/data/models/flash_deal_model.dart';
+import 'package:new_pharmacy_v2/core/models/static_product.dart';
 import 'home_product_item.dart';
 
 class OnSaleSection extends StatelessWidget {
@@ -11,7 +11,7 @@ class OnSaleSection extends StatelessWidget {
   final VoidCallback? onSeeAll;
 
   static const _products = [
-    FlashDealModel(
+    StaticProduct(
       name: 'MEDIDERM Dermatological Moisturizer Lotion',
       price: 106.00,
       originalPrice: 140.0,
@@ -19,7 +19,7 @@ class OnSaleSection extends StatelessWidget {
       imageUrl: 'https://picsum.photos/seed/os1/200/200',
       rating: 4.0,
     ),
-    FlashDealModel(
+    StaticProduct(
       name: 'Pectol Orange Throat Lozenges',
       price: 25.00,
       originalPrice: 38.0,
@@ -27,7 +27,7 @@ class OnSaleSection extends StatelessWidget {
       imageUrl: 'https://picsum.photos/seed/os2/200/200',
       rating: 3.5,
     ),
-    FlashDealModel(
+    StaticProduct(
       name: 'Aurora Organic Cleansing Oil',
       price: 54.00,
       originalPrice: 75.0,

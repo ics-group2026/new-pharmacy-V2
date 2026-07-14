@@ -11,13 +11,13 @@ import 'package:new_pharmacy_v2/features/products/presentation/widgets/quantity_
 
 import '../../../../../core/utils/app_translations.dart';
 import '../../../cart/cubit/cart_cubit.dart';
-import '../../../flash_deals/data/models/flash_deal_model.dart';
+import 'package:new_pharmacy_v2/core/models/static_product.dart';
 import '../../cubit/quantity_cubit.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   const ProductDetailScreen({super.key, required this.product});
 
-  final FlashDealModel product;
+  final StaticProduct product;
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +94,7 @@ class _QuantitySection extends StatelessWidget {
 class _BottomBar extends StatelessWidget {
   const _BottomBar({required this.product});
 
-  final FlashDealModel product;
+  final StaticProduct product;
 
   @override
   Widget build(BuildContext context) {
