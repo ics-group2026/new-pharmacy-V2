@@ -44,14 +44,20 @@ class OnSaleSection extends StatelessWidget {
       children: [
         SectionHeader(titleKey: 'products.on_sale', onSeeAll: onSeeAll),
         12.verticalSpace,
-        SizedBox(
-          height: 290.h,
-          child: ListView.separated(
+        IntrinsicHeight(
+          child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            padding: EdgeInsets.zero,
-            itemCount: _products.length,
-            separatorBuilder: (_, _) => 12.horizontalSpace,
-            itemBuilder: (_, index) => HomeProductItem(product: _products[index]),
+            clipBehavior: Clip.none,
+            padding: EdgeInsets.symmetric(vertical: 6.h),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                for (var i = 0; i < _products.length; i++) ...[
+                  if (i > 0) 12.horizontalSpace,
+                  HomeProductItem(product: _products[i]),
+                ],
+              ],
+            ),
           ),
         ),
       ],
