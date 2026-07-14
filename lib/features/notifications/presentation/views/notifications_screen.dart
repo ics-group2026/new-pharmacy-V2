@@ -60,7 +60,23 @@ class _NotificationsBodyState extends State<_NotificationsBody> {
     final colorScheme = theme.colorScheme;
 
     return Scaffold(
-      appBar: AppBar(title: Text(AppTranslations.t('account.notifications'))),
+      appBar: AppBar(
+        title: Text(AppTranslations.t('account.notifications')),
+        actions: [
+          BlocBuilder<NotificationsCubit, NotificationsState>(
+            buildWhen: (previous, current) =>
+                previous.notifications != current.notifications,
+            builder: (context, state) {
+              final hasUnread = state.notifications.any((n) => !n.isRead);
+              if (!hasUnread) return const SizedBox.shrink();
+              return TextButton(
+                onPressed: () => context.read<NotificationsCubit>().markAllAsRead(),
+                child: Text(AppTranslations.t('notifications.mark_all_read')),
+              );
+            },
+          ),
+        ],
+      ),
       body: BlocBuilder<NotificationsCubit, NotificationsState>(
         builder: (context, state) {
           if (state.status == NotificationsStatus.loading ||
@@ -110,8 +126,12 @@ class _NotificationsBodyState extends State<_NotificationsBody> {
                     child: const Center(child: CircularProgressIndicator()),
                   );
                 }
+                final item = state.notifications[index];
                 return NotificationItemTile(
-                  notification: state.notifications[index],
+                  notification: item,
+                  onTap: item.id != null
+                      ? () => context.read<NotificationsCubit>().markAsRead(item.id!)
+                      : null,
                 );
               },
             ),

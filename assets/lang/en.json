@@ -55,6 +55,9 @@
     "no_data": "No data available",
     "retry": "Retry"
   },
+  "notifications": {
+    "mark_all_read": "Mark all as read"
+  },
   "combo_offers": {
     "title": "Combo Offers",
     "included_products": "Included Products"

@@ -21,6 +21,10 @@ abstract class EndPoints {
   static const String notificationsUnreadCount =
       '/notifications/inbox/me/unread-count';
 
+  static String notificationMarkAsRead(String id) => '/notifications/inbox/$id/read';
+
+  static const String notificationsMarkAllAsRead = '/notifications/inbox/read-all';
+
   // Authentication
   static const String login = '/auth/login';
   static const String customerRegister = '/auth/customer/register';

@@ -11,4 +11,10 @@ class UnreadNotificationsCubit extends Cubit<int> {
     final result = await notificationsRepo.getUnreadCount();
     result.fold((_) {}, (count) => emit(count));
   }
+
+  void decrement() {
+    if (state > 0) emit(state - 1);
+  }
+
+  void reset() => emit(0);
 }

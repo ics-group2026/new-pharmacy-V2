@@ -28,15 +28,17 @@ class NotificationInfo {
 }
 
 class NotificationModel {
+  final String? id;
   final DateTime? readAt;
   final DateTime? createdAt;
   final NotificationInfo? notification;
 
-  NotificationModel({this.readAt, this.createdAt, this.notification});
+  NotificationModel({this.id, this.readAt, this.createdAt, this.notification});
 
   bool get isRead => readAt != null;
 
   factory NotificationModel.fromJson(Map<String, dynamic> json) => NotificationModel(
+    id: json['id'] as String?,
     readAt: json['readAt'] != null
         ? DateTime.tryParse(json['readAt'] as String)
         : null,
@@ -46,5 +48,12 @@ class NotificationModel {
     notification: json['notification'] != null
         ? NotificationInfo.fromJson(json['notification'] as Map<String, dynamic>)
         : null,
+  );
+
+  NotificationModel copyWith({DateTime? readAt}) => NotificationModel(
+    id: id,
+    readAt: readAt ?? this.readAt,
+    createdAt: createdAt,
+    notification: notification,
   );
 }

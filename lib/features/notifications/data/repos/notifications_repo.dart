@@ -7,4 +7,8 @@ abstract class NotificationsRepo {
   getInboxNotifications({int page = 1, int limit = 10});
 
   Future<Either<Failure, int>> getUnreadCount();
+
+  Future<Either<Failure, DateTime>> markAsRead(String id);
+
+  Future<Either<Failure, int>> markAllAsRead();
 }

@@ -41,4 +41,35 @@ class NotificationsRepoImpl implements NotificationsRepo {
       return left(ServerFailure(errMessage: e.message));
     }
   }
+
+  @override
+  Future<Either<Failure, DateTime>> markAsRead(String id) async {
+    try {
+      final result = await apiService.patch(
+        EndPoints.notificationMarkAsRead(id),
+        data: const {},
+      );
+      final data = result['data'] as Map<String, dynamic>;
+      final readAt = data['readAt'] != null
+          ? DateTime.tryParse(data['readAt'] as String)
+          : null;
+      return Right(readAt ?? DateTime.now());
+    } on CustomException catch (e) {
+      return left(ServerFailure(errMessage: e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, int>> markAllAsRead() async {
+    try {
+      final result = await apiService.patch(
+        EndPoints.notificationsMarkAllAsRead,
+        data: const {},
+      );
+      final data = result['data'] as Map<String, dynamic>;
+      return Right(Converter.toIntOrNull(data['updated']) ?? 0);
+    } on CustomException catch (e) {
+      return left(ServerFailure(errMessage: e.message));
+    }
+  }
 }

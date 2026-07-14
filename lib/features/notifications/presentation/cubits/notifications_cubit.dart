@@ -1,7 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/services/setup_service_locator.dart';
 import '../../data/repos/notifications_repo.dart';
 import 'notifications_state.dart';
+import 'unread_notifications_cubit.dart';
 
 class NotificationsCubit extends Cubit<NotificationsState> {
   final NotificationsRepo notificationsRepo;
@@ -49,5 +51,32 @@ class NotificationsCubit extends Cubit<NotificationsState> {
         ),
       ),
     );
+  }
+
+  Future<void> markAsRead(String id) async {
+    final index = state.notifications.indexWhere((n) => n.id == id);
+    if (index == -1 || state.notifications[index].isRead) return;
+
+    final result = await notificationsRepo.markAsRead(id);
+    result.fold((_) {}, (readAt) {
+      final updated = [...state.notifications];
+      updated[index] = updated[index].copyWith(readAt: readAt);
+      emit(state.copyWith(notifications: updated));
+      getIt<UnreadNotificationsCubit>().decrement();
+    });
+  }
+
+  Future<void> markAllAsRead() async {
+    if (state.notifications.every((n) => n.isRead)) return;
+
+    final result = await notificationsRepo.markAllAsRead();
+    result.fold((_) {}, (_) {
+      final now = DateTime.now();
+      final updated = state.notifications
+          .map((n) => n.isRead ? n : n.copyWith(readAt: now))
+          .toList();
+      emit(state.copyWith(notifications: updated));
+      getIt<UnreadNotificationsCubit>().reset();
+    });
   }
 }

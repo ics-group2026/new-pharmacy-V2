@@ -55,6 +55,9 @@
     "no_data": "لا توجد بيانات",
     "retry": "إعادة المحاولة"
   },
+  "notifications": {
+    "mark_all_read": "تعليم الكل كمقروء"
+  },
   "combo_offers": {
     "title": "عروض الكومبو",
     "included_products": "المنتجات المشمولة"
