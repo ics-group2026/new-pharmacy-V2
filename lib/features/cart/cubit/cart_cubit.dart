@@ -1,17 +1,17 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../flash_deals/data/models/flash_deal_model.dart';
+import 'package:new_pharmacy_v2/core/models/static_product.dart';
 
 class CartEntry {
   CartEntry({required this.product, this.quantity = 1});
-  final FlashDealModel product;
+  final StaticProduct product;
   int quantity;
 }
 
 class CartCubit extends Cubit<List<CartEntry>> {
   CartCubit() : super([]);
 
-  void add(FlashDealModel p) {
+  void add(StaticProduct p) {
     final list = List<CartEntry>.of(state);
     final i = list.indexWhere((e) => e.product.imageUrl == p.imageUrl);
     if (i >= 0) {
@@ -22,7 +22,7 @@ class CartCubit extends Cubit<List<CartEntry>> {
     emit(list);
   }
 
-  void decrement(FlashDealModel p) {
+  void decrement(StaticProduct p) {
     final list = List<CartEntry>.of(state);
     final i = list.indexWhere((e) => e.product.imageUrl == p.imageUrl);
     if (i < 0) return;
@@ -34,7 +34,7 @@ class CartCubit extends Cubit<List<CartEntry>> {
     emit(list);
   }
 
-  void remove(FlashDealModel p) =>
+  void remove(StaticProduct p) =>
       emit(state.where((e) => e.product.imageUrl != p.imageUrl).toList());
 
   double get total => state.fold(0.0, (s, e) => s + e.product.price * e.quantity);

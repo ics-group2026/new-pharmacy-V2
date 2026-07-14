@@ -8,13 +8,13 @@ import '../utils/app_translations.dart';
 import 'cached_network_image_widget.dart';
 import 'discount_badge.dart';
 import 'star_rating_row.dart';
-import '../../features/flash_deals/data/models/flash_deal_model.dart';
+import 'package:new_pharmacy_v2/core/models/static_product.dart';
 import '../../features/wishlist/cubit/wishlist_cubit.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({super.key, required this.product, this.imageHeight, this.width});
 
-  final FlashDealModel product;
+  final StaticProduct product;
   final double? imageHeight;
   final double? width;
 
@@ -59,7 +59,7 @@ class ProductCard extends StatelessWidget {
                 Positioned(
                   top: 8.h,
                   right: 8.w,
-                  child: BlocSelector<WishlistCubit, List<FlashDealModel>, bool>(
+                  child: BlocSelector<WishlistCubit, List<StaticProduct>, bool>(
                     selector: (state) => state.any((p) => p.imageUrl == product.imageUrl),
                     builder: (context, isWishlisted) => _WishlistButton(
                       isWishlisted: isWishlisted,
