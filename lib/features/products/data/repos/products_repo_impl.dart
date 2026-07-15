@@ -1,0 +1,34 @@
+import 'package:dartz/dartz.dart';
+import '../../../../core/constants/end_points.dart';
+import '../../../../core/errors/exception.dart';
+import '../../../../core/errors/failure.dart';
+import '../../../../core/services/api_service.dart';
+import '../models/product_model.dart';
+import 'products_repo.dart';
+
+class ProductsRepoImpl implements ProductsRepo {
+  final ApiService apiService;
+  ProductsRepoImpl({required this.apiService});
+
+  @override
+  Future<Either<Failure, ({List<ProductModel> items, bool hasNext})>> getProducts({
+    int page = 1,
+    int limit = 10,
+  }) async {
+    try {
+      final result = await apiService.get(
+        EndPoints.products,
+        queryParameters: {'page': page, 'limit': limit},
+      );
+      final data = result['data'] as Map<String, dynamic>;
+      final items = (data['items'] as List)
+          .map((e) => ProductModel.fromJson(e as Map<String, dynamic>))
+          .toList();
+      final meta = data['meta'] as Map<String, dynamic>?;
+      final hasNext = meta?['hasNext'] as bool? ?? false;
+      return Right((items: items, hasNext: hasNext));
+    } on CustomException catch (e) {
+      return left(ServerFailure(errMessage: e.message));
+    }
+  }
+}
