@@ -8,6 +8,8 @@ abstract class EndPoints {
   // Products
   static const String products = '/products';
 
+  static String productById(String id) => '/products/$id';
+
   // Combo Offers
   static const String activeComboOffers = '/combo-offers/active';
 
