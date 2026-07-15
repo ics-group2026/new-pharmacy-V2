@@ -4,7 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/utils/app_translations.dart';
 import '../../../../../core/widgets/pill_chip.dart';
 import '../../../../../core/widgets/section_header.dart';
-import 'package:new_pharmacy_v2/core/models/static_product.dart';
+import 'package:new_pharmacy_v2/features/products/data/models/product_image.dart';
+import 'package:new_pharmacy_v2/features/products/data/models/product_model.dart';
 import 'trending_product_item.dart';
 
 class TrendingSection extends StatefulWidget {
@@ -27,53 +28,47 @@ class _TrendingSectionState extends State<TrendingSection> {
   ];
 
   static const _products = [
-    StaticProduct(
+    ProductModel(
+      id: 'demo-tnd-1',
       name: 'Organic High-Curcumin Turmeric Powder',
-      price: 22.49,
-      originalPrice: 32.0,
-      discountPercent: 30,
-      imageUrl: 'https://picsum.photos/seed/tr_a1/300/300',
-      rating: 4.5,
+      price: 32.0,
+      sellingPrice: 22.49,
+      image: ProductImage(url: 'https://picsum.photos/seed/tr_a1/300/300'),
     ),
-    StaticProduct(
+    ProductModel(
+      id: 'demo-tnd-2',
       name: 'Aura Radiance Hydration Serum',
-      price: 54.0,
-      originalPrice: 72.0,
-      discountPercent: 25,
-      imageUrl: 'https://picsum.photos/seed/tr_a2/300/300',
-      rating: 4.0,
+      price: 72.0,
+      sellingPrice: 54.0,
+      image: ProductImage(url: 'https://picsum.photos/seed/tr_a2/300/300'),
     ),
-    StaticProduct(
+    ProductModel(
+      id: 'demo-tnd-3',
       name: 'Vitamin C 1000mg Effervescent',
-      price: 89.0,
-      originalPrice: 115.0,
-      discountPercent: 23,
-      imageUrl: 'https://picsum.photos/seed/tr_a3/300/300',
-      rating: 5.0,
+      price: 115.0,
+      sellingPrice: 89.0,
+      image: ProductImage(url: 'https://picsum.photos/seed/tr_a3/300/300'),
     ),
-    StaticProduct(
+    ProductModel(
+      id: 'demo-tnd-4',
       name: 'MEDIDERM Dermatological Moisturizer',
-      price: 106.0,
-      originalPrice: 140.0,
-      discountPercent: 24,
-      imageUrl: 'https://picsum.photos/seed/tr_a4/300/300',
-      rating: 3.5,
+      price: 140.0,
+      sellingPrice: 106.0,
+      image: ProductImage(url: 'https://picsum.photos/seed/tr_a4/300/300'),
     ),
-    StaticProduct(
+    ProductModel(
+      id: 'demo-tnd-5',
       name: 'Omega 3 Fish Oil 1200mg Softgels',
-      price: 145.0,
-      originalPrice: 190.0,
-      discountPercent: 24,
-      imageUrl: 'https://picsum.photos/seed/tr_a5/300/300',
-      rating: 4.5,
+      price: 190.0,
+      sellingPrice: 145.0,
+      image: ProductImage(url: 'https://picsum.photos/seed/tr_a5/300/300'),
     ),
-    StaticProduct(
+    ProductModel(
+      id: 'demo-tnd-6',
       name: 'Biotin Hair Growth Formula',
-      price: 120.0,
-      originalPrice: 160.0,
-      discountPercent: 25,
-      imageUrl: 'https://picsum.photos/seed/tr_a6/300/300',
-      rating: 4.0,
+      price: 160.0,
+      sellingPrice: 120.0,
+      image: ProductImage(url: 'https://picsum.photos/seed/tr_a6/300/300'),
     ),
   ];
 
