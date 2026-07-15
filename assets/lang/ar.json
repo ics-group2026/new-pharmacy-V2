@@ -85,7 +85,8 @@
   "products": {
     "best_seller": "الأكثر مبيعاً",
     "top_rated": "الأعلى تقييماً",
-    "on_sale": "تخفيضات"
+    "on_sale": "تخفيضات",
+    "all_products": "كل المنتجات"
   },
   "home": {
     "greeting": "مرحباً،",
