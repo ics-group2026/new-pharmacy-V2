@@ -7,14 +7,13 @@ import '../routes/app_routes.dart';
 import '../utils/app_translations.dart';
 import 'cached_network_image_widget.dart';
 import 'discount_badge.dart';
-import 'star_rating_row.dart';
-import 'package:new_pharmacy_v2/core/models/static_product.dart';
+import 'package:new_pharmacy_v2/features/products/data/models/product_model.dart';
 import '../../features/wishlist/cubit/wishlist_cubit.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({super.key, required this.product, this.imageHeight, this.width});
 
-  final StaticProduct product;
+  final ProductModel product;
   final double? imageHeight;
   final double? width;
 
@@ -23,6 +22,12 @@ class ProductCard extends StatelessWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final imgHeight = imageHeight ?? 130.h;
+
+    final imageUrl = product.image?.url ?? '';
+    final heroTag = 'product-image-${product.id ?? imageUrl}';
+    final price = product.sellingPrice ?? product.price ?? 0;
+    final originalPrice = product.hasDiscount ? product.price : null;
+    final discountPercent = product.discountPercent;
 
     return GestureDetector(
       onTap: () => context.push(AppRoutes.productDetail, extra: product),
@@ -45,11 +50,11 @@ class ProductCard extends StatelessWidget {
             Stack(
               children: [
                 Hero(
-                  tag: 'product-image-${product.imageUrl}',
+                  tag: heroTag,
                   child: ClipRRect(
                     borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
                     child: CachedNetworkImageWidget(
-                      imageUrl: product.imageUrl,
+                      imageUrl: imageUrl,
                       width: double.infinity,
                       height: imgHeight,
                       fit: BoxFit.cover,
@@ -59,19 +64,19 @@ class ProductCard extends StatelessWidget {
                 Positioned(
                   top: 8.h,
                   right: 8.w,
-                  child: BlocSelector<WishlistCubit, List<StaticProduct>, bool>(
-                    selector: (state) => state.any((p) => p.imageUrl == product.imageUrl),
+                  child: BlocSelector<WishlistCubit, List<ProductModel>, bool>(
+                    selector: (state) => state.any((p) => p.id == product.id),
                     builder: (context, isWishlisted) => _WishlistButton(
                       isWishlisted: isWishlisted,
                       onTap: () => context.read<WishlistCubit>().toggle(product),
                     ),
                   ),
                 ),
-                if (product.discountPercent != null)
+                if (discountPercent != null)
                   Positioned(
                     top: 8.h,
                     left: 8.w,
-                    child: DiscountBadge(percent: product.discountPercent!),
+                    child: DiscountBadge(percent: discountPercent),
                   ),
               ],
             ),
@@ -81,7 +86,7 @@ class ProductCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    product.name,
+                    product.name ?? '',
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: theme.textTheme.bodySmall?.copyWith(
@@ -90,25 +95,21 @@ class ProductCard extends StatelessWidget {
                       height: 1.35,
                     ),
                   ),
-                  if (product.rating != null) ...[
-                    6.verticalSpace,
-                    StarRatingRow(rating: product.rating!),
-                  ],
                   8.verticalSpace,
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        '${product.price.toStringAsFixed(0)} ${AppTranslations.t('flash_deals.currency')}',
+                        '${price.toStringAsFixed(0)} ${AppTranslations.t('flash_deals.currency')}',
                         style: theme.textTheme.bodyMedium?.copyWith(
                           color: colorScheme.primary,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      if (product.originalPrice != null) ...[
+                      if (originalPrice != null) ...[
                         6.horizontalSpace,
                         Text(
-                          product.originalPrice!.toStringAsFixed(0),
+                          originalPrice.toStringAsFixed(0),
                           style: theme.textTheme.bodySmall?.copyWith(
                             color: colorScheme.onSurface.withValues(alpha: 0.38),
                             decoration: TextDecoration.lineThrough,

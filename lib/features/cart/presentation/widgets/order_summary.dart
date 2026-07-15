@@ -18,7 +18,10 @@ class OrderSummary extends StatelessWidget {
 
     return BlocBuilder<CartCubit, List<CartEntry>>(
       builder: (_, items) {
-        final subtotal = items.fold(0.0, (s, e) => s + e.product.price * e.quantity);
+        final subtotal = items.fold(
+          0.0,
+          (s, e) => s + (e.product.sellingPrice ?? e.product.price ?? 0) * e.quantity,
+        );
 
         return Container(
           padding: EdgeInsets.all(16.r),

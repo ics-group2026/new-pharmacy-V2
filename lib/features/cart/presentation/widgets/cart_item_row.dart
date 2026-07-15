@@ -18,9 +18,11 @@ class CartItemRow extends StatelessWidget {
     final colorScheme = theme.colorScheme;
     final cubit = context.read<CartCubit>();
     final currency = AppTranslations.t('flash_deals.currency');
+    final product = entry.product;
+    final unitPrice = product.sellingPrice ?? product.price ?? 0;
 
     return Dismissible(
-      key: ValueKey(entry.product.imageUrl),
+      key: ValueKey(product.id),
       direction: DismissDirection.endToStart,
       onDismissed: (_) => cubit.remove(entry.product),
       background: Container(
@@ -49,7 +51,7 @@ class CartItemRow extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(12.r),
               child: CachedNetworkImageWidget(
-                imageUrl: entry.product.imageUrl,
+                imageUrl: product.image?.url ?? '',
                 width: 72.r,
                 height: 72.r,
                 fit: BoxFit.cover,
@@ -61,7 +63,7 @@ class CartItemRow extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    entry.product.name,
+                    product.name ?? '',
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: theme.textTheme.bodySmall?.copyWith(
@@ -72,7 +74,7 @@ class CartItemRow extends StatelessWidget {
                   ),
                   6.verticalSpace,
                   Text(
-                    '${(entry.product.price * entry.quantity).toStringAsFixed(0)} $currency',
+                    '${(unitPrice * entry.quantity).toStringAsFixed(0)} $currency',
                     style: theme.textTheme.bodyMedium?.copyWith(
                       color: colorScheme.primary,
                       fontWeight: FontWeight.bold,

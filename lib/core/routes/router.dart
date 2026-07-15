@@ -15,9 +15,9 @@ import '../../features/flash_deals/presentation/views/flash_deal_detail_screen.d
 import '../../features/profile/presentation/cubits/profile_cubit.dart';
 import '../../features/profile/presentation/views/profile_screen.dart';
 import '../../features/nav_bar/presentation/views/bottom_nav_bar_screen.dart';
+import '../../features/products/data/models/product_model.dart';
 import '../../features/products/presentation/views/product_detail_screen.dart';
 import '../../features/search/presentation/views/search_screen.dart';
-import 'package:new_pharmacy_v2/core/models/static_product.dart';
 import '../../features/notifications/presentation/views/notifications_screen.dart';
 import '../constants/constants.dart';
 import '../services/prefs.dart';
@@ -71,7 +71,7 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: AppRoutes.productDetail,
       builder: (context, state) {
-        final product = state.extra as StaticProduct;
+        final product = state.extra as ProductModel;
         return ProductDetailScreen(product: product);
       },
     ),
