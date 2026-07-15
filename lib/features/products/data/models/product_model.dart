@@ -1,4 +1,5 @@
 import '../../../../core/utils/converter.dart';
+import 'product_image.dart';
 import 'product_vendor.dart';
 
 class ProductModel {
@@ -23,7 +24,7 @@ class ProductModel {
   final DateTime? createdAt;
   final ProductVendor? vendor;
 
-  ProductModel({
+  const ProductModel({
     this.id,
     this.name,
     this.productType,
@@ -101,22 +102,4 @@ class ProductRef {
 
   factory ProductRef.fromJson(Map<String, dynamic> json) =>
       ProductRef(id: json['id'] as String?, name: json['name'] as String?);
-}
-
-class ProductImage {
-  final String? id;
-  final String? url;
-  final bool? isMain;
-  final int? sortOrder;
-  final String? altText;
-
-  ProductImage({this.id, this.url, this.isMain, this.sortOrder, this.altText});
-
-  factory ProductImage.fromJson(Map<String, dynamic> json) => ProductImage(
-    id: json['id'] as String?,
-    url: json['url'] as String?,
-    isMain: json['isMain'] as bool?,
-    sortOrder: Converter.toIntOrNull(json['sortOrder']),
-    altText: json['altText'] as String?,
-  );
 }
