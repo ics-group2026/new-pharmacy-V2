@@ -15,6 +15,8 @@ import '../../features/flash_deals/data/repos/flash_deals_repo_impl.dart';
 import '../../features/notifications/data/repos/notifications_repo.dart';
 import '../../features/notifications/data/repos/notifications_repo_impl.dart';
 import '../../features/notifications/presentation/cubits/unread_notifications_cubit.dart';
+import '../../features/products/data/repos/products_repo.dart';
+import '../../features/products/data/repos/products_repo_impl.dart';
 import '../../features/profile/data/repos/profile_repo.dart';
 import '../../features/profile/data/repos/profile_repo_impl.dart';
 import '../../features/profile/presentation/cubits/profile_cubit.dart';
@@ -48,6 +50,9 @@ void setupServiceLocator() {
   );
   getIt.registerSingleton<NotificationsRepo>(
     NotificationsRepoImpl(apiService: getIt<ApiService>()),
+  );
+  getIt.registerSingleton<ProductsRepo>(
+    ProductsRepoImpl(apiService: getIt<ApiService>()),
   );
 
   /// Cubits

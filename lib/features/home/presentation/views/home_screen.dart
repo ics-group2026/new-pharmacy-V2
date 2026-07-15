@@ -10,6 +10,7 @@ import '../../../flash_deals/presentation/widgets/flash_deals_section.dart';
 import '../../../new_arrivals/presentation/widgets/new_arrivals_section.dart';
 import '../../../products/presentation/widgets/best_seller_section.dart';
 import '../../../products/presentation/widgets/on_sale_section.dart';
+import '../../../products/presentation/widgets/products_section.dart';
 import '../../../products/presentation/widgets/top_rated_section.dart';
 import '../../../trending/presentation/widgets/trending_section.dart';
 import '../widgets/home_app_bar.dart';
@@ -83,7 +84,7 @@ class HomeScreen extends StatelessWidget {
               delay: const Duration(milliseconds: 320),
               child: Padding(
                 padding: EdgeInsets.fromLTRB(16.w, 24.h, 16.w, 0),
-                child: const TopRatedSection(),
+                child: const ProductsSection(),
               ),
             ),
           ),
@@ -92,13 +93,22 @@ class HomeScreen extends StatelessWidget {
               delay: const Duration(milliseconds: 360),
               child: Padding(
                 padding: EdgeInsets.fromLTRB(16.w, 24.h, 16.w, 0),
-                child: const OnSaleSection(),
+                child: const TopRatedSection(),
               ),
             ),
           ),
           SliverToBoxAdapter(
             child: AnimatedFadeSlide(
               delay: const Duration(milliseconds: 400),
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(16.w, 24.h, 16.w, 0),
+                child: const OnSaleSection(),
+              ),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: AnimatedFadeSlide(
+              delay: const Duration(milliseconds: 440),
               child: Padding(
                 padding: EdgeInsets.only(top: 24.h),
                 child: const NewArrivalsSection(),
@@ -107,7 +117,7 @@ class HomeScreen extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: AnimatedFadeSlide(
-              delay: const Duration(milliseconds: 440),
+              delay: const Duration(milliseconds: 480),
               child: Padding(
                 padding: EdgeInsets.fromLTRB(16.w, 24.h, 16.w, 0),
                 child: const TrendingSection(),
