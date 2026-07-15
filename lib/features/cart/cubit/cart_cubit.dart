@@ -1,19 +1,19 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:new_pharmacy_v2/core/models/static_product.dart';
+import 'package:new_pharmacy_v2/features/products/data/models/product_model.dart';
 
 class CartEntry {
   CartEntry({required this.product, this.quantity = 1});
-  final StaticProduct product;
+  final ProductModel product;
   int quantity;
 }
 
 class CartCubit extends Cubit<List<CartEntry>> {
   CartCubit() : super([]);
 
-  void add(StaticProduct p) {
+  void add(ProductModel p) {
     final list = List<CartEntry>.of(state);
-    final i = list.indexWhere((e) => e.product.imageUrl == p.imageUrl);
+    final i = list.indexWhere((e) => e.product.id == p.id);
     if (i >= 0) {
       list[i].quantity++;
     } else {
@@ -22,9 +22,9 @@ class CartCubit extends Cubit<List<CartEntry>> {
     emit(list);
   }
 
-  void decrement(StaticProduct p) {
+  void decrement(ProductModel p) {
     final list = List<CartEntry>.of(state);
-    final i = list.indexWhere((e) => e.product.imageUrl == p.imageUrl);
+    final i = list.indexWhere((e) => e.product.id == p.id);
     if (i < 0) return;
     if (list[i].quantity <= 1) {
       list.removeAt(i);
@@ -34,8 +34,11 @@ class CartCubit extends Cubit<List<CartEntry>> {
     emit(list);
   }
 
-  void remove(StaticProduct p) =>
-      emit(state.where((e) => e.product.imageUrl != p.imageUrl).toList());
+  void remove(ProductModel p) =>
+      emit(state.where((e) => e.product.id != p.id).toList());
 
-  double get total => state.fold(0.0, (s, e) => s + e.product.price * e.quantity);
+  double get total => state.fold(
+    0.0,
+    (s, e) => s + (e.product.sellingPrice ?? e.product.price ?? 0) * e.quantity,
+  );
 }

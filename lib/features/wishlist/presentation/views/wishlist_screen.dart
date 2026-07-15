@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/widgets/product_card.dart';
 import '../../../../../core/widgets/t_text.dart';
-import 'package:new_pharmacy_v2/core/models/static_product.dart';
+import 'package:new_pharmacy_v2/features/products/data/models/product_model.dart';
 import '../../cubit/wishlist_cubit.dart';
 
 class WishlistScreen extends StatelessWidget {
@@ -15,7 +15,7 @@ class WishlistScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const TText('nav_bar.wishlist')),
-      body: BlocBuilder<WishlistCubit, List<StaticProduct>>(
+      body: BlocBuilder<WishlistCubit, List<ProductModel>>(
         builder: (_, items) => items.isEmpty
             ? const _EmptyState()
             : GridView.builder(
