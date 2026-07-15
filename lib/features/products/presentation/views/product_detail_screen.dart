@@ -1,23 +1,87 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:new_pharmacy_v2/features/products/presentation/widgets/add_to_cart_bar.dart';
+import 'package:new_pharmacy_v2/features/products/data/models/product_model.dart';
 import 'package:new_pharmacy_v2/features/products/presentation/widgets/describtion_widget.dart';
 import 'package:new_pharmacy_v2/features/products/presentation/widgets/how_to_use_widget.dart';
+import 'package:new_pharmacy_v2/features/products/presentation/widgets/product_detail_bottom_bar.dart';
 import 'package:new_pharmacy_v2/features/products/presentation/widgets/product_header.dart';
+import 'package:new_pharmacy_v2/features/products/presentation/widgets/product_quantity_section.dart';
+import 'package:new_pharmacy_v2/features/products/presentation/widgets/product_details_mapper.dart';
 import 'package:new_pharmacy_v2/features/products/presentation/widgets/products_sliver_app_bar.dart';
-import 'package:new_pharmacy_v2/features/products/presentation/widgets/quantity_widget.dart';
 
-import '../../../../../core/utils/app_translations.dart';
-import '../../../cart/cubit/cart_cubit.dart';
-import 'package:new_pharmacy_v2/core/models/static_product.dart';
+import '../../../../../core/services/setup_service_locator.dart';
 import '../../cubit/quantity_cubit.dart';
+import '../../data/repos/products_repo.dart';
+import '../cubits/product_details_cubit.dart';
+import '../cubits/product_details_state.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   const ProductDetailScreen({super.key, required this.product});
 
-  final StaticProduct product;
+  final ProductModel product;
+
+  @override
+  Widget build(BuildContext context) {
+    // Cards backed by the API carry an id — fetch the full record on open.
+    // The hardcoded demo sections have no id, so they render as-is.
+    final id = product.id;
+    if (id == null) return _ProductDetailContent(product: product);
+    return BlocProvider(
+      create: (_) => ProductDetailsCubit(getIt<ProductsRepo>())..getProductById(id),
+      child: _LiveProductDetail(fallback: product),
+    );
+  }
+}
+
+/// Shows the list data instantly, then swaps in the full record once the
+/// details request resolves. On failure it keeps the list data on screen.
+class _LiveProductDetail extends StatelessWidget {
+  const _LiveProductDetail({required this.fallback});
+
+  final ProductModel fallback;
+
+  @override
+  Widget build(BuildContext context) {
+    final languageCode = context.locale.languageCode;
+
+    return BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
+      builder: (context, state) {
+        final details = state.product;
+        if (state.status == ProductDetailsStatus.loaded && details != null) {
+          final galleryUrls = details.images
+              .map((e) => e.url)
+              .whereType<String>()
+              .where((url) => url.isNotEmpty)
+              .toList();
+          final rating = details.averageRating;
+          return _ProductDetailContent(
+            product: details.toProductModel(languageCode),
+            description: details.description?.localized(languageCode),
+            galleryUrls: galleryUrls,
+            rating: (rating != null && rating > 0) ? rating : null,
+          );
+        }
+        return _ProductDetailContent(product: fallback);
+      },
+    );
+  }
+}
+
+class _ProductDetailContent extends StatelessWidget {
+  const _ProductDetailContent({
+    required this.product,
+    this.description,
+    this.galleryUrls,
+    this.rating,
+  });
+
+  final ProductModel product;
+  final String? description;
+  final List<String>? galleryUrls;
+  final double? rating;
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +97,10 @@ class ProductDetailScreen extends StatelessWidget {
         ),
         child: Scaffold(
           extendBodyBehindAppBar: true,
-          bottomNavigationBar: _BottomBar(product: product),
+          bottomNavigationBar: ProductDetailBottomBar(product: product),
           body: CustomScrollView(
             slivers: [
-              ProductSliverAppBar(product: product),
+              ProductSliverAppBar(product: product, galleryUrls: galleryUrls),
               SliverToBoxAdapter(
                 child: Container(
                   decoration: BoxDecoration(
@@ -48,15 +112,19 @@ class ProductDetailScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ProductHeader(product: product),
+                        ProductHeader(product: product, rating: rating),
                         20.verticalSpace,
                         Divider(color: colorScheme.outlineVariant, thickness: 1),
                         20.verticalSpace,
-                        DescriptionWidget(colorScheme: colorScheme, theme: theme),
+                        DescriptionWidget(
+                          colorScheme: colorScheme,
+                          theme: theme,
+                          description: description,
+                        ),
                         20.verticalSpace,
                         HowToUseWidget(colorScheme: colorScheme, theme: theme),
                         20.verticalSpace,
-                        _QuantitySection(theme: theme, colorScheme: colorScheme),
+                        ProductQuantitySection(theme: theme, colorScheme: colorScheme),
                       ],
                     ),
                   ),
@@ -65,49 +133,6 @@ class ProductDetailScreen extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _QuantitySection extends StatelessWidget {
-  const _QuantitySection({required this.theme, required this.colorScheme});
-
-  final ThemeData theme;
-  final ColorScheme colorScheme;
-
-  @override
-  Widget build(BuildContext context) {
-    final cubit = context.read<QuantityCubit>();
-    return BlocBuilder<QuantityCubit, int>(
-      builder: (_, quantity) => QuantityWidget(
-        quantity: quantity,
-        increment: cubit.increment,
-        decrement: cubit.decrement,
-        theme: theme,
-        colorScheme: colorScheme,
-      ),
-    );
-  }
-}
-
-class _BottomBar extends StatelessWidget {
-  const _BottomBar({required this.product});
-
-  final StaticProduct product;
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<QuantityCubit, int>(
-      builder: (context, quantity) => AddToCartBar(
-        totalPrice: product.price * quantity,
-        currency: AppTranslations.t('flash_deals.currency'),
-        onAddToCart: () {
-          final cart = context.read<CartCubit>();
-          for (var i = 0; i < quantity; i++) {
-            cart.add(product);
-          }
-        },
       ),
     );
   }
