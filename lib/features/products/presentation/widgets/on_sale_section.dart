@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/widgets/section_header.dart';
-import 'package:new_pharmacy_v2/core/models/static_product.dart';
+import '../../data/models/product_image.dart';
+import '../../data/models/product_model.dart';
 import 'home_product_item.dart';
 
 class OnSaleSection extends StatelessWidget {
@@ -11,29 +12,26 @@ class OnSaleSection extends StatelessWidget {
   final VoidCallback? onSeeAll;
 
   static const _products = [
-    StaticProduct(
+    ProductModel(
+      id: 'demo-os-1',
       name: 'MEDIDERM Dermatological Moisturizer Lotion',
-      price: 106.00,
-      originalPrice: 140.0,
-      discountPercent: 24,
-      imageUrl: 'https://picsum.photos/seed/os1/200/200',
-      rating: 4.0,
+      price: 140.0,
+      sellingPrice: 106.00,
+      image: ProductImage(url: 'https://picsum.photos/seed/os1/200/200'),
     ),
-    StaticProduct(
+    ProductModel(
+      id: 'demo-os-2',
       name: 'Pectol Orange Throat Lozenges',
-      price: 25.00,
-      originalPrice: 38.0,
-      discountPercent: 34,
-      imageUrl: 'https://picsum.photos/seed/os2/200/200',
-      rating: 3.5,
+      price: 38.0,
+      sellingPrice: 25.00,
+      image: ProductImage(url: 'https://picsum.photos/seed/os2/200/200'),
     ),
-    StaticProduct(
+    ProductModel(
+      id: 'demo-os-3',
       name: 'Aurora Organic Cleansing Oil',
-      price: 54.00,
-      originalPrice: 75.0,
-      discountPercent: 28,
-      imageUrl: 'https://picsum.photos/seed/os3/200/200',
-      rating: 4.5,
+      price: 75.0,
+      sellingPrice: 54.00,
+      image: ProductImage(url: 'https://picsum.photos/seed/os3/200/200'),
     ),
   ];
 
