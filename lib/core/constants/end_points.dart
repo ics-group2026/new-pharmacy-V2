@@ -5,6 +5,9 @@ abstract class EndPoints {
   // Categories
   static const String categories = '/categories';
 
+  // Products
+  static const String products = '/products';
+
   // Combo Offers
   static const String activeComboOffers = '/combo-offers/active';
 
