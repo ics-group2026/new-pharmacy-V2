@@ -6,18 +6,23 @@ import '../../../../../core/utils/app_translations.dart';
 import '../../../../../core/widgets/animated_fade_slide.dart';
 import '../../../../../core/widgets/discount_badge.dart';
 import '../../../../../core/widgets/star_rating_row.dart';
-import 'package:new_pharmacy_v2/core/models/static_product.dart';
+import 'package:new_pharmacy_v2/features/products/data/models/product_model.dart';
 import 'price_row.dart';
 
 class ProductHeader extends StatelessWidget {
-  const ProductHeader({super.key, required this.product});
+  const ProductHeader({super.key, required this.product, this.rating});
 
-  final StaticProduct product;
+  final ProductModel product;
+
+  /// Average rating from the details endpoint; null hides the stars (the list
+  /// payload carries no rating).
+  final double? rating;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final discountPercent = product.discountPercent;
 
     return AnimatedFadeSlide(
       delay: Duration.zero,
@@ -26,8 +31,8 @@ class ProductHeader extends StatelessWidget {
         children: [
           Row(
             children: [
-              if (product.discountPercent != null)
-                DiscountBadge(percent: product.discountPercent!),
+              if (discountPercent != null)
+                DiscountBadge(percent: discountPercent),
               const Spacer(),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
@@ -55,18 +60,18 @@ class ProductHeader extends StatelessWidget {
           ),
           12.verticalSpace,
           Text(
-            product.name,
+            product.name ?? '',
             style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
               color: colorScheme.onSurface,
               height: 1.3,
             ),
           ),
-          if (product.rating != null) ...[
+          if (rating != null) ...[
             10.verticalSpace,
             Row(
               children: [
-                StarRatingRow(rating: product.rating!, size: 16.r),
+                StarRatingRow(rating: rating!, size: 16.r),
                 10.horizontalSpace,
                 Text(
                   '(128 ${AppTranslations.t('product_detail.reviews')})',

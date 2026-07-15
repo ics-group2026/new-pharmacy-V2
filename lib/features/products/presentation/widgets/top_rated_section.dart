@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/widgets/section_header.dart';
-import 'package:new_pharmacy_v2/core/models/static_product.dart';
+import '../../data/models/product_image.dart';
+import '../../data/models/product_model.dart';
 import 'home_product_item.dart';
 
 class TopRatedSection extends StatelessWidget {
@@ -11,29 +12,26 @@ class TopRatedSection extends StatelessWidget {
   final VoidCallback? onSeeAll;
 
   static const _products = [
-    StaticProduct(
+    ProductModel(
+      id: 'demo-tr-1',
       name: 'Vitamin C 1000mg Effervescent Tablets',
-      price: 89.00,
-      originalPrice: 115.0,
-      discountPercent: 23,
-      imageUrl: 'https://picsum.photos/seed/tr1/200/200',
-      rating: 5.0,
+      price: 115.0,
+      sellingPrice: 89.00,
+      image: ProductImage(url: 'https://picsum.photos/seed/tr1/200/200'),
     ),
-    StaticProduct(
+    ProductModel(
+      id: 'demo-tr-2',
       name: 'Omega 3 Fish Oil 1200mg Softgels',
-      price: 145.00,
-      originalPrice: 190.0,
-      discountPercent: 24,
-      imageUrl: 'https://picsum.photos/seed/tr2/200/200',
-      rating: 4.5,
+      price: 190.0,
+      sellingPrice: 145.00,
+      image: ProductImage(url: 'https://picsum.photos/seed/tr2/200/200'),
     ),
-    StaticProduct(
+    ProductModel(
+      id: 'demo-tr-3',
       name: 'Collagen Peptides Anti-Aging Complex',
-      price: 210.00,
-      originalPrice: 280.0,
-      discountPercent: 25,
-      imageUrl: 'https://picsum.photos/seed/tr3/200/200',
-      rating: 4.0,
+      price: 280.0,
+      sellingPrice: 210.00,
+      image: ProductImage(url: 'https://picsum.photos/seed/tr3/200/200'),
     ),
   ];
 

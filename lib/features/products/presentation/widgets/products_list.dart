@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../data/models/product_model.dart';
 import 'home_product_item.dart';
-import 'product_static_mapper.dart';
 
 class ProductsList extends StatelessWidget {
   const ProductsList({super.key, required this.products});
@@ -24,7 +23,7 @@ class ProductsList extends StatelessWidget {
           children: [
             for (var i = 0; i < products.length; i++) ...[
               if (i > 0) 12.horizontalSpace,
-              HomeProductItem(product: products[i].toStaticProduct()),
+              HomeProductItem(product: products[i]),
             ],
           ],
         ),
