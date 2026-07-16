@@ -58,6 +58,9 @@
   "notifications": {
     "mark_all_read": "Mark all as read"
   },
+  "brands": {
+    "title": "Shop by Brand"
+  },
   "combo_offers": {
     "title": "Combo Offers",
     "included_products": "Included Products"

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/widgets/animated_fade_slide.dart';
 import '../../../banners/presentation/widgets/banners_carousel.dart';
+import '../../../brands/presentation/widgets/brands_section.dart';
 import '../../../bundles/presentation/widgets/bundles_section.dart';
 import '../../../categories/presentation/widgets/categories_section.dart';
 import '../../../combo_offers/presentation/widgets/combo_offers_section.dart';
@@ -43,12 +44,22 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ),
+
           SliverToBoxAdapter(
             child: AnimatedFadeSlide(
               delay: const Duration(milliseconds: 160),
               child: Padding(
                 padding: EdgeInsets.only(top: 20.h),
                 child: const FlashDealsSection(),
+              ),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: AnimatedFadeSlide(
+              delay: const Duration(milliseconds: 140),
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(16.w, 20.h, 16.w, 0),
+                child: const BrandsSection(),
               ),
             ),
           ),

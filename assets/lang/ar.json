@@ -58,6 +58,9 @@
   "notifications": {
     "mark_all_read": "تعليم الكل كمقروء"
   },
+  "brands": {
+    "title": "تسوق حسب الماركة"
+  },
   "combo_offers": {
     "title": "عروض الكومبو",
     "included_products": "المنتجات المشمولة"
