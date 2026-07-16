@@ -5,10 +5,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/services/setup_service_locator.dart';
 import '../../../../../core/widgets/empty_data_placeholder.dart';
-import '../../../../../core/widgets/pill_chip.dart';
+import '../../../../../core/widgets/section_header.dart';
 import '../../data/repos/categories_repo.dart';
 import '../cubits/categories_cubit.dart';
 import '../cubits/categories_state.dart';
+import 'category_circle_item.dart';
 
 class CategoriesSection extends StatelessWidget {
   const CategoriesSection({super.key});
@@ -22,76 +23,83 @@ class CategoriesSection extends StatelessWidget {
   }
 }
 
-class _CategoriesBody extends StatefulWidget {
+class _CategoriesBody extends StatelessWidget {
   const _CategoriesBody();
-
-  @override
-  State<_CategoriesBody> createState() => _CategoriesSectionState();
-}
-
-class _CategoriesSectionState extends State<_CategoriesBody> {
-  int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     final isArabic = context.locale.languageCode == 'ar';
 
-    return SizedBox(
-      height: 44.h,
-      child: BlocBuilder<CategoriesCubit, CategoriesState>(
-        builder: (context, state) {
-          if (state.status == CategoriesStatus.loading ||
-              state.status == CategoriesStatus.initial) {
-            return ListView.separated(
-              scrollDirection: Axis.horizontal,
-              padding: EdgeInsets.zero,
-              itemCount: 5,
-              separatorBuilder: (_, _) => 8.horizontalSpace,
-              itemBuilder: (_, _) => _CategoryPillShimmer(),
-            );
-          }
+    return BlocBuilder<CategoriesCubit, CategoriesState>(
+      builder: (context, state) {
+        if (state.status == CategoriesStatus.error) {
+          return const SizedBox.shrink();
+        }
 
-          if (state.status == CategoriesStatus.error) {
-            return const SizedBox.shrink();
-          }
+        final isLoading =
+            state.status == CategoriesStatus.initial ||
+            state.status == CategoriesStatus.loading;
+        final isEmpty =
+            state.status == CategoriesStatus.loaded && state.categories.isEmpty;
 
-          if (state.categories.isEmpty) {
-            return const EmptyDataPlaceholder();
-          }
-
-          final categories = state.categories;
-          return ListView.separated(
-            scrollDirection: Axis.horizontal,
-            padding: EdgeInsets.zero,
-            itemCount: categories.length,
-            separatorBuilder: (_, _) => 8.horizontalSpace,
-            itemBuilder: (_, index) {
-              final category = categories[index];
-              final label = (isArabic ? category.arName : category.enName) ?? '';
-              return PillChip(
-                label: label,
-                isSelected: _selectedIndex == index,
-                onTap: () => setState(() => _selectedIndex = index),
-              );
-            },
-          );
-        },
-      ),
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SectionHeader(titleKey: 'categories.title'),
+            12.verticalSpace,
+            SizedBox(
+              height: 100.h,
+              child: isLoading
+                  ? const _CategoriesLoading()
+                  : isEmpty
+                  ? const EmptyDataPlaceholder()
+                  : ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      padding: EdgeInsets.zero,
+                      itemCount: state.categories.length,
+                      separatorBuilder: (_, _) => 16.horizontalSpace,
+                      itemBuilder: (_, index) {
+                        final category = state.categories[index];
+                        final label =
+                            (isArabic ? category.arName : category.enName) ?? '';
+                        return CategoryCircleItem(category: category, label: label);
+                      },
+                    ),
+            ),
+          ],
+        );
+      },
     );
   }
 }
 
-class _CategoryPillShimmer extends StatelessWidget {
-  const _CategoryPillShimmer();
+class _CategoriesLoading extends StatelessWidget {
+  const _CategoriesLoading();
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+      scrollDirection: Axis.horizontal,
+      padding: EdgeInsets.zero,
+      itemCount: 5,
+      separatorBuilder: (_, _) => 16.horizontalSpace,
+      itemBuilder: (_, _) => const _CategoryCircleShimmer(),
+    );
+  }
+}
+
+class _CategoryCircleShimmer extends StatelessWidget {
+  const _CategoryCircleShimmer();
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     return Container(
-      width: 72.w,
+      width: 60.r,
+      height: 60.r,
       decoration: BoxDecoration(
         color: colorScheme.surfaceContainerHighest,
-        borderRadius: BorderRadius.circular(24.r),
+        shape: BoxShape.circle,
       ),
     );
   }
