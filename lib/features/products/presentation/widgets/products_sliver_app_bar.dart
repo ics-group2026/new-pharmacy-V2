@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:new_pharmacy_v2/core/utils/app_colors.dart';
 import 'package:new_pharmacy_v2/core/widgets/cached_network_image_widget.dart';
+import 'package:new_pharmacy_v2/core/widgets/fullscreen_image_viewer.dart';
 import 'package:new_pharmacy_v2/features/products/data/models/product_model.dart';
 import 'package:new_pharmacy_v2/features/wishlist/cubit/wishlist_cubit.dart';
 
@@ -63,23 +64,31 @@ class ProductSliverAppBar extends StatelessWidget {
         overflow: TextOverflow.ellipsis,
         style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
       ),
-      flexibleSpace: FlexibleSpaceBar(background: _buildBackground()),
+      flexibleSpace: FlexibleSpaceBar(background: _buildBackground(context)),
     );
   }
 
-  Widget _buildBackground() {
+  Widget _buildBackground(BuildContext context) {
     final urls = galleryUrls;
     if (urls != null && urls.length > 1) {
       return _GalleryBackground(urls: urls);
     }
     final imageUrl = product.image?.url ?? '';
-    return Hero(
-      tag: 'product-image-${product.id ?? imageUrl}',
-      child: CachedNetworkImageWidget(
-        imageUrl: imageUrl,
-        width: double.infinity,
-        height: double.infinity,
-        fit: BoxFit.cover,
+    final heroTag = 'product-image-${product.id ?? imageUrl}';
+    return GestureDetector(
+      onTap: () => FullscreenImageViewer.show(
+        context,
+        imageUrls: [imageUrl],
+        heroTag: heroTag,
+      ),
+      child: Hero(
+        tag: heroTag,
+        child: CachedNetworkImageWidget(
+          imageUrl: imageUrl,
+          width: double.infinity,
+          height: double.infinity,
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }
@@ -113,11 +122,18 @@ class _GalleryBackgroundState extends State<_GalleryBackground> {
           controller: _controller,
           itemCount: widget.urls.length,
           onPageChanged: (i) => setState(() => _index = i),
-          itemBuilder: (_, i) => CachedNetworkImageWidget(
-            imageUrl: widget.urls[i],
-            width: double.infinity,
-            height: double.infinity,
-            fit: BoxFit.cover,
+          itemBuilder: (context, i) => GestureDetector(
+            onTap: () => FullscreenImageViewer.show(
+              context,
+              imageUrls: widget.urls,
+              initialIndex: i,
+            ),
+            child: CachedNetworkImageWidget(
+              imageUrl: widget.urls[i],
+              width: double.infinity,
+              height: double.infinity,
+              fit: BoxFit.cover,
+            ),
           ),
         ),
         Positioned(
