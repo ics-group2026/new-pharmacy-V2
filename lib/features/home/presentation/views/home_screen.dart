@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/widgets/animated_fade_slide.dart';
 import '../../../banners/presentation/widgets/banners_carousel.dart';
 import '../../../brands/presentation/widgets/brands_section.dart';
@@ -86,7 +88,9 @@ class HomeScreen extends StatelessWidget {
               delay: const Duration(milliseconds: 280),
               child: Padding(
                 padding: EdgeInsets.fromLTRB(16.w, 24.h, 16.w, 0),
-                child: const BestSellerSection(),
+                child: ProductsSection(
+                  onSeeAll: () => context.push(AppRoutes.allProducts),
+                ),
               ),
             ),
           ),
@@ -95,7 +99,7 @@ class HomeScreen extends StatelessWidget {
               delay: const Duration(milliseconds: 320),
               child: Padding(
                 padding: EdgeInsets.fromLTRB(16.w, 24.h, 16.w, 0),
-                child: const ProductsSection(),
+                child: const BestSellerSection(),
               ),
             ),
           ),
