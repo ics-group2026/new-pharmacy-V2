@@ -16,6 +16,7 @@ import '../../features/profile/presentation/cubits/profile_cubit.dart';
 import '../../features/profile/presentation/views/profile_screen.dart';
 import '../../features/nav_bar/presentation/views/bottom_nav_bar_screen.dart';
 import '../../features/products/data/models/product_model.dart';
+import '../../features/products/presentation/views/all_products_screen.dart';
 import '../../features/products/presentation/views/product_detail_screen.dart';
 import '../../features/search/presentation/views/search_screen.dart';
 import '../../features/notifications/presentation/views/notifications_screen.dart';
@@ -99,6 +100,10 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: AppRoutes.notifications,
       builder: (context, state) => const NotificationsScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.allProducts,
+      builder: (context, state) => const AllProductsScreen(),
     ),
   ],
 );

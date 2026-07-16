@@ -35,3 +35,37 @@ class _ProductCardShimmer extends StatelessWidget {
     );
   }
 }
+
+class ProductsGridLoading extends StatelessWidget {
+  const ProductsGridLoading({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      padding: EdgeInsets.all(16.r),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 12.w,
+        mainAxisSpacing: 16.h,
+        childAspectRatio: 0.65,
+      ),
+      itemCount: 6,
+      itemBuilder: (_, _) => const _ProductGridCardShimmer(),
+    );
+  }
+}
+
+class _ProductGridCardShimmer extends StatelessWidget {
+  const _ProductGridCardShimmer();
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    return Container(
+      decoration: BoxDecoration(
+        color: colorScheme.surfaceContainerHighest,
+        borderRadius: BorderRadius.circular(20.r),
+      ),
+    );
+  }
+}
