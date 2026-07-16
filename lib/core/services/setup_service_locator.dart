@@ -4,6 +4,8 @@ import '../../features/auth/data/repos/auth_repo.dart';
 import '../../features/auth/data/repos/auth_repo_impl.dart';
 import '../../features/banners/data/repos/banners_repo.dart';
 import '../../features/banners/data/repos/banners_repo_impl.dart';
+import '../../features/brands/data/repos/brands_repo.dart';
+import '../../features/brands/data/repos/brands_repo_impl.dart';
 import '../../features/bundles/data/repos/bundles_repo.dart';
 import '../../features/bundles/data/repos/bundles_repo_impl.dart';
 import '../../features/categories/data/repos/categories_repo.dart';
@@ -53,6 +55,9 @@ void setupServiceLocator() {
   );
   getIt.registerSingleton<ProductsRepo>(
     ProductsRepoImpl(apiService: getIt<ApiService>()),
+  );
+  getIt.registerSingleton<BrandsRepo>(
+    BrandsRepoImpl(apiService: getIt<ApiService>()),
   );
 
   /// Cubits
