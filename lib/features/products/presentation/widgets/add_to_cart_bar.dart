@@ -3,7 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_pharmacy_v2/core/utils/app_translations.dart';
 
 class AddToCartBar extends StatelessWidget {
-  const AddToCartBar({super.key, 
+  const AddToCartBar({
+    super.key,
     required this.totalPrice,
     required this.currency,
     required this.onAddToCart,
@@ -61,7 +62,9 @@ class AddToCartBar extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: onAddToCart,
                   style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14.r)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14.r),
+                    ),
                   ),
                   child: Text(
                     AppTranslations.t('product_detail.add_to_cart'),

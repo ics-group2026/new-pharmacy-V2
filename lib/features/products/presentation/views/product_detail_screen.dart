@@ -125,6 +125,7 @@ class _ProductDetailContent extends StatelessWidget {
                         HowToUseWidget(colorScheme: colorScheme, theme: theme),
                         20.verticalSpace,
                         ProductQuantitySection(theme: theme, colorScheme: colorScheme),
+                        24.verticalSpace,
                       ],
                     ),
                   ),
