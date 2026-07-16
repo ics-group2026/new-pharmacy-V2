@@ -11,11 +11,18 @@ import 'package:new_pharmacy_v2/features/products/data/models/product_model.dart
 import '../../features/wishlist/cubit/wishlist_cubit.dart';
 
 class ProductCard extends StatelessWidget {
-  const ProductCard({super.key, required this.product, this.imageHeight, this.width});
+  const ProductCard({
+    super.key,
+    required this.product,
+    this.imageHeight,
+    this.width,
+    this.enableHero = true,
+  });
 
   final ProductModel product;
   final double? imageHeight;
   final double? width;
+  final bool enableHero;
 
   @override
   Widget build(BuildContext context) {
@@ -49,17 +56,10 @@ class ProductCard extends StatelessWidget {
           children: [
             Stack(
               children: [
-                Hero(
-                  tag: heroTag,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
-                    child: CachedNetworkImageWidget(
-                      imageUrl: imageUrl,
-                      width: double.infinity,
-                      height: imgHeight,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                _ProductImage(
+                  heroTag: enableHero ? heroTag : null,
+                  imageUrl: imageUrl,
+                  height: imgHeight,
                 ),
                 Positioned(
                   top: 8.h,
@@ -85,14 +85,20 @@ class ProductCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    product.name ?? '',
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      fontWeight: FontWeight.w600,
-                      color: colorScheme.onSurface,
-                      height: 1.35,
+                  // Fixed height reserves room for 2 lines regardless of the
+                  // actual name length, so every grid card lands at the same
+                  // height instead of leaving a gap under short names.
+                  SizedBox(
+                    height: 33,
+                    child: Text(
+                      product.name ?? '',
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: colorScheme.onSurface,
+                        height: 1.35,
+                      ),
                     ),
                   ),
                   8.verticalSpace,
@@ -113,7 +119,9 @@ class ProductCard extends StatelessWidget {
                           style: theme.textTheme.bodySmall?.copyWith(
                             color: colorScheme.onSurface.withValues(alpha: 0.38),
                             decoration: TextDecoration.lineThrough,
-                            decorationColor: colorScheme.onSurface.withValues(alpha: 0.38),
+                            decorationColor: colorScheme.onSurface.withValues(
+                              alpha: 0.38,
+                            ),
                           ),
                         ),
                       ],
@@ -128,7 +136,8 @@ class ProductCard extends StatelessWidget {
                 width: double.infinity,
                 height: 34.h,
                 child: ElevatedButton(
-                  onPressed: () => context.push(AppRoutes.productDetail, extra: product),
+                  onPressed: () =>
+                      context.push(AppRoutes.productDetail, extra: product),
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.zero,
                     shape: RoundedRectangleBorder(
@@ -146,6 +155,30 @@ class ProductCard extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class _ProductImage extends StatelessWidget {
+  const _ProductImage({required this.heroTag, required this.imageUrl, required this.height});
+
+  final Object? heroTag;
+  final String imageUrl;
+  final double height;
+
+  @override
+  Widget build(BuildContext context) {
+    final image = ClipRRect(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+      child: CachedNetworkImageWidget(
+        imageUrl: imageUrl,
+        width: double.infinity,
+        height: height,
+        fit: BoxFit.cover,
+      ),
+    );
+
+    if (heroTag == null) return image;
+    return Hero(tag: heroTag!, child: image);
   }
 }
 
@@ -177,7 +210,9 @@ class _WishlistButton extends StatelessWidget {
         child: Icon(
           isWishlisted ? Icons.favorite_rounded : Icons.favorite_border_rounded,
           size: 15.r,
-          color: isWishlisted ? Colors.redAccent : colorScheme.onSurface.withValues(alpha: 0.45),
+          color: isWishlisted
+              ? Colors.redAccent
+              : colorScheme.onSurface.withValues(alpha: 0.45),
         ),
       ),
     );

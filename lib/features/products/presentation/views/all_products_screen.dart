@@ -109,7 +109,10 @@ class _AllProductsBodyState extends State<_AllProductsBody> {
                 if (index >= state.products.length) {
                   return const Center(child: CircularProgressIndicator());
                 }
-                return ProductCard(product: state.products[index]);
+                return ProductCard(
+                  product: state.products[index],
+                  enableHero: false,
+                );
               },
             ),
           );
