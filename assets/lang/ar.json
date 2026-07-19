@@ -61,6 +61,39 @@
   "brands": {
     "title": "تسوق حسب الماركة"
   },
+  "wallet": {
+    "title": "محفظتي",
+    "balance": "رصيد المحفظة",
+    "loyalty_points": "نقاط الولاء",
+    "points_value": "{points} نقطة",
+    "referral_code": "كود الإحالة",
+    "code_copied": "تم نسخ كود الإحالة",
+    "tab_transactions": "المعاملات",
+    "tab_loyalty": "الولاء",
+    "no_transactions": "لا توجد معاملات بعد",
+    "no_loyalty": "لا يوجد نشاط ولاء بعد",
+    "add_funds": "شحن رصيد",
+    "add_funds_title": "شحن رصيد المحفظة",
+    "amount": "المبلغ",
+    "amount_hint": "أدخل المبلغ",
+    "amount_required": "يرجى إدخال المبلغ",
+    "amount_invalid": "أدخل مبلغاً صحيحاً أكبر من صفر",
+    "notes": "ملاحظات (اختياري)",
+    "notes_hint": "مثال: شحن عبر التطبيق",
+    "funds_added": "تم شحن الرصيد بنجاح",
+    "convert_points": "تحويل النقاط",
+    "convert": "تحويل",
+    "convert_title": "تحويل نقاط الولاء",
+    "convert_message": "تحويل كل نقاط الولاء ({points}) إلى رصيد المحفظة؟",
+    "points_converted": "تم تحويل النقاط بنجاح",
+    "type": {
+      "deposit": "شحن رصيد",
+      "payment": "دفع",
+      "refund": "استرداد",
+      "order_earn": "نقاط مكتسبة",
+      "conversion": "تحويل نقاط"
+    }
+  },
   "combo_offers": {
     "title": "عروض الكومبو",
     "included_products": "المنتجات المشمولة"
@@ -131,6 +164,7 @@
     "edit_profile": "تعديل الملف الشخصي",
     "my_orders": "طلباتي",
     "notifications": "الإشعارات",
+    "wallet": "محفظتي",
     "help_support": "المساعدة والدعم",
     "dark_mode": "الوضع الداكن",
     "email_placeholder": "user@pharmacy.com",

@@ -61,6 +61,39 @@
   "brands": {
     "title": "Shop by Brand"
   },
+  "wallet": {
+    "title": "My Wallet",
+    "balance": "Wallet Balance",
+    "loyalty_points": "Loyalty Points",
+    "points_value": "{points} pts",
+    "referral_code": "Referral Code",
+    "code_copied": "Referral code copied",
+    "tab_transactions": "Transactions",
+    "tab_loyalty": "Loyalty",
+    "no_transactions": "No transactions yet",
+    "no_loyalty": "No loyalty activity yet",
+    "add_funds": "Add Funds",
+    "add_funds_title": "Add Funds to Wallet",
+    "amount": "Amount",
+    "amount_hint": "Enter amount",
+    "amount_required": "Please enter an amount",
+    "amount_invalid": "Enter a valid amount greater than zero",
+    "notes": "Notes (optional)",
+    "notes_hint": "e.g. Top-up via mobile app",
+    "funds_added": "Funds added successfully",
+    "convert_points": "Convert Points",
+    "convert": "Convert",
+    "convert_title": "Convert Loyalty Points",
+    "convert_message": "Convert all {points} loyalty points into wallet balance?",
+    "points_converted": "Points converted successfully",
+    "type": {
+      "deposit": "Top-up",
+      "payment": "Payment",
+      "refund": "Refund",
+      "order_earn": "Points earned",
+      "conversion": "Points converted"
+    }
+  },
   "combo_offers": {
     "title": "Combo Offers",
     "included_products": "Included Products"
@@ -131,6 +164,7 @@
     "edit_profile": "Edit Profile",
     "my_orders": "My Orders",
     "notifications": "Notifications",
+    "wallet": "My Wallet",
     "help_support": "Help & Support",
     "dark_mode": "Dark Mode",
     "email_placeholder": "user@pharmacy.com",
