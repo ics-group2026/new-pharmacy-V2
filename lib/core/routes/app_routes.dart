@@ -9,6 +9,7 @@ abstract class AppRoutes {
   static const String flashDealDetail = "/flashDealDetail";
   static const String bundleDetail = "/bundleDetail";
   static const String profile = "/profile";
+  static const String wallet = "/wallet";
   static const String notifications = "/notifications";
   static const String allProducts = "/allProducts";
 }

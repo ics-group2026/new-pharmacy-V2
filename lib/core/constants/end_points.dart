@@ -41,6 +41,10 @@ abstract class EndPoints {
   static const String walletTransactions = '/customer/wallet/transactions';
   static const String walletLoyaltyTransactions =
       '/customer/wallet/loyalty-transactions';
+  static const String walletAddFunds = '/customer/wallet/add-funds';
+
+  // Note: conversion sits outside the /wallet group.
+  static const String loyaltyPointsConvert = '/customer/loyalty-points/convert';
 
   // Authentication
   static const String login = '/auth/login';

@@ -19,6 +19,7 @@ import '../../features/products/data/models/product_model.dart';
 import '../../features/products/presentation/views/all_products_screen.dart';
 import '../../features/products/presentation/views/product_detail_screen.dart';
 import '../../features/search/presentation/views/search_screen.dart';
+import '../../features/wallet/presentation/views/wallet_screen.dart';
 import '../../features/notifications/presentation/views/notifications_screen.dart';
 import '../constants/constants.dart';
 import '../services/prefs.dart';
@@ -104,6 +105,10 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: AppRoutes.allProducts,
       builder: (context, state) => const AllProductsScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.wallet,
+      builder: (context, state) => const WalletScreen(),
     ),
   ],
 );
