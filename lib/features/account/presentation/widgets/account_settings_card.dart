@@ -19,6 +19,12 @@ class AccountSettingsCard extends StatelessWidget {
         ),
         const SettingsDivider(),
         SettingsTile(
+          icon: Icons.account_balance_wallet_outlined,
+          titleKey: 'account.wallet',
+          onTap: () => context.push(AppRoutes.wallet),
+        ),
+        const SettingsDivider(),
+        SettingsTile(
           icon: Icons.receipt_long_rounded,
           titleKey: 'account.my_orders',
           onTap: () {},
