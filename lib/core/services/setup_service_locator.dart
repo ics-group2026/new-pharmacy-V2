@@ -21,6 +21,8 @@ import '../../features/products/data/repos/products_repo.dart';
 import '../../features/products/data/repos/products_repo_impl.dart';
 import '../../features/profile/data/repos/profile_repo.dart';
 import '../../features/profile/data/repos/profile_repo_impl.dart';
+import '../../features/wallet/data/repos/wallet_repo.dart';
+import '../../features/wallet/data/repos/wallet_repo_impl.dart';
 import '../../features/profile/presentation/cubits/profile_cubit.dart';
 import 'api_service.dart';
 import 'dio_consumer.dart';
@@ -58,6 +60,9 @@ void setupServiceLocator() {
   );
   getIt.registerSingleton<BrandsRepo>(
     BrandsRepoImpl(apiService: getIt<ApiService>()),
+  );
+  getIt.registerSingleton<WalletRepo>(
+    WalletRepoImpl(apiService: getIt<ApiService>()),
   );
 
   /// Cubits
