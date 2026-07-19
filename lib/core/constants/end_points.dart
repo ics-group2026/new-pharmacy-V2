@@ -36,6 +36,12 @@ abstract class EndPoints {
 
   static const String notificationsMarkAllAsRead = '/notifications/inbox/read-all';
 
+  // Customer wallet
+  static const String wallet = '/customer/wallet';
+  static const String walletTransactions = '/customer/wallet/transactions';
+  static const String walletLoyaltyTransactions =
+      '/customer/wallet/loyalty-transactions';
+
   // Authentication
   static const String login = '/auth/login';
   static const String customerRegister = '/auth/customer/register';
