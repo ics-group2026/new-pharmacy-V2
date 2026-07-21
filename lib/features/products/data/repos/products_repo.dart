@@ -15,7 +15,9 @@ abstract class ProductsRepo {
   Future<Either<Failure, ProductDetailsModel>> getProductById(String id);
 
   /// Products belonging to a given category and/or brand.
-  Future<Either<Failure, List<ProductModel>>> getProductsByFilter({
+  Future<Either<Failure, ({List<ProductModel> items, bool hasNext})>> getProductsByFilter({
+    int page = 1,
+    int limit = 10,
     String? categoryId,
     String? brandId,
   });

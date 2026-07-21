@@ -50,20 +50,29 @@ class ProductsRepoImpl implements ProductsRepo {
   }
 
   @override
-  Future<Either<Failure, List<ProductModel>>> getProductsByFilter({
+  Future<Either<Failure, ({List<ProductModel> items, bool hasNext})>> getProductsByFilter({
+    int page = 1,
+    int limit = 10,
     String? categoryId,
     String? brandId,
   }) async {
     try {
       final result = await apiService.get(
         EndPoints.products,
-        queryParameters: {'categoryId': ?categoryId, 'brandId': ?brandId},
+        queryParameters: {
+          'page': page,
+          'limit': limit,
+          'categoryId': ?categoryId,
+          'brandId': ?brandId,
+        },
       );
       final data = result['data'] as Map<String, dynamic>;
       final items = (data['items'] as List)
           .map((e) => ProductModel.fromJson(e as Map<String, dynamic>))
           .toList();
-      return Right(items);
+      final meta = data['meta'] as Map<String, dynamic>?;
+      final hasNext = meta?['hasNext'] as bool? ?? false;
+      return Right((items: items, hasNext: hasNext));
     } on CustomException catch (e) {
       return left(ServerFailure(errMessage: e.message));
     }

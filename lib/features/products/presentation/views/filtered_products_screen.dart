@@ -36,10 +36,37 @@ class FilteredProductsScreen extends StatelessWidget {
   }
 }
 
-class _FilteredProductsBody extends StatelessWidget {
+class _FilteredProductsBody extends StatefulWidget {
   const _FilteredProductsBody({required this.title});
 
   final String title;
+
+  @override
+  State<_FilteredProductsBody> createState() => _FilteredProductsBodyState();
+}
+
+class _FilteredProductsBodyState extends State<_FilteredProductsBody> {
+  final _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_onScroll);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(_onScroll);
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    if (_scrollController.position.pixels >=
+        _scrollController.position.maxScrollExtent - 200) {
+      context.read<FilteredProductsCubit>().loadMore();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +74,7 @@ class _FilteredProductsBody extends StatelessWidget {
     final colorScheme = theme.colorScheme;
 
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
+      appBar: AppBar(title: Text(widget.title)),
       body: BlocBuilder<FilteredProductsCubit, FilteredProductsState>(
         builder: (context, state) {
           if (state.status == FilteredProductsStatus.loading ||
@@ -84,6 +111,7 @@ class _FilteredProductsBody extends StatelessWidget {
           return RefreshIndicator(
             onRefresh: () => context.read<FilteredProductsCubit>().getProducts(),
             child: GridView.builder(
+              controller: _scrollController,
               padding: EdgeInsets.all(16.r),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
@@ -91,11 +119,16 @@ class _FilteredProductsBody extends StatelessWidget {
                 mainAxisSpacing: 16.h,
                 childAspectRatio: 0.65,
               ),
-              itemCount: state.products.length,
-              itemBuilder: (context, index) => ProductCard(
-                product: state.products[index],
-                enableHero: false,
-              ),
+              itemCount: state.products.length + (state.isLoadingMore ? 1 : 0),
+              itemBuilder: (context, index) {
+                if (index >= state.products.length) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                return ProductCard(
+                  product: state.products[index],
+                  enableHero: false,
+                );
+              },
             ),
           );
         },
