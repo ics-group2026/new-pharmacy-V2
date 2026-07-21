@@ -74,7 +74,7 @@ class _FilteredProductsBodyState extends State<_FilteredProductsBody> {
     final colorScheme = theme.colorScheme;
 
     return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
+      appBar: AppBar(centerTitle: true, title: Text(widget.title)),
       body: BlocBuilder<FilteredProductsCubit, FilteredProductsState>(
         builder: (context, state) {
           if (state.status == FilteredProductsStatus.loading ||
@@ -96,7 +96,8 @@ class _FilteredProductsBodyState extends State<_FilteredProductsBody> {
                   ),
                   12.verticalSpace,
                   TextButton(
-                    onPressed: () => context.read<FilteredProductsCubit>().getProducts(),
+                    onPressed: () =>
+                        context.read<FilteredProductsCubit>().getProducts(),
                     child: Text(AppTranslations.t('common.retry')),
                   ),
                 ],

@@ -11,6 +11,6 @@ class NewArrivalItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProductCard(product: item, imageHeight: 140.h, width: 160.w);
+    return ProductCard(product: item, imageHeight: 140.h, width: 160.w, enableHero: false);
   }
 }

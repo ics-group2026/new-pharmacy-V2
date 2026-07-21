@@ -11,6 +11,6 @@ class TrendingProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProductCard(product: product, imageHeight: 110.h);
+    return ProductCard(product: product, imageHeight: 110.h, enableHero: false);
   }
 }
