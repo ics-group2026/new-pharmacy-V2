@@ -1,5 +1,5 @@
-import '../../data/models/product_details_model.dart';
-import '../../data/models/product_model.dart';
+import 'package:new_pharmacy_v2/features/products/data/models/product_details_model.dart';
+import 'package:new_pharmacy_v2/features/products/data/models/product_model.dart';
 
 extension ProductDetailsMapper on ProductDetailsModel {
   /// Reduces the full details record to the [ProductModel] the shared product

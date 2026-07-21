@@ -6,8 +6,8 @@ import 'package:new_pharmacy_v2/features/products/data/repos/products_repo.dart'
 import 'package:new_pharmacy_v2/features/products/presentation/cubits/products_cubit.dart';
 import 'package:new_pharmacy_v2/features/products/presentation/cubits/products_state.dart';
 
-import '../../../../../core/services/setup_service_locator.dart';
-import '../../../../../core/widgets/section_header.dart';
+import 'package:new_pharmacy_v2/core/services/setup_service_locator.dart';
+import 'package:new_pharmacy_v2/core/widgets/section_header.dart';
 import 'new_arrival_item.dart';
 
 class NewArrivalsSection extends StatelessWidget {

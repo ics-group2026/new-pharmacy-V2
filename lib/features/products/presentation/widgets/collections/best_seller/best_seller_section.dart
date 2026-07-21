@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../data/models/product_collections.dart';
-import 'product_collection_section.dart';
+import '../../../../data/models/product_collections.dart';
+import '../../product_collection_section.dart';
 
 class BestSellerSection extends StatelessWidget {
   const BestSellerSection({super.key, this.onSeeAll});

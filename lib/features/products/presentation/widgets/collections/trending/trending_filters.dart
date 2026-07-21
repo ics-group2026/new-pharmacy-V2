@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_pharmacy_v2/features/products/data/models/product_collections.dart';
 
-import '../../../../../core/utils/app_translations.dart';
-import '../../../../../core/widgets/pill_chip.dart';
+import 'package:new_pharmacy_v2/core/utils/app_translations.dart';
+import 'package:new_pharmacy_v2/core/widgets/pill_chip.dart';
 
 /// The filter chips map 1:1 onto the storefront presets, so selecting one
 /// re-queries `GET /products?collection=...`.

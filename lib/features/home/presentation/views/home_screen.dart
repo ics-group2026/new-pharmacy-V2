@@ -10,12 +10,12 @@ import '../../../bundles/presentation/widgets/bundles_section.dart';
 import '../../../categories/presentation/widgets/categories_section.dart';
 import '../../../combo_offers/presentation/widgets/combo_offers_section.dart';
 import '../../../flash_deals/presentation/widgets/flash_deals_section.dart';
-import '../../../new_arrivals/presentation/widgets/new_arrivals_section.dart';
-import '../../../products/presentation/widgets/best_seller_section.dart';
-import '../../../products/presentation/widgets/on_sale_section.dart';
+import '../../../products/presentation/widgets/collections/best_seller/best_seller_section.dart';
+import '../../../products/presentation/widgets/collections/new_arrivals/new_arrivals_section.dart';
+import '../../../products/presentation/widgets/collections/on_sale/on_sale_section.dart';
+import '../../../products/presentation/widgets/collections/top_rated/top_rated_section.dart';
+import '../../../products/presentation/widgets/collections/trending/trending_section.dart';
 import '../../../products/presentation/widgets/products_section.dart';
-import '../../../products/presentation/widgets/top_rated_section.dart';
-import '../../../trending/presentation/widgets/trending_section.dart';
 import '../widgets/home_app_bar.dart';
 
 class HomeScreen extends StatelessWidget {

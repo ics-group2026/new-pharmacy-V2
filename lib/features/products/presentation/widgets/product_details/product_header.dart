@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/utils/app_colors.dart';
-import '../../../../../core/utils/app_translations.dart';
-import '../../../../../core/widgets/animated_fade_slide.dart';
-import '../../../../../core/widgets/discount_badge.dart';
-import '../../../../../core/widgets/star_rating_row.dart';
+import 'package:new_pharmacy_v2/core/utils/app_colors.dart';
+import 'package:new_pharmacy_v2/core/utils/app_translations.dart';
+import 'package:new_pharmacy_v2/core/widgets/animated_fade_slide.dart';
+import 'package:new_pharmacy_v2/core/widgets/discount_badge.dart';
+import 'package:new_pharmacy_v2/core/widgets/star_rating_row.dart';
 import 'package:new_pharmacy_v2/features/products/data/models/product_model.dart';
 import 'price_row.dart';
 

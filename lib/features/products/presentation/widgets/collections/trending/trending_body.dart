@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_pharmacy_v2/features/products/presentation/cubits/products_cubit.dart';
 import 'package:new_pharmacy_v2/features/products/presentation/cubits/products_state.dart';
 
-import '../../../../../core/widgets/section_header.dart';
+import 'package:new_pharmacy_v2/core/widgets/section_header.dart';
 import 'trending_filters.dart';
 import 'trending_grid.dart';
 import 'trending_grid_loading.dart';

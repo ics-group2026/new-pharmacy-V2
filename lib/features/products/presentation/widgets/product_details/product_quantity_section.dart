@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:new_pharmacy_v2/features/products/presentation/widgets/quantity_widget.dart';
+import 'package:new_pharmacy_v2/features/products/presentation/widgets/product_details/quantity_widget.dart';
 
 class ProductQuantitySection extends StatefulWidget {
   const ProductQuantitySection({
