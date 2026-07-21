@@ -15,12 +15,17 @@ class ProductCard extends StatelessWidget {
     this.imageHeight,
     this.width,
     this.enableHero = true,
+    this.bottomPadding,
   });
 
   final ProductModel product;
   final double? imageHeight;
   final double? width;
   final bool enableHero;
+
+  /// Space below the "Buy Now" button. Defaults to 10.h; pass a smaller
+  /// value to tighten a specific grid without affecting the shared default.
+  final double? bottomPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -41,13 +46,6 @@ class ProductCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: colorScheme.surface,
           borderRadius: BorderRadius.circular(20.r),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.08),
-              blurRadius: 16,
-              offset: const Offset(0, 6),
-            ),
-          ],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,7 +81,7 @@ class ProductCard extends StatelessWidget {
                   // actual name length, so every grid card lands at the same
                   // height instead of leaving a gap under short names.
                   SizedBox(
-                    height: 33,
+                    height: 33.h,
                     child: Text(
                       product.name ?? '',
                       maxLines: 2,
@@ -125,7 +123,7 @@ class ProductCard extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.fromLTRB(12.w, 8.h, 12.w, 12.h),
+              padding: EdgeInsets.fromLTRB(12.w, 8.h, 12.w, bottomPadding ?? 10.h),
               child: SizedBox(
                 width: double.infinity,
                 height: 34.h,

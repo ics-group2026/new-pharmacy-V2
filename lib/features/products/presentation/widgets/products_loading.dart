@@ -47,7 +47,7 @@ class ProductsGridLoading extends StatelessWidget {
         crossAxisCount: 2,
         crossAxisSpacing: 12.w,
         mainAxisSpacing: 16.h,
-        childAspectRatio: 0.65,
+        mainAxisExtent: 290.h,
       ),
       itemCount: 6,
       itemBuilder: (_, _) => const _ProductGridCardShimmer(),

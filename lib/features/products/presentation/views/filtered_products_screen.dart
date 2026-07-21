@@ -118,7 +118,7 @@ class _FilteredProductsBodyState extends State<_FilteredProductsBody> {
                 crossAxisCount: 2,
                 crossAxisSpacing: 12.w,
                 mainAxisSpacing: 16.h,
-                childAspectRatio: 0.65,
+                mainAxisExtent: 290.h,
               ),
               itemCount: state.products.length + (state.isLoadingMore ? 1 : 0),
               itemBuilder: (context, index) {
