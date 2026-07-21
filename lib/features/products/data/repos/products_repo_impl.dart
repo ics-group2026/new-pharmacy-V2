@@ -48,4 +48,24 @@ class ProductsRepoImpl implements ProductsRepo {
       return left(ServerFailure(errMessage: e.message));
     }
   }
+
+  @override
+  Future<Either<Failure, List<ProductModel>>> getProductsByFilter({
+    String? categoryId,
+    String? brandId,
+  }) async {
+    try {
+      final result = await apiService.get(
+        EndPoints.products,
+        queryParameters: {'categoryId': ?categoryId, 'brandId': ?brandId},
+      );
+      final data = result['data'] as Map<String, dynamic>;
+      final items = (data['items'] as List)
+          .map((e) => ProductModel.fromJson(e as Map<String, dynamic>))
+          .toList();
+      return Right(items);
+    } on CustomException catch (e) {
+      return left(ServerFailure(errMessage: e.message));
+    }
+  }
 }

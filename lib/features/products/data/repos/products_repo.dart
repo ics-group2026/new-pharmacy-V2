@@ -13,4 +13,10 @@ abstract class ProductsRepo {
   });
 
   Future<Either<Failure, ProductDetailsModel>> getProductById(String id);
+
+  /// Products belonging to a given category and/or brand.
+  Future<Either<Failure, List<ProductModel>>> getProductsByFilter({
+    String? categoryId,
+    String? brandId,
+  });
 }
