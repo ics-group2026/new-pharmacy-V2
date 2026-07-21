@@ -23,12 +23,14 @@ abstract class ProductsRepo {
     String? brandId,
   });
 
-  /// Free-text product search with optional price range and sort order.
+  /// Free-text product search with optional category/brand/price/sort filters.
   Future<Either<Failure, ({List<ProductModel> items, bool hasNext})>>
   searchProducts({
     int page = 1,
     int limit = 10,
     String? search,
+    String? categoryId,
+    String? brandId,
     double? minPrice,
     double? maxPrice,
     String? sortOrder,
