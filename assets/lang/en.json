@@ -197,5 +197,10 @@
     "vitamins": "Vitamins",
     "baby_care": "Baby Care",
     "dental": "Dental Care"
+  },
+  "search": {
+    "empty_title": "Search for Products",
+    "empty_subtitle": "Find medications, supplements & more",
+    "no_results": "No products found"
   }
 }

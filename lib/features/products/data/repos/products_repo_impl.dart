@@ -74,4 +74,38 @@ class ProductsRepoImpl implements ProductsRepo {
       return left(ServerFailure(errMessage: e.message));
     }
   }
+
+  @override
+  Future<Either<Failure, ({List<ProductModel> items, bool hasNext})>>
+  searchProducts({
+    int page = 1,
+    int limit = 10,
+    String? search,
+    double? minPrice,
+    double? maxPrice,
+    String? sortOrder,
+  }) async {
+    try {
+      final result = await apiService.get(
+        EndPoints.products,
+        queryParameters: {
+          'page': page,
+          'limit': limit,
+          'search': ?search,
+          'minPrice': ?minPrice,
+          'maxPrice': ?maxPrice,
+          'sortOrder': ?sortOrder,
+        },
+      );
+      final data = result['data'] as Map<String, dynamic>;
+      final items = (data['items'] as List)
+          .map((e) => ProductModel.fromJson(e as Map<String, dynamic>))
+          .toList();
+      final meta = data['meta'] as Map<String, dynamic>?;
+      final hasNext = meta?['hasNext'] as bool? ?? false;
+      return Right((items: items, hasNext: hasNext));
+    } on CustomException catch (e) {
+      return left(ServerFailure(errMessage: e.message));
+    }
+  }
 }

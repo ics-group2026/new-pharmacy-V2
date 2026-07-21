@@ -49,6 +49,7 @@ ThemeData lightTheme = ThemeData(
 
   // ── AppBar ──────────────────────────────────────────────────────────────
   appBarTheme: SharedTheme.lightAppBarTheme.copyWith(
+    centerTitle: true,
     systemOverlayStyle: const SystemUiOverlayStyle(
       statusBarColor: AppColors.primaryDark,
       statusBarIconBrightness: Brightness.light,
@@ -187,9 +188,7 @@ ThemeData lightTheme = ThemeData(
   searchBarTheme: SearchBarThemeData(
     backgroundColor: const WidgetStatePropertyAll(AppColors.surfaceLight),
     elevation: const WidgetStatePropertyAll(0),
-    side: const WidgetStatePropertyAll(
-      BorderSide(color: AppColors.borderLight),
-    ),
+    side: const WidgetStatePropertyAll(BorderSide(color: AppColors.borderLight)),
     shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
     ),

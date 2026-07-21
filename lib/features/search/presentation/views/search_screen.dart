@@ -1,71 +1,159 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../core/constants/hero_tags.dart';
+import '../../../../../core/services/setup_service_locator.dart';
 import '../../../../../core/utils/app_translations.dart';
-import '../../../../../core/widgets/custom_text_form_field.dart';
+import '../../../../../core/widgets/empty_data_placeholder.dart';
+import '../../../../../core/widgets/product_card.dart';
+import '../../../../../core/widgets/search_field_bar.dart';
+import '../../../products/data/repos/products_repo.dart';
+import '../../../products/presentation/widgets/products_loading.dart';
+import '../cubits/search_cubit.dart';
+import '../cubits/search_state.dart';
 
-class SearchScreen extends StatefulWidget {
+class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
 
   @override
-  State<SearchScreen> createState() => _SearchScreenState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => SearchCubit(getIt<ProductsRepo>()),
+      child: const _SearchBody(),
+    );
+  }
 }
 
-class _SearchScreenState extends State<SearchScreen> {
+class _SearchBody extends StatefulWidget {
+  const _SearchBody();
+
+  @override
+  State<_SearchBody> createState() => _SearchBodyState();
+}
+
+class _SearchBodyState extends State<_SearchBody> {
   final _controller = TextEditingController();
-  bool _hasText = false;
+  final _focusNode = FocusNode();
+  final _scrollController = ScrollController();
+  bool _autofocusHandled = false;
 
   @override
   void initState() {
     super.initState();
-    _controller.addListener(() {
-      final hasText = _controller.text.isNotEmpty;
-      if (hasText != _hasText) setState(() => _hasText = hasText);
-    });
+    _scrollController.addListener(_onScroll);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_autofocusHandled) return;
+    _autofocusHandled = true;
+    // Focus once the Hero flight into this screen has finished, so the
+    // keyboard doesn't pop up mid-animation and cause jank.
+    final animation = ModalRoute.of(context)?.animation;
+    if (animation == null || animation.isCompleted) {
+      _focusNode.requestFocus();
+      return;
+    }
+    void listener(AnimationStatus status) {
+      if (status == AnimationStatus.completed) {
+        _focusNode.requestFocus();
+        animation.removeStatusListener(listener);
+      }
+    }
+
+    animation.addStatusListener(listener);
   }
 
   @override
   void dispose() {
+    _scrollController.removeListener(_onScroll);
+    _scrollController.dispose();
     _controller.dispose();
+    _focusNode.dispose();
     super.dispose();
+  }
+
+  void _onScroll() {
+    if (_scrollController.position.pixels >=
+        _scrollController.position.maxScrollExtent - 200) {
+      context.read<SearchCubit>().loadMore();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
     return Scaffold(
-      appBar: AppBar(
-        titleSpacing: 0,
-        title: Padding(
-          padding: EdgeInsets.only(right: 16.w),
-          child: CustomTextFormField(
-            controller: _controller,
-            hintText: AppTranslations.t('common.search_hint'),
-            autofocus: true,
-            prefixIcon: Icon(Icons.search_rounded, color: colorScheme.onSurfaceVariant),
-            suffixIcon: _hasText
-                ? IconButton(
-                    icon: Icon(Icons.close_rounded, color: colorScheme.onSurfaceVariant),
-                    onPressed: _controller.clear,
-                  )
-                : null,
+      appBar: AppBar(),
+      body: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.fromLTRB(16.w, 0, 16.w, 16.h),
+            child: Hero(
+              tag: HeroTags.searchBar,
+              child: SearchFieldBar(
+                controller: _controller,
+                focusNode: _focusNode,
+                onChanged: (query) => context.read<SearchCubit>().onQueryChanged(query),
+              ),
+            ),
           ),
-        ),
-      ),
-      body: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 250),
-        child: _hasText
-            ? const SizedBox.expand(key: ValueKey('results'))
-            : _EmptySearchState(key: const ValueKey('empty')),
+          Expanded(
+            child: BlocBuilder<SearchCubit, SearchState>(
+              builder: (context, state) {
+                if (state.status == SearchStatus.initial) {
+                  return const _EmptySearchState();
+                }
+
+                if (state.status == SearchStatus.loading) {
+                  return const ProductsGridLoading();
+                }
+
+                if (state.status == SearchStatus.error && state.products.isEmpty) {
+                  return Center(
+                    child: Text(
+                      state.errorMessage ?? AppTranslations.t('common.no_data'),
+                      textAlign: TextAlign.center,
+                    ),
+                  );
+                }
+
+                if (state.products.isEmpty) {
+                  return const EmptyDataPlaceholder(messageKey: 'search.no_results');
+                }
+
+                return GridView.builder(
+                  controller: _scrollController,
+                  padding: EdgeInsets.fromLTRB(16.w, 0, 16.w, 16.h),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 12.w,
+                    mainAxisSpacing: 16.h,
+                    childAspectRatio: 0.65,
+                  ),
+                  itemCount: state.products.length + (state.isLoadingMore ? 1 : 0),
+                  itemBuilder: (context, index) {
+                    if (index >= state.products.length) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                    return ProductCard(
+                      product: state.products[index],
+                      enableHero: false,
+                    );
+                  },
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
 }
 
 class _EmptySearchState extends StatelessWidget {
-  const _EmptySearchState({super.key});
+  const _EmptySearchState();
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +171,7 @@ class _EmptySearchState extends StatelessWidget {
           ),
           20.verticalSpace,
           Text(
-            'Search for Products',
+            AppTranslations.t('search.empty_title'),
             style: theme.textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.bold,
               color: colorScheme.onSurface,
@@ -91,7 +179,7 @@ class _EmptySearchState extends StatelessWidget {
           ),
           8.verticalSpace,
           Text(
-            'Find medications, supplements & more',
+            AppTranslations.t('search.empty_subtitle'),
             style: theme.textTheme.bodyMedium?.copyWith(
               color: colorScheme.onSurface.withValues(alpha: 0.5),
             ),

@@ -52,6 +52,7 @@ ThemeData darkTheme = ThemeData(
 
   // ── AppBar ──────────────────────────────────────────────────────────────
   appBarTheme: SharedTheme.darkAppBarTheme.copyWith(
+    centerTitle: true,
     systemOverlayStyle: const SystemUiOverlayStyle(
       statusBarColor: AppColors.scaffoldDark,
       statusBarIconBrightness: Brightness.light,
@@ -162,7 +163,10 @@ ThemeData darkTheme = ThemeData(
   // ── Snackbar ──────────────────────────────────────────────────────────────
   snackBarTheme: SnackBarThemeData(
     backgroundColor: AppColors.cardDark,
-    contentTextStyle: const TextStyle(color: AppColors.textPrimaryDark, fontSize: 14),
+    contentTextStyle: const TextStyle(
+      color: AppColors.textPrimaryDark,
+      fontSize: 14,
+    ),
     actionTextColor: AppColors.primaryLight,
     behavior: SnackBarBehavior.floating,
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -208,9 +212,7 @@ ThemeData darkTheme = ThemeData(
   searchBarTheme: SearchBarThemeData(
     backgroundColor: const WidgetStatePropertyAll(AppColors.cardDark),
     elevation: const WidgetStatePropertyAll(0),
-    side: const WidgetStatePropertyAll(
-      BorderSide(color: AppColors.borderDark),
-    ),
+    side: const WidgetStatePropertyAll(BorderSide(color: AppColors.borderDark)),
     shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
     ),

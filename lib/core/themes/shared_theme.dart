@@ -251,7 +251,7 @@ abstract class SharedTheme {
     backgroundColor: AppColors.primary,
     foregroundColor: AppColors.whiteColor,
     elevation: 0,
-    centerTitle: false,
+    centerTitle: true,
     titleTextStyle: TextStyle(
       color: AppColors.whiteColor,
       fontSize: 20,

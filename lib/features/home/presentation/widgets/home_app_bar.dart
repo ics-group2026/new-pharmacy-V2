@@ -3,10 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../core/constants/hero_tags.dart';
 import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/services/setup_service_locator.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_translations.dart';
+import '../../../../../core/widgets/search_field_bar.dart';
 import '../../../notifications/presentation/cubits/unread_notifications_cubit.dart';
 import '../../../profile/presentation/cubits/profile_cubit.dart';
 import '../../../profile/presentation/cubits/profile_state.dart';
@@ -116,43 +118,13 @@ class _SearchBarSlot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
     return Padding(
       padding: EdgeInsets.fromLTRB(16.w, 0, 16.w, 12.h),
-      child: GestureDetector(
-        onTap: () => context.push(AppRoutes.search),
-        child: Container(
-          height: 44.h,
-          decoration: BoxDecoration(
-            color: colorScheme.surface,
-            borderRadius: BorderRadius.circular(28.r),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.12),
-                blurRadius: 8,
-                offset: const Offset(0, 3),
-              ),
-            ],
-          ),
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
-          child: Row(
-            children: [
-              Icon(
-                Icons.search_rounded,
-                size: 20.r,
-                color: colorScheme.onSurface.withValues(alpha: 0.45),
-              ),
-              10.horizontalSpace,
-              Text(
-                AppTranslations.t('common.search_hint'),
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  color: colorScheme.onSurface.withValues(alpha: 0.45),
-                ),
-              ),
-            ],
-          ),
+      child: Hero(
+        tag: HeroTags.searchBar,
+        child: SearchFieldBar(
+          interactive: false,
+          onTap: () => context.push(AppRoutes.search),
         ),
       ),
     );
