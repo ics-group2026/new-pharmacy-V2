@@ -23,6 +23,14 @@ class Prefs {
     return _instance.getString(key);
   }
 
+  static Future<void> setStringList(String key, List<String> value) async {
+    await _instance.setStringList(key, value);
+  }
+
+  static List<String> getStringList(String key) {
+    return _instance.getStringList(key) ?? const [];
+  }
+
   static Future<bool> removeData({required String key}) async {
     return await _instance.remove(key);
   }
