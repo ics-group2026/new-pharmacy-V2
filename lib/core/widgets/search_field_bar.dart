@@ -71,7 +71,11 @@ class SearchFieldBar extends StatelessWidget {
                         ),
                         decoration: InputDecoration(
                           isCollapsed: true,
+                          filled: false,
+                          fillColor: Colors.transparent,
                           border: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          focusedBorder: InputBorder.none,
                           hintText: AppTranslations.t('common.search_hint'),
                           hintStyle: TextStyle(
                             fontSize: 14.sp,
