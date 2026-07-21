@@ -24,6 +24,7 @@ import '../../features/profile/data/repos/profile_repo_impl.dart';
 import '../../features/wallet/data/repos/wallet_repo.dart';
 import '../../features/wallet/data/repos/wallet_repo_impl.dart';
 import '../../features/profile/presentation/cubits/profile_cubit.dart';
+import '../../features/search/presentation/cubits/search_cubit.dart';
 import 'api_service.dart';
 import 'dio_consumer.dart';
 
@@ -73,5 +74,10 @@ void setupServiceLocator() {
   // Shared so the home app bar badge reflects the count across navigation.
   getIt.registerLazySingleton<UnreadNotificationsCubit>(
     () => UnreadNotificationsCubit(getIt<NotificationsRepo>()),
+  );
+  // Shared so the query, filters and results survive leaving and re-entering
+  // the Search screen.
+  getIt.registerLazySingleton<SearchCubit>(
+    () => SearchCubit(getIt<ProductsRepo>()),
   );
 }
