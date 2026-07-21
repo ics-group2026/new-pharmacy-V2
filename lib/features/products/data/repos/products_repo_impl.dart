@@ -20,11 +20,7 @@ class ProductsRepoImpl implements ProductsRepo {
     try {
       final result = await apiService.get(
         EndPoints.products,
-        queryParameters: {
-          'page': page,
-          'limit': limit,
-          'collection': ?collection,
-        },
+        queryParameters: {'page': page, 'limit': limit, 'collection': ?collection},
       );
       final data = result['data'] as Map<String, dynamic>;
       final items = (data['items'] as List)
@@ -50,7 +46,8 @@ class ProductsRepoImpl implements ProductsRepo {
   }
 
   @override
-  Future<Either<Failure, ({List<ProductModel> items, bool hasNext})>> getProductsByFilter({
+  Future<Either<Failure, ({List<ProductModel> items, bool hasNext})>>
+  getProductsByFilter({
     int page = 1,
     int limit = 10,
     String? categoryId,
