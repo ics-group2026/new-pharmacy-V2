@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/utils/app_translations.dart';
 import '../../data/models/delete_account_request_model.dart';
+import '../../data/models/device_info_model.dart';
 import '../../data/models/login_request_model.dart';
 import '../../data/models/register_request_model.dart';
 import '../../data/repos/auth_repo.dart';
@@ -15,6 +16,7 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> login({
     required String email,
     required String password,
+    DeviceInfoModel? device,
   }) async {
     emit(
       state.copyWith(
@@ -24,7 +26,7 @@ class AuthCubit extends Cubit<AuthState> {
       ),
     );
     final result = await authRepo.login(
-      LoginRequestModel(email: email, password: password),
+      LoginRequestModel(email: email, password: password, device: device),
     );
     result.fold(
       (failure) => emit(
@@ -44,6 +46,7 @@ class AuthCubit extends Cubit<AuthState> {
     required String lastName,
     required String email,
     required String password,
+    DeviceInfoModel? device,
   }) async {
     emit(
       state.copyWith(
@@ -58,6 +61,7 @@ class AuthCubit extends Cubit<AuthState> {
         lastName: lastName,
         email: email,
         password: password,
+        device: device,
       ),
     );
     result.fold(

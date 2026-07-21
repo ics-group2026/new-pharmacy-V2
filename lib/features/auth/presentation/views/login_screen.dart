@@ -10,6 +10,7 @@ import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../core/widgets/password_field.dart';
 import '../../../../core/widgets/t_text.dart';
+import '../../data/models/device_info_model.dart';
 import '../cubits/auth_cubit.dart';
 import '../cubits/auth_state.dart';
 import '../utils/auth_validators.dart';
@@ -39,6 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
     context.read<AuthCubit>().login(
       email: _emailController.text.trim(),
       password: _passwordController.text,
+      device: DeviceInfoModel.current(),
     );
   }
 
