@@ -25,14 +25,16 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _fullNameController = TextEditingController();
+  final _firstNameController = TextEditingController();
+  final _lastNameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
 
   @override
   void dispose() {
-    _fullNameController.dispose();
+    _firstNameController.dispose();
+    _lastNameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
@@ -41,12 +43,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   void _submit() {
     if (!_formKey.currentState!.validate()) return;
-    final nameParts = _fullNameController.text.trim().split(RegExp(r'\s+'));
-    final firstName = nameParts.first;
-    final lastName = nameParts.length > 1 ? nameParts.sublist(1).join(' ') : '';
     context.read<AuthCubit>().register(
-      firstName: firstName,
-      lastName: lastName,
+      firstName: _firstNameController.text.trim(),
+      lastName: _lastNameController.text.trim(),
       email: _emailController.text.trim(),
       password: _passwordController.text,
       device: DeviceInfoModel.current(),
@@ -101,14 +100,32 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
                     SizedBox(height: 32.h),
-                    CustomTextFormField(
-                      controller: _fullNameController,
-                      hintText: AppTranslations.t('auth.full_name_hint'),
-                      prefixIcon: Icon(
-                        Icons.person_outline,
-                        color: theme.colorScheme.onSurfaceVariant,
-                      ),
-                      validator: AuthValidators.validateFullName,
+                    Row(
+                      children: [
+                        Expanded(
+                          child: CustomTextFormField(
+                            controller: _firstNameController,
+                            hintText: AppTranslations.t('auth.first_name_hint'),
+                            prefixIcon: Icon(
+                              Icons.person_outline,
+                              color: theme.colorScheme.onSurfaceVariant,
+                            ),
+                            validator: AuthValidators.validateRequired,
+                          ),
+                        ),
+                        SizedBox(width: 12.w),
+                        Expanded(
+                          child: CustomTextFormField(
+                            controller: _lastNameController,
+                            hintText: AppTranslations.t('auth.last_name_hint'),
+                            prefixIcon: Icon(
+                              Icons.person_outline,
+                              color: theme.colorScheme.onSurfaceVariant,
+                            ),
+                            validator: AuthValidators.validateRequired,
+                          ),
+                        ),
+                      ],
                     ),
                     SizedBox(height: 16.h),
                     CustomTextFormField(

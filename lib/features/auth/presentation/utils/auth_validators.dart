@@ -2,17 +2,6 @@ import '../../../../core/utils/app_regx.dart';
 import '../../../../core/utils/app_translations.dart';
 
 abstract class AuthValidators {
-  static String? validateFullName(String? value) {
-    final name = value?.trim() ?? '';
-    if (name.isEmpty) {
-      return AppTranslations.t('auth.validation.name_required');
-    }
-    if (!name.contains(' ')) {
-      return AppTranslations.t('auth.validation.name_full');
-    }
-    return null;
-  }
-
   static String? validateRequired(String? value) {
     final text = value?.trim() ?? '';
     if (text.isEmpty) {
