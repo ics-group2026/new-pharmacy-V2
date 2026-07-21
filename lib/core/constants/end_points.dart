@@ -62,4 +62,7 @@ abstract class EndPoints {
 
   static String customerSocialLoginCallback(String provider) =>
       '/auth/customer/login/$provider/callback';
+
+  // Cart
+  static const String cartItems = '/cart/items';
 }

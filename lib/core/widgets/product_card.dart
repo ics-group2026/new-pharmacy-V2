@@ -153,7 +153,11 @@ class ProductCard extends StatelessWidget {
 }
 
 class _ProductImage extends StatelessWidget {
-  const _ProductImage({required this.heroTag, required this.imageUrl, required this.height});
+  const _ProductImage({
+    required this.heroTag,
+    required this.imageUrl,
+    required this.height,
+  });
 
   final Object? heroTag;
   final String imageUrl;
