@@ -199,8 +199,34 @@
     "dental": "العناية بالأسنان"
   },
   "search": {
+    "title": "بحث",
     "empty_title": "ابحث عن المنتجات",
     "empty_subtitle": "اعثر على الأدوية والمكملات والمزيد",
-    "no_results": "لم يتم العثور على منتجات"
+    "no_results_title": "لم يتم العثور على منتجات",
+    "no_results_subtitle": "جرّب كلمات مختلفة أو عدّل عوامل التصفية",
+    "error_title": "حدث خطأ ما",
+    "recent_searches": "عمليات البحث الأخيرة",
+    "clear_all": "مسح الكل",
+    "popular_searches": "الأكثر بحثاً",
+    "popular_item_1": "فيتامين سي",
+    "popular_item_2": "باراسيتامول",
+    "popular_item_3": "واقي شمس",
+    "popular_item_4": "حليب أطفال",
+    "popular_item_5": "فيتامينات متعددة",
+    "popular_item_6": "سيروم للشعر",
+    "filters": "الفلاتر",
+    "filters_title": "تصفية النتائج",
+    "sort_by": "ترتيب حسب",
+    "sort_relevance": "الأكثر ملاءمة",
+    "sort_price_asc": "السعر: من الأقل للأعلى",
+    "sort_price_desc": "السعر: من الأعلى للأقل",
+    "category": "الفئة",
+    "brand": "الماركة",
+    "price_range": "نطاق السعر",
+    "min_price": "الحد الأدنى",
+    "max_price": "الحد الأقصى",
+    "reset": "إعادة تعيين",
+    "apply": "تطبيق",
+    "apply_with_count": "تطبيق ({count})"
   }
 }

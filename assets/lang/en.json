@@ -199,8 +199,34 @@
     "dental": "Dental Care"
   },
   "search": {
+    "title": "Search",
     "empty_title": "Search for Products",
     "empty_subtitle": "Find medications, supplements & more",
-    "no_results": "No products found"
+    "no_results_title": "No products found",
+    "no_results_subtitle": "Try different keywords or adjust your filters",
+    "error_title": "Something went wrong",
+    "recent_searches": "Recent Searches",
+    "clear_all": "Clear All",
+    "popular_searches": "Popular Searches",
+    "popular_item_1": "Vitamin C",
+    "popular_item_2": "Paracetamol",
+    "popular_item_3": "Sunscreen",
+    "popular_item_4": "Baby Formula",
+    "popular_item_5": "Multivitamins",
+    "popular_item_6": "Hair Serum",
+    "filters": "Filters",
+    "filters_title": "Filter Results",
+    "sort_by": "Sort By",
+    "sort_relevance": "Relevance",
+    "sort_price_asc": "Price: Low to High",
+    "sort_price_desc": "Price: High to Low",
+    "category": "Category",
+    "brand": "Brand",
+    "price_range": "Price Range",
+    "min_price": "Min",
+    "max_price": "Max",
+    "reset": "Reset",
+    "apply": "Apply",
+    "apply_with_count": "Apply ({count})"
   }
 }
