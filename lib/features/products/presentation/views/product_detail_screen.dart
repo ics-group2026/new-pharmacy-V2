@@ -13,7 +13,6 @@ import 'package:new_pharmacy_v2/features/products/presentation/widgets/product_d
 import 'package:new_pharmacy_v2/features/products/presentation/widgets/products_sliver_app_bar.dart';
 
 import '../../../../../core/services/setup_service_locator.dart';
-import '../../cubit/quantity_cubit.dart';
 import '../../data/repos/products_repo.dart';
 import '../cubits/product_details_cubit.dart';
 import '../cubits/product_details_state.dart';
@@ -88,51 +87,48 @@ class _ProductDetailContent extends StatelessWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
-    return BlocProvider(
-      create: (_) => QuantityCubit(),
-      child: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: const SystemUiOverlayStyle(
-          statusBarColor: Colors.transparent,
-          statusBarIconBrightness: Brightness.light,
-        ),
-        child: Scaffold(
-          extendBodyBehindAppBar: true,
-          bottomNavigationBar: ProductDetailBottomBar(product: product),
-          body: CustomScrollView(
-            slivers: [
-              ProductSliverAppBar(product: product, galleryUrls: galleryUrls),
-              SliverToBoxAdapter(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: theme.scaffoldBackgroundColor,
-                    borderRadius: BorderRadius.vertical(top: Radius.circular(28.r)),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(20.w, 20.h, 20.w, 0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ProductHeader(product: product, rating: rating),
-                        20.verticalSpace,
-                        Divider(color: colorScheme.outlineVariant, thickness: 1),
-                        20.verticalSpace,
-                        DescriptionWidget(
-                          colorScheme: colorScheme,
-                          theme: theme,
-                          description: description,
-                        ),
-                        20.verticalSpace,
-                        HowToUseWidget(colorScheme: colorScheme, theme: theme),
-                        20.verticalSpace,
-                        ProductQuantitySection(theme: theme, colorScheme: colorScheme),
-                        24.verticalSpace,
-                      ],
-                    ),
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.light,
+      ),
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        bottomNavigationBar: ProductDetailBottomBar(product: product),
+        body: CustomScrollView(
+          slivers: [
+            ProductSliverAppBar(product: product, galleryUrls: galleryUrls),
+            SliverToBoxAdapter(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: theme.scaffoldBackgroundColor,
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(28.r)),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(20.w, 20.h, 20.w, 0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ProductHeader(product: product, rating: rating),
+                      20.verticalSpace,
+                      Divider(color: colorScheme.outlineVariant, thickness: 1),
+                      20.verticalSpace,
+                      DescriptionWidget(
+                        colorScheme: colorScheme,
+                        theme: theme,
+                        description: description,
+                      ),
+                      20.verticalSpace,
+                      HowToUseWidget(colorScheme: colorScheme, theme: theme),
+                      20.verticalSpace,
+                      ProductQuantitySection(theme: theme, colorScheme: colorScheme),
+                      24.verticalSpace,
+                    ],
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

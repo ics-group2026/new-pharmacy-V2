@@ -1,35 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/utils/app_colors.dart';
-import '../../../../../core/widgets/product_card.dart';
 import '../../../../../core/widgets/t_text.dart';
-import 'package:new_pharmacy_v2/features/products/data/models/product_model.dart';
-import '../../cubit/wishlist_cubit.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WishlistScreen extends StatelessWidget {
   const WishlistScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Wishlist cubit was removed; the screen always shows the empty state
+    // until the feature is rebuilt.
     return Scaffold(
       appBar: AppBar(title: const TText('nav_bar.wishlist')),
-      body: BlocBuilder<WishlistCubit, List<ProductModel>>(
-        builder: (_, items) => items.isEmpty
-            ? const _EmptyState()
-            : GridView.builder(
-                padding: EdgeInsets.fromLTRB(16.w, 16.h, 16.w, 100.h),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 12.w,
-                  mainAxisSpacing: 12.h,
-                  childAspectRatio: 0.65,
-                ),
-                itemCount: items.length,
-                itemBuilder: (_, i) => ProductCard(product: items[i], imageHeight: 110.h),
-              ),
-      ),
+      body: const _EmptyState(),
     );
   }
 }

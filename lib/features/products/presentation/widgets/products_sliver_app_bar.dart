@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:new_pharmacy_v2/core/utils/app_colors.dart';
 import 'package:new_pharmacy_v2/core/widgets/cached_network_image_widget.dart';
 import 'package:new_pharmacy_v2/core/widgets/fullscreen_image_viewer.dart';
 import 'package:new_pharmacy_v2/features/products/data/models/product_model.dart';
-import 'package:new_pharmacy_v2/features/wishlist/cubit/wishlist_cubit.dart';
 
 class ProductSliverAppBar extends StatelessWidget {
   const ProductSliverAppBar({super.key, required this.product, this.galleryUrls});
@@ -35,25 +33,15 @@ class ProductSliverAppBar extends StatelessWidget {
         ),
       ),
       actions: [
-        BlocSelector<WishlistCubit, List<ProductModel>, bool>(
-          selector: (state) => state.any((p) => p.id == product.id),
-          builder: (context, isWishlisted) => Padding(
-            padding: EdgeInsets.only(right: 8.w),
-            child: CircleAvatar(
-              backgroundColor: Colors.black26,
-              child: IconButton(
-                icon: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 250),
-                  transitionBuilder: (child, anim) => ScaleTransition(scale: anim, child: child),
-                  child: Icon(
-                    isWishlisted ? Icons.favorite_rounded : Icons.favorite_border_rounded,
-                    key: ValueKey(isWishlisted),
-                    color: isWishlisted ? Colors.redAccent : Colors.white,
-                    size: 20.r,
-                  ),
-                ),
-                onPressed: () => context.read<WishlistCubit>().toggle(product),
-              ),
+        // Wishlist cubit was removed; the button stays for the UI shell but
+        // doesn't toggle anything yet.
+        Padding(
+          padding: EdgeInsets.only(right: 8.w),
+          child: CircleAvatar(
+            backgroundColor: Colors.black26,
+            child: IconButton(
+              icon: Icon(Icons.favorite_border_rounded, color: Colors.white, size: 20.r),
+              onPressed: () {},
             ),
           ),
         ),

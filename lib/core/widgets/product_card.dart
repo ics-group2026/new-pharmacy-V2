@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
@@ -8,7 +7,6 @@ import '../utils/app_translations.dart';
 import 'cached_network_image_widget.dart';
 import 'discount_badge.dart';
 import 'package:new_pharmacy_v2/features/products/data/models/product_model.dart';
-import '../../features/wishlist/cubit/wishlist_cubit.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
@@ -64,13 +62,9 @@ class ProductCard extends StatelessWidget {
                 Positioned(
                   top: 8.h,
                   right: 8.w,
-                  child: BlocSelector<WishlistCubit, List<ProductModel>, bool>(
-                    selector: (state) => state.any((p) => p.id == product.id),
-                    builder: (context, isWishlisted) => _WishlistButton(
-                      isWishlisted: isWishlisted,
-                      onTap: () => context.read<WishlistCubit>().toggle(product),
-                    ),
-                  ),
+                  // Wishlist cubit was removed; the button stays for the UI
+                  // shell but doesn't toggle anything yet.
+                  child: _WishlistButton(isWishlisted: false, onTap: () {}),
                 ),
                 if (discountPercent != null)
                   Positioned(

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_translations.dart';
 import '../../../../../core/widgets/cached_network_image_widget.dart';
-import '../../cubit/cart_cubit.dart';
+import '../../data/models/cart_entry.dart';
 
 class CartItemRow extends StatelessWidget {
   const CartItemRow({super.key, required this.entry});
@@ -16,7 +15,6 @@ class CartItemRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    final cubit = context.read<CartCubit>();
     final currency = AppTranslations.t('flash_deals.currency');
     final product = entry.product;
     final unitPrice = product.sellingPrice ?? product.price ?? 0;
@@ -24,7 +22,9 @@ class CartItemRow extends StatelessWidget {
     return Dismissible(
       key: ValueKey(product.id),
       direction: DismissDirection.endToStart,
-      onDismissed: (_) => cubit.remove(entry.product),
+      // Cart cubit was removed; row still swipes visually but doesn't
+      // mutate any state yet.
+      onDismissed: (_) {},
       background: Container(
         alignment: AlignmentDirectional.centerEnd,
         padding: EdgeInsetsDirectional.only(end: 24.w),
@@ -86,7 +86,7 @@ class CartItemRow extends StatelessWidget {
                       _StepButton(
                         icon: Icons.remove_rounded,
                         enabled: entry.quantity > 1,
-                        onTap: () => cubit.decrement(entry.product),
+                        onTap: () {},
                       ),
                       SizedBox(
                         width: 36.w,
@@ -110,11 +110,11 @@ class CartItemRow extends StatelessWidget {
                       _StepButton(
                         icon: Icons.add_rounded,
                         enabled: true,
-                        onTap: () => cubit.add(entry.product),
+                        onTap: () {},
                       ),
                       const Spacer(),
                       IconButton(
-                        onPressed: () => cubit.remove(entry.product),
+                        onPressed: () {},
                         icon: Icon(
                           Icons.delete_outline_rounded,
                           size: 20.r,
